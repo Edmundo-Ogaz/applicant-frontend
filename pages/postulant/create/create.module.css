@@ -1,0 +1,12 @@
+.user__body {
+  display: grid;
+}
+
+.user__label-text {
+  display: inline-block;
+  width: 9rem;
+}
+
+.user__input {
+  margin: 0.2rem 0rem;
+}
