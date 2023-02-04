@@ -2,10 +2,12 @@ import { useState } from 'react';
 
 import { toast } from 'react-toastify';
 
-import Cookie from '../../../utils/Cookie.js';
 import WithPrivateRoute from '../../../components/WithPrivateRoute.js'
+
 import Layout from "../../../components/layout";
 import LoadingSpinner from '../../../components/LoadingSpinner/index.js';
+
+import Cookie from '../../../utils/Cookie.js';
 
 import styles from './assign.module.css';
 
@@ -128,11 +130,11 @@ export default function AssignTest({companies, tests}) {
   return (
     <>
       <Layout>
-        <div className={styles.user}>
-          <h2>Asignar Test a Postulante</h2>
-          <form className={styles.user__form}>
+        <h2>Asignar Test a Postulante</h2>
+        <form>
+          <fieldset className={styles.user__body}>
             <section id="search-section">
-              <label forhtml="rut" className={styles.user__label}>
+              <label forhtml="rut">
                 <span className={styles['user__label-text']}>Rut</span>
                 <input type="text" id="rut" className={styles.user__input} onChange={ handleRut } />
               </label>
@@ -142,32 +144,32 @@ export default function AssignTest({companies, tests}) {
               <p>Nombre: {firstName} {lastName}</p>
               <p>Email: {email}</p>
             </section>
-            <label forhtml="test" className={styles.user__label}>
+            <label forhtml="test">
               <span className={styles['user__label-text']}>Test</span>
               <select name="test" id="test" className={styles.user__input} onChange={ handleTest}>
                 <option value="">Selecionar...</option>
                 {tests.map((test) => <option key={test.id} value={test.id}>{test.name}</option>)}
               </select>
             </label>
-            <label forhtml="company" className={styles.user__label}>
+            <label forhtml="company">
               <span className={styles['user__label-text']}>Empresa</span>
               <select name="company" id="company" className={styles.user__input} onChange={ handleCompany}>
                 <option value="">Selecionar...</option>
                 {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
               </select>
             </label>
-            <label forhtml="analyst" className={styles.user__label}>
+            <label forhtml="analyst">
               <span className={styles['user__label-text']}>Analista</span>
               <select name="analyst" id="analyst" className={styles.user__input} onChange={ handleAnalyst}>
                 <option value="">Selecionar...</option>
                 {analysts.map((analyst) => <option key={analyst.id} value={analyst.id}>{analyst.firstName} {analyst.lastName}</option>)}
               </select>
             </label>
-            <button id="save-button" className={styles['user__button']} onClick={ handleSave } disabled={ isSaving }>
-              {isSaving ? 'Saving...' : 'Save'}
-            </button>
+          </fieldset>
+          <button id="save-button" className={styles['user__button']} onClick={ handleSave } disabled={ isSaving }>
+            {isSaving ? 'Saving...' : 'Save'}
+          </button>
           </form>
-        </div>
         {(isSearching || isSaving) && <LoadingSpinner/>}
       </Layout>
     </>

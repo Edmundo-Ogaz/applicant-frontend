@@ -2,10 +2,14 @@ import { useState } from 'react';
 
 import { toast } from 'react-toastify';
 
-import Cookie from '../../../utils/Cookie.js';
 import WithPrivateRoute from '../../../components/WithPrivateRoute.js'
-import styles from './edit.module.css';
+
 import Layout from '../../../components/layout';
+import LoadingSpinner from '../../../components/LoadingSpinner/index.js';
+
+import Cookie from '../../../utils/Cookie.js';
+
+import styles from './edit.module.css';
 
 export default function EditPostulant({postulant}) {
 	console.log('EditPostulant')
@@ -54,10 +58,6 @@ export default function EditPostulant({postulant}) {
     }
   }
 
-  function handleRut(event) {
-		setRut(event.target.value)
-	}
-
   function handleFirstName(event) {
 		setFirstName(event.target.value)
 	}
@@ -81,30 +81,30 @@ export default function EditPostulant({postulant}) {
   return (
     <>
       <Layout>
-        <div className={styles.user}>
-          <h2>Actualizar Postulante</h2>
-          <div className={styles.user__form}>
-            <label forhtml="rut" className={styles.user__label}>
+        <h2>Actualizar Postulante</h2>
+        <form>
+          <fieldset className={styles.user__body}>
+            <label forhtml="rut">
               <span className={styles['user__label-text']}>Rut</span>
-              <input type="text" id="rut" value={rut} className={styles.user__input} onChange={ handleRut } />
+              <input type="text" id="rut" value={rut} className={styles.user__input} disabled="true"/>
             </label>
-            <label forhtml="firt_name" className={styles.user__label}>
+            <label forhtml="firt_name">
               <span className={styles['user__label-text']}>Nombres</span>
               <input type="test" id="firt_name" value={firstName} size="50" className={styles.user__input} onChange={ handleFirstName } />
             </label>
-            <label forhtml="last_name" className={styles.user__label}>
+            <label forhtml="last_name">
               <span className={styles['user__label-text']}>Apellidos</span>
               <input type="text" id="last_name" value={lastName} size="50" className={styles.user__input} onChange={ handleLastName } />
             </label>
-            <label forhtml="email" className={styles.user__label}>
+            <label forhtml="email">
               <span className={styles['user__label-text']}>Email</span>
               <input type="text" id="email" value={email} size="30"className={styles.user__input} onChange={ handleEmail } />
             </label>
-            <label forhtml="age" className={styles.user__label}>
+            <label forhtml="age">
               <span className={styles['user__label-text']}>Edad</span>
               <input type="number" id="age" value={age} min="1" max="100" className={styles.user__input} onChange={ handleAge } />
             </label>
-            <label forhtml="profile" className={styles.user__label}>
+            <label forhtml="profile">
               <span className={styles['user__label-text']}>Sexo</span>
               <select name="sexo" id="sexo" value={sexo} className={styles.user__input} onChange={ handleSexo}>
                 <option value="">Selecionar...</option>
@@ -112,11 +112,12 @@ export default function EditPostulant({postulant}) {
                 <option value="masculino">Masculino</option>
               </select>
             </label>
-            <button id="save" className={styles['user__button']} onClick={ handleSave } disabled={ saving }>
-              {saving ? 'Saving...' : 'Save'}
-            </button>
-          </div>
-        </div>
+          </fieldset>
+          <button id="save" className={styles['user__button']} onClick={ handleSave } disabled={ saving }>
+            {saving ? 'Saving...' : 'Save'}
+          </button>
+        </form>
+        {saving && <LoadingSpinner/>}
       </Layout>
     </>
   );

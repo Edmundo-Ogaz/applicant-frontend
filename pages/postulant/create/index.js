@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import WithPrivateRoute from '../../../components/WithPrivateRoute.js'
 
 import Layout from '../../../components/layout';
+import LoadingSpinner from '../../../components/LoadingSpinner/index.js';
 
 import Cookie from '../../../utils/Cookie.js';
 
@@ -120,6 +121,7 @@ export default function CreatePostulant() {
               {saving ? 'Saving...' : 'Save'}
             </button>
           </form>
+        {(isSaving) && <LoadingSpinner/>}
       </Layout>
     </>
   );
