@@ -12,7 +12,7 @@ describe('applicant', () => {
     cy.get('#password').type('1234')
     cy.get('#login').click()
     cy.get('#logo').should('have.text', 'Applicant')
-    cy.get('#username').should('have.text', '1234@1234.cl')
+    cy.get('#username').should('have.text', 'test@test.cl')
     
   })
 })
