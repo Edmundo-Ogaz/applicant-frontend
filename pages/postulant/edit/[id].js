@@ -24,9 +24,10 @@ export default function EditPostulant({postulant}) {
   const [ age, setAge ] = useState(postulant.age ? postulant.age : 0);
   const [ sexo, setSexo ] = useState(postulant.sexo);
 
-  const handleSave = async () => {
-    console.log('handleSave')
+  const handleSave = async (e) => {
     try {
+      console.log('handleSave')
+      e.preventDefault()
       setSaving(true)
       const data = {
         rut, 
@@ -88,13 +89,13 @@ export default function EditPostulant({postulant}) {
               <span className={styles['user__label-text']}>Rut</span>
               <input type="text" id="rut" value={rut} className={styles.user__input} disabled="true"/>
             </label>
-            <label forhtml="firt_name">
+            <label forhtml="firstName">
               <span className={styles['user__label-text']}>Nombres</span>
-              <input type="test" id="firt_name" value={firstName} size="50" className={styles.user__input} onChange={ handleFirstName } />
+              <input type="test" id="firstName" value={firstName} size="50" className={styles.user__input} onChange={ handleFirstName } />
             </label>
-            <label forhtml="last_name">
+            <label forhtml="lastName">
               <span className={styles['user__label-text']}>Apellidos</span>
-              <input type="text" id="last_name" value={lastName} size="50" className={styles.user__input} onChange={ handleLastName } />
+              <input type="text" id="lastName" value={lastName} size="50" className={styles.user__input} onChange={ handleLastName } />
             </label>
             <label forhtml="email">
               <span className={styles['user__label-text']}>Email</span>
@@ -104,7 +105,7 @@ export default function EditPostulant({postulant}) {
               <span className={styles['user__label-text']}>Edad</span>
               <input type="number" id="age" value={age} min="1" max="100" className={styles.user__input} onChange={ handleAge } />
             </label>
-            <label forhtml="profile">
+            <label forhtml="sexo">
               <span className={styles['user__label-text']}>Sexo</span>
               <select name="sexo" id="sexo" value={sexo} className={styles.user__input} onChange={ handleSexo}>
                 <option value="">Selecionar...</option>

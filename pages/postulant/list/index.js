@@ -21,10 +21,11 @@ export default function List() {
 
   const [ postulants, setPostulants ] = useState([]);
 
-  const handleSearch = async () => {
-    console.log('handleSearch')
-    setIsSearching(true)
+  const handleSearch = async (e) => {
     try {
+      console.log('handleSearch')
+      e.preventDefault()
+      setIsSearching(true)
       let query = ''
       if (rut)
         query = `rut=${rut}`

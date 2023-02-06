@@ -23,9 +23,10 @@ export default function CreateUser({companies, profiles}) {
   const [ company, setCompany ] = useState();
   const [ profile, setProfile ] = useState();
 
-  const handleSave = async () => {
-    console.log('handleSave')
+  const handleSave = async (e) => {
     try {
+      console.log('handleSave')
+      e.preventDefault()
       setSaving(true)
       const data = {
         rut, 
@@ -50,6 +51,12 @@ export default function CreateUser({companies, profiles}) {
           throw new Error(json?.error)
         }
         toast.success('Saved');
+        setRut('');
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setCompany('');
+        setProfile('');
     } catch(e) {
       toast.error(e.message);
     } finally {
@@ -89,30 +96,30 @@ export default function CreateUser({companies, profiles}) {
           <fieldset className={styles.user__body}>
             <label forhtml="rut">
               <span className={styles['user__label-text']}>Rut</span>
-              <input type="text" id="rut" className={styles.user__input} onChange={ handleRut } />
+              <input type="text" id="rut" value={rut} className={styles.user__input} onChange={ handleRut } />
             </label>
             <label forhtml="firstName">
               <span className={styles['user__label-text']}>Nombres</span>
-              <input type="test" id="firstName" size="50" className={styles.user__input} onChange={ handleFirstName } />
+              <input type="test" id="firstName" value={firstName} size="50" className={styles.user__input} onChange={ handleFirstName } />
             </label>
             <label forhtml="lastName">
               <span className={styles['user__label-text']}>Apellidos</span>
-              <input type="text" id="lastName" size="50" className={styles.user__input} onChange={ handleLastName } />
+              <input type="text" id="lastName" value={lastName} size="50" className={styles.user__input} onChange={ handleLastName } />
             </label>
             <label forhtml="email">
               <span className={styles['user__label-text']}>Email</span>
-              <input type="text" id="email" size="30"className={styles.user__input} onChange={ handleEmail } />
+              <input type="text" id="email" value={email} size="30"className={styles.user__input} onChange={ handleEmail } />
             </label>
             <label forhtml="company">
               <span className={styles['user__label-text']}>Empresa</span>
-              <select name="company" id="company" className={styles.user__input} onChange={ handleCompany}>
+              <select name="company" id="company" value={company} className={styles.user__input} onChange={ handleCompany}>
                 <option value="">Selecionar...</option>
                 {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
               </select>
             </label>
             <label forhtml="profile">
               <span className={styles['user__label-text']}>Perfil</span>
-              <select name="profile" id="profile" className={styles.user__input} onChange={ handleProfile}>
+              <select name="profile" id="profile" value={profile} className={styles.user__input} onChange={ handleProfile}>
                 <option value="">Selecionar...</option>
                 {profiles.map((profile) => <option key={profile.id} value={profile.id}>{profile.name}</option>)}
               </select>

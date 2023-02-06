@@ -24,9 +24,10 @@ export default function EditUser({user, companies, profiles}) {
   const [ company, setCompany ] = useState(user.company ? user.company.id : '');
   const [ profile, setProfile ] = useState(user.profile ? user.profile.id : '');
 
-  const handleSave = async () => {
-    console.log('handleSave')
+  const handleSave = async (e) => {
     try {
+      console.log('handleSave')
+      e.preventDefault()
       setSaving(true)
       const data = {
         rut, 
@@ -86,15 +87,15 @@ export default function EditUser({user, companies, profiles}) {
           <fieldset className={styles.user__body}>
             <label forhtml="rut">
               <span className={styles['user__label-text']}>Rut</span>
-              <input type="text" id="rut" value={rut} className={styles.user__input} disabled="true"/>
+              <input type="text" id="rut" value={rut} className={styles.user__input} disabled={true}/>
             </label>
-            <label forhtml="firt_name">
+            <label forhtml="firstName">
               <span className={styles['user__label-text']}>Nombres</span>
-              <input type="test" id="firt_name" value={firstName} size="50" className={styles.user__input} onChange={ handleFirstName } />
+              <input type="test" id="firstName" value={firstName} size="50" className={styles.user__input} onChange={ handleFirstName } />
             </label>
-            <label forhtml="last_name">
+            <label forhtml="lastName">
               <span className={styles['user__label-text']}>Apellidos</span>
-              <input type="text" id="last_name" value={lastName} size="50" className={styles.user__input} onChange={ handleLastName } />
+              <input type="text" id="lastName" value={lastName} size="50" className={styles.user__input} onChange={ handleLastName } />
             </label>
             <label forhtml="email">
               <span className={styles['user__label-text']}>Email</span>
@@ -138,6 +139,7 @@ export async function getServerSideProps({params}) {
     const companies = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/companies`).then(companies => companies.json())
     const profiles = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/profiles`).then(profiles => profiles.json())
     let data = await Promise.all([user, companies, profiles]);
+    console.log('get', user)
     return {
       props: {
         user: data[0],

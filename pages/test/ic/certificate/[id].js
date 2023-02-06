@@ -5,13 +5,6 @@ export default function Certificate({ test, postulant, answer, date, state }) {
 
   return (
     <>
-      <Head>
-        <link 
-          rel="stylesheet" 
-          type="text/css" 
-          href="https://edmundoogaz.pythonanywhere.com/static/IC/certificate.css"
-        />
-      </Head>
     <div className="horizontal">
       <div id="certificate-body">
         <div id="info_sup" className="horizontal">

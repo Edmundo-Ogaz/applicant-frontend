@@ -14,7 +14,7 @@ import styles from './create.module.css';
 export default function CreatePostulant() {
 	console.log('CreatePostulant')
 
-  const [ saving, setSaving ] = useState();
+  const [ isSaving, setIsSaving ] = useState();
 
   const [ rut, setRut ] = useState();
   const [ firstName, setFirstName ] = useState();
@@ -23,10 +23,11 @@ export default function CreatePostulant() {
   const [ sexo, setSexo ] = useState();
   const [ email, setEmail ] = useState();
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
     try {
+      e.preventDefault()
       console.log('handleSave')
-      setSaving(true)
+      setIsSaving(true)
       const data = {
         rut, 
         firstName, 
@@ -51,10 +52,16 @@ export default function CreatePostulant() {
         throw new Error(json?.error)
       }
       toast.success('Saved');
+      setRut('')
+      setFirstName('')
+      setLastName('')
+      setAge('')
+      setSexo('')
+      setEmail('')
     } catch(e) {
       toast.error(e.message);
     } finally {
-      setSaving(false)
+      setIsSaving(false)
     }
   }
 
@@ -90,23 +97,23 @@ export default function CreatePostulant() {
             <fieldset className={styles.user__body}>
               <label forhtml="rut">
                 <span className={styles['user__label-text']}>Rut</span>
-                <input type="text" id="rut" className={styles.user__input} onChange={ handleRut } />
+                <input type="text" id="rut" value={rut} className={styles.user__input} onChange={ handleRut } />
               </label>
-              <label forhtml="firt_name">
+              <label forhtml="firstName">
                 <span className={styles['user__label-text']}>Nombres</span>
-                <input type="test" id="firt_name" size="50" className={styles.user__input} onChange={ handleFirstName } />
+                <input type="test" id="firstName" value={firstName} size="50" className={styles.user__input} onChange={ handleFirstName } />
               </label>
-              <label forhtml="last_name">
+              <label forhtml="lastName">
                 <span className={styles['user__label-text']}>Apellidos</span>
-                <input type="text" id="last_name" size="50" className={styles.user__input} onChange={ handleLastName } />
+                <input type="text" id="lastName" value={lastName} size="50" className={styles.user__input} onChange={ handleLastName } />
               </label>
               <label forhtml="age">
                 <span className={styles['user__label-text']}>Edad</span>
-                <input type="number" id="age" min="1" max="100" className={styles.user__input} onChange={ handleAge } />
+                <input type="number" id="age" value={age} min="1" max="100" className={styles.user__input} onChange={ handleAge } />
               </label>
               <label forhtml="sexo">
                 <span className={styles['user__label-text']}>Sexo</span>
-                <select name="sexo" id="sexo" className={styles.user__input} onChange={ handleSexo}>
+                <select name="sexo" id="sexo" value={sexo} className={styles.user__input} onChange={ handleSexo}>
                   <option value="">Selecionar...</option>
                   <option value="femenino">Femenino</option>
                   <option value="masculino">Masculino</option>
@@ -114,11 +121,11 @@ export default function CreatePostulant() {
               </label>
               <label forhtml="email">
                 <span className={styles['user__label-text']}>Email</span>
-                <input type="text" id="email" size="30"className={styles.user__input} onChange={ handleEmail } />
+                <input type="text" id="email" value={email} size="30"className={styles.user__input} onChange={ handleEmail } />
               </label>
             </fieldset>
-            <button className={styles['user__button']} onClick={ handleSave } disabled={ saving }>
-              {saving ? 'Saving...' : 'Save'}
+            <button id="save" className={styles['user__button']} onClick={ handleSave } disabled={ isSaving }>
+              {isSaving ? 'Saving...' : 'Save'}
             </button>
           </form>
         {(isSaving) && <LoadingSpinner/>}

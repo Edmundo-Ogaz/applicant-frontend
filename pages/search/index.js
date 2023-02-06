@@ -27,10 +27,11 @@ export default function Search({companies, tests, states}) {
 
   const [ analysts, setAnalysts ] = useState([]);
 
-  const handleSearch = async () => {
-    console.log('handleSearch')
-    setIsSearching(true)
+  const handleSearch = async (e) => {
     try {
+    console.log('handleSearch')
+    e.preventDefault()
+    setIsSearching(true)
       let query = ''
       if (rut)
         query = `rut=${rut}`
@@ -112,7 +113,7 @@ export default function Search({companies, tests, states}) {
   return (
     <>
       <Layout>
-        <h2> Buscar Resultados </h2>
+        <h2>Buscar Resultados</h2>
         <form>
           <fieldset className='search__filter'>
             <legend className='search__filter-header'>Filtro</legend>

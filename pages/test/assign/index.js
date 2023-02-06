@@ -31,7 +31,7 @@ export default function AssignTest({companies, tests}) {
 
   const handleSearch = async (e) => {
     try {
-      e.preventDefault();
+      e.preventDefault()
       console.log('handleSearch')
       setIsSearching(true)
       const response = await fetch(
@@ -41,7 +41,7 @@ export default function AssignTest({companies, tests}) {
       if (response?.ok === false) {
         throw new Error(arrJson?.error)
       } else if (!Array.isArray(arrJson) ||  arrJson.length != 1) {
-        throw new Error('BAD_REQUEST')
+        throw new Error('NOT_FOUND')
       }
       setPostulantId(arrJson[0].id)
       setFirstName(arrJson[0].firstName)
@@ -54,9 +54,10 @@ export default function AssignTest({companies, tests}) {
     }
   }
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
     try {
       console.log('handleSave')
+      e.preventDefault()
       setIsSaving(true)
       const assigner = {
         companyId: company, 
