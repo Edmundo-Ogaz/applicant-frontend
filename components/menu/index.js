@@ -23,7 +23,6 @@ export default function App( props ) {
         <MenuItem key="1">Home</MenuItem>
         <SubMenu title={ <span className="submenu-title-wrapper">Resultados</span> } key="2">
           <MenuItem key="2-2">Buscar</MenuItem>
-          <MenuItem key="2-3">IC</MenuItem>
         </SubMenu>
         <SubMenu title={ <span className="submenu-title-wrapper">Tests</span> } key="3">
         <MenuItem key="3-1">IC</MenuItem>

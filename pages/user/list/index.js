@@ -119,7 +119,7 @@ export default function List({companies, profiles}) {
           </button>
         </form>
         <table className="search__list">
-          <thead className="search__list-header">
+          <thead className="list-header">
             <tr>
                 <th>RUT</th>
                 <th>Nombre</th>
@@ -132,7 +132,7 @@ export default function List({companies, profiles}) {
           </thead>
           <tbody>
             {users.map((user) => {
-              return (<tr key={user.id} className="search__list-body-row">
+              return (<tr key={user.id} className="list-body-row">
                   <td>{ user.rut }</td>
                   <td>{ user.firstName } { user.lastName }</td>
                   <td>{ user.email }</td>

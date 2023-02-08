@@ -55,7 +55,7 @@ export default function Search({companies, tests, states}) {
         query = `state=${state}`
       
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants/search?${query}`,
+        `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants?${query}`,
         )
       const json = await response.json();
       if (response?.ok === false) {
@@ -163,7 +163,7 @@ export default function Search({companies, tests, states}) {
           </button>
         </form>
         <table className="search__list">
-          <thead className="search__list-header">
+          <thead className="list-header">
             <tr>
               <th>Candidato</th>
               <th>Email</th>
@@ -180,10 +180,10 @@ export default function Search({companies, tests, states}) {
               let linkQuery = ''
               if (item.state.id === process.env.NEXT_PUBLIC_TEST_STATE_PENDING_ID) {
                 link = `test/ic/instruction`
-                linkQuery = {postulant: item.postulant.id, company: item.company.id}
+                linkQuery = {id: item.id}
               }
               return(
-                <tr key={item.id} className="search__list-body-row">
+                <tr key={item.id} className="list-body-row">
                   <td>
                     <Link
                       href={{

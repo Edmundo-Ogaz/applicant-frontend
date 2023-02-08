@@ -1,5 +1,10 @@
 import { useState } from 'react';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import LoadingSpinner from '../../../components/LoadingSpinner';
+
 import styles from './password.module.css';
 
 export default function RegisterPassword({user}) {
@@ -10,12 +15,6 @@ export default function RegisterPassword({user}) {
   const [ repeatPassword, setRepeatPassword ] = useState();
   const [ isPasswordCorrect, setIsPasswordCorrect ] = useState(false);
   const [ error, setError ] = useState();
-
-  const cleanForm = () => {
-    console.log('cleanForm')
-    setPassword('');
-    setRepeatPassword('')
-  }
 
   const handleSave = async () => {
     console.log('handleSave')
@@ -30,14 +29,17 @@ export default function RegisterPassword({user}) {
             'Content-Type': 'application/json'
           },
         })
-        .then(user => user.json())
-      console.log('Saved', response)
-      alert('Saved')
-      cleanForm()
-      setIsSaving(false)
+      const json = await response.json();
+      if (response?.ok === false) {
+        throw new Error(json?.error)
+      }
+      
+      toast.success('Saved')
+      setPassword('');
+      setRepeatPassword('')
     } catch(e) {
-      console.error(e.message)
-      setError(e.message)
+      toast.error(e.message);
+    } finally {
       setIsSaving(false)
     }
   }
@@ -79,6 +81,8 @@ export default function RegisterPassword({user}) {
           </button>
         </form>
       </div>
+      {isSaving && <LoadingSpinner/>}
+      <ToastContainer />
     </>
   );
 }

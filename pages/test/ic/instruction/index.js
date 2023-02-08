@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
-export default function Instruction2({postulantId, companyId}) {
-	console.log('Instruction2')
+export default function Instruction({id}) {
+	console.log('Instruction')
 
   return (
     <>
@@ -13,8 +13,8 @@ export default function Instruction2({postulantId, companyId}) {
           <p>Tienes 8 minutos para completar el test. Si te sales de la página, perderás tus respuestas. Es TÚ responsabilidad realizarlo de forma sensata. Buena suerte!</p>
           <Link
             href={{
-              pathname: '/test/ic/ic',
-              query: { postulant: postulantId, company: companyId },
+              pathname: '/test/ic/test',
+              query: { id },
             }}
             role="button"
             className="btn btn-warning btn-lg" 
@@ -29,34 +29,31 @@ export default function Instruction2({postulantId, companyId}) {
 
 export async function getServerSideProps({query}) {
   try {
-    console.log('getServerSideProps', query.postulant, query.company);
-    if (isNaN(query.postulant) || isNaN(query.company)) {
+    console.log('getServerSideProps', query.id);
+    if (isNaN(query.id)) {
       return {
         redirect: {
           permanent: false,
-          destination: "/error",
-        },
-        props:{},
+          destination: "/error?message=Problemas al obtener parametros",
+        }
       };
     }
-    const URL = `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests-postulants?postulant=${query.postulant}&company=${query.company}&state=${process.env.NEXT_PUBLIC_TEST_STATE_PENDING_ID}`
+    const URL = `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants/${query.id}`
     console.log('getServerSideProps', URL);
     const testsPortulants = await fetch(URL)
     .then(testsPortulants => testsPortulants.json())
     console.log('getServerSideProps', testsPortulants);
-    if (!Array.isArray(testsPortulants) || testsPortulants.length !== 1) {
+    if (Object.keys(testsPortulants).length === 0) {
       return {
         redirect: {
           permanent: false,
-          destination: "/error",
-        },
-        props:{},
+          destination: "/error?message=No se pudo obtener el test del postulanta",
+        }
       };
     }
     return {
       props: {
-        postulantId: testsPortulants[0].postulant, 
-        companyId: testsPortulants[0].company
+        id: testsPortulants.id
       },
     }
   } catch(e) {
@@ -64,9 +61,8 @@ export async function getServerSideProps({query}) {
     return {
       redirect: {
         permanent: false,
-        destination: "/error",
-      },
-      props:{},
+        destination: `/error?message=${e.message}`,
+      }
     };
   }
 }

@@ -137,7 +137,7 @@ export default function AssignTest({companies, tests}) {
             <section id="search-section">
               <label forhtml="rut">
                 <span className={styles['user__label-text']}>Rut</span>
-                <input type="text" id="rut" className={styles.user__input} onChange={ handleRut } />
+                <input type="text" id="rut" value={rut} className={styles.user__input} onChange={ handleRut } />
               </label>
               <button id="search-button" className={styles['user__button']} onClick={ handleSearch } disabled={ isSearching }>
                 {isSearching ? 'Searching...' : 'Search'}
@@ -147,21 +147,21 @@ export default function AssignTest({companies, tests}) {
             </section>
             <label forhtml="test">
               <span className={styles['user__label-text']}>Test</span>
-              <select name="test" id="test" className={styles.user__input} onChange={ handleTest}>
+              <select name="test" id="test" value={test} className={styles.user__input} onChange={ handleTest}>
                 <option value="">Selecionar...</option>
                 {tests.map((test) => <option key={test.id} value={test.id}>{test.name}</option>)}
               </select>
             </label>
             <label forhtml="company">
               <span className={styles['user__label-text']}>Empresa</span>
-              <select name="company" id="company" className={styles.user__input} onChange={ handleCompany}>
+              <select name="company" id="company" value={company} className={styles.user__input} onChange={ handleCompany}>
                 <option value="">Selecionar...</option>
                 {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
               </select>
             </label>
             <label forhtml="analyst">
               <span className={styles['user__label-text']}>Analista</span>
-              <select name="analyst" id="analyst" className={styles.user__input} onChange={ handleAnalyst}>
+              <select name="analyst" id="analyst" value={analyst} className={styles.user__input} onChange={ handleAnalyst}>
                 <option value="">Selecionar...</option>
                 {analysts.map((analyst) => <option key={analyst.id} value={analyst.id}>{analyst.firstName} {analyst.lastName}</option>)}
               </select>

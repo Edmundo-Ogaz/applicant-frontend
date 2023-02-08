@@ -78,12 +78,16 @@ table.search__list {
   width: 100%;
 }
 
-thead.search__list-header {
+thead.list-header {
   background-color: #ffc107;
   height: 2.5rem;
 }
 
-tr.search__list-body-row {
+tr.list-body-row {
   border-bottom: 1px solid #000;
   height: 2.5rem;
+}
+
+th, td {
+  padding: .5rem;
 }

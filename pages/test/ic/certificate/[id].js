@@ -137,7 +137,7 @@ export async function getServerSideProps({params}) {
       };
     }
     
-    const URL = `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants/ic/${id}`
+    const URL = `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants/${id}`
     console.log('getServerSideProps', URL);
     const testPortulant = await fetch(URL)
     .then(testPortulant => testPortulant.json())
