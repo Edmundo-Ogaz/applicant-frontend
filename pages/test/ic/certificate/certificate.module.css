@@ -1,0 +1,166 @@
+.horizontal {
+  display: flex;
+  justify-content: center;
+}
+
+.certificate-body {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 850px;
+  height: 1100px;
+  background-color: white;
+}
+
+.info_sup {
+  width: 100%;
+  height: 17%;
+  background-color: #ffc107;
+}
+
+.logo {
+  width: 20%;
+  height: 100%;
+}
+
+.full_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.personal_info {
+  width: 80%;
+  height: 100%;
+}
+
+.full_container {
+  width: 100%;
+  height: 100%;
+}
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info_col {
+  width: 50%;
+  height: 80%;
+}
+
+.info_col ul {
+  list-style: none;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+.info_col ul li {
+  background-color: white;
+  width: 95%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 2px;
+  margin-bottom: 5px;
+}
+
+.graph_cont {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.bignum {
+  line-height: 100pt;
+  font-size: 10em;
+  font-weight: 300;
+  text-align: center;
+}
+
+.middle {
+  text-align: center;
+}
+
+.mid-floater {
+  height: 450px;
+  width: 550px;
+}
+
+.pseudo-mid-floater {
+  position: absolute;
+  top: 36%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bottom-floater {
+  font-size: 0.7em;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid black;
+  width: 50%;
+}
+
+.info_inf {
+  width: 100%;
+}
+
+.puntaje {
+  height: 100%;
+  width: 100%;
+  display: table;
+}
+
+.puntajes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+}
+
+/* .puntajes table, td, th {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.puntajes table {
+  background-color: white;
+  width: 90%;
+  margin: 0 auto;
+  border-color: black;
+  font-size: 1em;
+} */
+
+.border {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 0.1rem;
+}
+
+.bigth {
+  width: 70%;
+}
+
+.highlight {
+  background-color: #ffc107;
+  border: white !important;
+}
+
+.fixed {
+  position: fixed;
+  bottom: 1%;
+  right: 1%;
+}
+
+.button-pdf {
+  background-color: #fff;
+  box-shadow: none;
+  border: none;
+}
+
+.button-pdf:hover, .button-pdf:focus {
+  box-shadow: none;
+  outline: none;
+}
