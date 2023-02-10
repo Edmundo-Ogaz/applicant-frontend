@@ -4,7 +4,7 @@ import 'rc-menu/assets/index.css';
 //import styles from './menu.module.css';
 
 export default function App( props ) {
-	console.log('App')
+	console.log('Menu')
 
   function onOpenChange(value) {
     // console.log('onOpenChange', value);

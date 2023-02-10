@@ -9,6 +9,7 @@ import Menu from '../menu';
 import LoadingSpinner from '../LoadingSpinner';
 
 export default function Layout({ children }) {
+  console.log('Layout')
 
   const router = useRouter();
 
@@ -56,6 +57,14 @@ export default function Layout({ children }) {
       }
     }
   }
+
+  useEffect(() => {
+    const handleRouteChange = () => { setIsLoading(false) }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [])
 
   return (
       <>

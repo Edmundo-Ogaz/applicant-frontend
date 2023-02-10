@@ -1,10 +1,12 @@
-import Image from 'next/image'
-
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
+
+import WithPrivateRoute from '../../../../components/WithPrivateRoute.js'
+
+import Layout from '@/components/layout/index.js';
 
 import styles from './certificate.module.css';
 
@@ -115,122 +117,137 @@ export default function Certificate({ test, postulant, answer, date, state }) {
 
   return (
     <>
-      <div className={styles.horizontal}>
-        <div id="certificate-body" className={styles['certificate-body']}>
-          <div className={`${styles.info_sup} ${styles.horizontal}`}>
-            <div id="logo" className={`${styles.logo} ${styles.full_center}`}>
-              <a>Aquí va un logo</a>
-            </div>
-            <div id="personal_info" className={`${styles.personal_info} ${styles.full_center}`}>
-              <div className={`${styles.full_container} ${styles.full_center}`}>
-                <div className={`${styles.info_col} ${styles.vertical}`}>
-                  <ul>
-                    <li>Nombre: {postulant.firstName} {postulant.lastName}</li>
-                    <li>RUN: {postulant.rut}</li>
-                    <li>Edad: {postulant.age}</li>
-                    <li>Sexo: {postulant.sexo}</li>
-                    <li>Ciudad: P/D</li>
-                  </ul>
-                </div>
-                <div className={`${styles.info_col} ${styles.vertical}`}>
-                  <ul>
-                    <li>Rendido: {date['@ts']} </li>
-                    <li>Válido hasta: P/D</li>
-                    <li>Estado: {state.name} </li>
-                    <li>Lugar de rendición: Online</li>
-                    <li>Cod: --- </li>
-                  </ul>
+      <Layout>
+        <div className={styles.horizontal}>
+          <div id="certificate-body" className={styles['certificate-body']}>
+            <div className={`${styles.info_sup} ${styles.horizontal}`}>
+              <div id="logo" className={`${styles.logo} ${styles.full_center}`}>
+                <a>Aquí va un logo</a>
+              </div>
+              <div id="personal_info" className={`${styles.personal_info} ${styles.full_center}`}>
+                <div className={`${styles.full_container} ${styles.full_center}`}>
+                  <div className={`${styles.info_col} ${styles.vertical}`}>
+                    <ul>
+                      <li>Nombre: {postulant.firstName} {postulant.lastName}</li>
+                      <li>RUN: {postulant.rut}</li>
+                      <li>Edad: {postulant.age}</li>
+                      <li>Sexo: {postulant.sexo}</li>
+                      <li>Ciudad: P/D</li>
+                    </ul>
+                  </div>
+                  <div className={`${styles.info_col} ${styles.vertical}`}>
+                    <ul>
+                      <li>Rendido: {date['@ts']} </li>
+                      <li>Válido hasta: P/D</li>
+                      <li>Estado: {state.name} </li>
+                      <li>Lugar de rendición: Online</li>
+                      <li>Cod: --- </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className={styles.graph_cont}>
-            <div className={styles['mid-floater']}>
-              <Doughnut data={data} options={options} />
-            </div>
-            <div className={styles['pseudo-mid-floater']}>
-              <div className={styles.puntaje}>
-                <div className={styles.bignum}>
-                  {answer.score}
+            <div className={styles.graph_cont}>
+              <div className={styles['mid-floater']}>
+                <Doughnut data={data} options={options} />
+              </div>
+              <div className={styles['pseudo-mid-floater']}>
+                <div className={styles.puntaje}>
+                  <div className={styles.bignum}>
+                    {answer.score}
+                  </div>
+                  <div className={styles.middle}>
+                    {answer.level}
+                  </div>
                 </div>
-                <div className={styles.middle}>
-                  {answer.level}
+                <div>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td className={`${styles.middle} ${styles.border}`}>Buenas</td>
+                        <td className={styles.border}> {answer.correct} </td>
+                      </tr>
+                      <tr>
+                        <td className={`${styles.middle} ${styles.border}`}>Malas</td>
+                        <td className={styles.border}> {answer.wrong} </td>
+                      </tr>
+                      <tr>
+                        <td className={`${styles.middle} ${styles.border}`}>Omitidas</td>
+                        <td className={styles.border}> {answer.omitted} </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
-              <div>
+              <div className={styles['bottom-floater']}>
+                TEST IC <br /> Test diseñado para medir la eficiencia en el trabajo bajo presión, la reacción ante instrucciones complejas y la tolerancia a la frustración. Se evalua entre 1 y 6 puntos, obteniendo mayor puntaje en cuanto muestre mejor desempeño ante los retos enfrentados.
+              </div>
+            </div>
+              <div className={styles.puntajes}>
                 <table>
+                  <thead>
+                    <tr>
+                      <th className={styles.border}>Puntaje</th>
+                      <th className={styles.border}>Nivel</th>
+                      <th className={`${styles.bigth} ${styles.border}`}>Descripción</th>
+                    </tr>
+                  </thead>
                   <tbody>
-                    <tr>
-                      <td className={`${styles.middle} ${styles.border}`}>Buenas</td>
-                      <td className={styles.border}> {answer.correct} </td>
+                    <tr className={styles.highlight}>
+                      <td className={`${styles.middle} ${styles.border}`}>1</td>
+                      <td className={`${styles.middle} ${styles.border}`}>Bajo</td>
+                      <td className={styles.border}>Dificultad de comprensión de instrucciones elevada, o poco manejo de presión.</td>
                     </tr>
                     <tr>
-                      <td className={`${styles.middle} ${styles.border}`}>Malas</td>
-                      <td className={styles.border}> {answer.wrong} </td>
+                      <td className={`${styles.middle} ${styles.border}`}>2</td>
+                      <td className={`${styles.middle} ${styles.border}`}>Medio Bajo</td>
+                      <td className={styles.border}>Dificultad de comprensión de instrucciones moderada, o poco manejo de presión.</td>
                     </tr>
                     <tr>
-                      <td className={`${styles.middle} ${styles.border}`}>Omitidas</td>
-                      <td className={styles.border}> {answer.omitted} </td>
+                      <td className={`${styles.middle} ${styles.border}`}>3</td>
+                      <td className={`${styles.middle} ${styles.border}`}>Medio</td>
+                      <td className={styles.border}>Presenta problemas leves de comprensión de instrucciones o manejo de presión.</td>
+                    </tr>
+                    <tr>
+                      <td className={`${styles.middle} ${styles.border}`}>4</td>
+                      <td className={`${styles.middle} ${styles.border}`}>Medio Alto</td>
+                      <td className={styles.border}>Muestra comprensión de instrucciones y manejo de presión moderado.</td>
+                    </tr>
+                    <tr>
+                      <td className={`${styles.middle} ${styles.border}`}>5</td>
+                      <td className={`${styles.middle} ${styles.border}`}>Alto</td>
+                      <td className={styles.border}>Maneja instrucciones complejas con eficiencia y mantiene el control bajo presión.</td>
+                    </tr>
+                    <tr>
+                      <td className={`${styles.middle} ${styles.border}`}>6</td>
+                      <td className={`${styles.middle} ${styles.border}`}>Muy Alto</td>
+                      <td className={styles.border}>Maneja instrucciones complejas sin difucultades y mantiene el control bajo presión.</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-            </div>
-            <div className={styles['bottom-floater']}>
-              TEST IC <br /> Test diseñado para medir la eficiencia en el trabajo bajo presión, la reacción ante instrucciones complejas y la tolerancia a la frustración. Se evalua entre 1 y 6 puntos, obteniendo mayor puntaje en cuanto muestre mejor desempeño ante los retos enfrentados.
-            </div>
           </div>
-            <div className={styles.puntajes}>
-              <table>
-                <thead>
-                  <tr>
-                    <th className={styles.border}>Puntaje</th>
-                    <th className={styles.border}>Nivel</th>
-                    <th className={`${styles.bigth} ${styles.border}`}>Descripción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className={styles.highlight}>
-                    <td className={`${styles.middle} ${styles.border}`}>1</td>
-                    <td className={`${styles.middle} ${styles.border}`}>Bajo</td>
-                    <td className={styles.border}>Dificultad de comprensión de instrucciones elevada, o poco manejo de presión.</td>
-                  </tr>
-                  <tr>
-                    <td className={`${styles.middle} ${styles.border}`}>2</td>
-                    <td className={`${styles.middle} ${styles.border}`}>Medio Bajo</td>
-                    <td className={styles.border}>Dificultad de comprensión de instrucciones moderada, o poco manejo de presión.</td>
-                  </tr>
-                  <tr>
-                    <td className={`${styles.middle} ${styles.border}`}>3</td>
-                    <td className={`${styles.middle} ${styles.border}`}>Medio</td>
-                    <td className={styles.border}>Presenta problemas leves de comprensión de instrucciones o manejo de presión.</td>
-                  </tr>
-                  <tr>
-                    <td className={`${styles.middle} ${styles.border}`}>4</td>
-                    <td className={`${styles.middle} ${styles.border}`}>Medio Alto</td>
-                    <td className={styles.border}>Muestra comprensión de instrucciones y manejo de presión moderado.</td>
-                  </tr>
-                  <tr>
-                    <td className={`${styles.middle} ${styles.border}`}>5</td>
-                    <td className={`${styles.middle} ${styles.border}`}>Alto</td>
-                    <td className={styles.border}>Maneja instrucciones complejas con eficiencia y mantiene el control bajo presión.</td>
-                  </tr>
-                  <tr>
-                    <td className={`${styles.middle} ${styles.border}`}>6</td>
-                    <td className={`${styles.middle} ${styles.border}`}>Muy Alto</td>
-                    <td className={styles.border}>Maneja instrucciones complejas sin difucultades y mantiene el control bajo presión.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <button className={`${styles.fixed} ${styles[`button-pdf`]}`} onClick={generatePDF}>
+          <svg
+            class={styles['icon__dowload-pdf']}
+            fill="#ffc107"
+            width="75"
+            height="75"
+            id="Layer_1"
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 122.88 122.88">
+            <title>download-file-round</title>
+            <path fillRule="evenodd" class="cls-1" d="M61.44,0A61.44,61.44,0,1,1,0,61.44,61.44,61.44,0,0,1,61.44,0Zm10.9,49.72a3.63,3.63,0,1,1,5.09,5.18L63.63,68.53a3.64,3.64,0,0,1-5.1,0L44.93,55.1A3.63,3.63,0,0,1,50,49.91l7.49,7.42.08-26.13a3.64,3.64,0,0,1,7.27.06l-.08,25.93,7.56-7.47ZM32.5,83.09l0-14.22a3.64,3.64,0,0,1,7.27.07l0,10.35q21.66,0,43.3,0l0-10.42a3.64,3.64,0,1,1,7.27.07l0,14.15h0a3.64,3.64,0,0,1-3.6,3.47q-25.32,0-50.59,0a3.63,3.63,0,0,1-3.6-3.47Z"/>
+          </svg>
+          </button>
         </div>
-        <button className={`${styles.fixed} ${styles[`button-pdf`]}`} onClick={generatePDF}>
-          <Image src="/images/download_icon.svg" alt="download" width="75" height="75" />
-        </button>
-      </div>
+      </Layout>
     </>
   );
 }
+
+Certificate.Auth = WithPrivateRoute
 
 export async function getServerSideProps({ params }) {
   try {
