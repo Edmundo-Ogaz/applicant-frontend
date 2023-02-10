@@ -108,7 +108,7 @@ export default function Certificate({ test, postulant, answer, date, state }) {
   }
 
   async function generatePDF() {
-    const canvas = await html2canvas(document.querySelector("#certificate-body"));
+    const canvas = await html2canvas(document.querySelector("#certificate"));
     const image = canvas.toDataURL("image/png", 1.0);
     var doc = new jsPDF('p', 'in', 'letter', false, false, 5000);
     doc.addImage(image, 'JPEG', 0, 0, 8.5, 11);
@@ -118,15 +118,14 @@ export default function Certificate({ test, postulant, answer, date, state }) {
   return (
     <>
       <Layout>
-        <div className={styles.horizontal}>
-          <div id="certificate-body" className={styles['certificate-body']}>
-            <div className={`${styles.info_sup} ${styles.horizontal}`}>
-              <div id="logo" className={`${styles.logo} ${styles.full_center}`}>
+        <div className={styles.main}>
+          <div id="certificate" className={styles.container}>
+            <div className={styles.header}>
+              <div id="logo" className={styles.logo}>
                 <a>Aquí va un logo</a>
               </div>
-              <div id="personal_info" className={`${styles.personal_info} ${styles.full_center}`}>
-                <div className={`${styles.full_container} ${styles.full_center}`}>
-                  <div className={`${styles.info_col} ${styles.vertical}`}>
+              <div className={styles.personal_info}>
+                  <div className={styles.info_col}>
                     <ul>
                       <li>Nombre: {postulant.firstName} {postulant.lastName}</li>
                       <li>RUN: {postulant.rut}</li>
@@ -135,7 +134,7 @@ export default function Certificate({ test, postulant, answer, date, state }) {
                       <li>Ciudad: P/D</li>
                     </ul>
                   </div>
-                  <div className={`${styles.info_col} ${styles.vertical}`}>
+                  <div className={styles.info_col}>
                     <ul>
                       <li>Rendido: {date['@ts']} </li>
                       <li>Válido hasta: P/D</li>
@@ -144,52 +143,49 @@ export default function Certificate({ test, postulant, answer, date, state }) {
                       <li>Cod: --- </li>
                     </ul>
                   </div>
-                </div>
               </div>
             </div>
-            <div className={styles.graph_cont}>
-              <div className={styles['mid-floater']}>
+            <div className={styles.body}>
+              <div className={styles.graph}>
                 <Doughnut data={data} options={options} />
               </div>
-              <div className={styles['pseudo-mid-floater']}>
-                <div className={styles.puntaje}>
-                  <div className={styles.bignum}>
-                    {answer.score}
-                  </div>
-                  <div className={styles.middle}>
-                    {answer.level}
-                  </div>
+              <div className={styles.score}>
+                <div className={styles.score__number}>
+                  {answer.score}
+                </div>
+                <div>
+                  {answer.level}
                 </div>
                 <div>
                   <table>
                     <tbody>
                       <tr>
-                        <td className={`${styles.middle} ${styles.border}`}>Buenas</td>
+                        <td className={styles.border}>Buenas</td>
                         <td className={styles.border}> {answer.correct} </td>
                       </tr>
                       <tr>
-                        <td className={`${styles.middle} ${styles.border}`}>Malas</td>
+                        <td className={styles.border}>Malas</td>
                         <td className={styles.border}> {answer.wrong} </td>
                       </tr>
                       <tr>
-                        <td className={`${styles.middle} ${styles.border}`}>Omitidas</td>
+                        <td className={styles.border}>Omitidas</td>
                         <td className={styles.border}> {answer.omitted} </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
-              <div className={styles['bottom-floater']}>
+              <div className={styles.description}>
                 TEST IC <br /> Test diseñado para medir la eficiencia en el trabajo bajo presión, la reacción ante instrucciones complejas y la tolerancia a la frustración. Se evalua entre 1 y 6 puntos, obteniendo mayor puntaje en cuanto muestre mejor desempeño ante los retos enfrentados.
               </div>
             </div>
-              <div className={styles.puntajes}>
+              <div className={styles.scores}>
                 <table>
                   <thead>
                     <tr>
                       <th className={styles.border}>Puntaje</th>
                       <th className={styles.border}>Nivel</th>
-                      <th className={`${styles.bigth} ${styles.border}`}>Descripción</th>
+                      <th className={`${styles['scores__cell-7w']} ${styles.border}`}>Descripción</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -227,7 +223,7 @@ export default function Certificate({ test, postulant, answer, date, state }) {
                 </table>
               </div>
           </div>
-          <button className={`${styles.fixed} ${styles[`button-pdf`]}`} onClick={generatePDF}>
+          <button className={styles[`button-pdf`]} onClick={generatePDF}>
           <svg
             class={styles['icon__dowload-pdf']}
             fill="#ffc107"

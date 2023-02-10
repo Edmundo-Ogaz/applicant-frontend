@@ -1,9 +1,9 @@
-.horizontal {
+.main {
   display: flex;
   justify-content: center;
 }
 
-.certificate-body {
+.container {
   margin-top: 20px;
   margin-bottom: 20px;
   width: 850px;
@@ -11,42 +11,30 @@
   background-color: white;
 }
 
-.info_sup {
-  width: 100%;
-  height: 17%;
+.header {
+  display: flex;
   background-color: #ffc107;
 }
 
 .logo {
-  width: 20%;
-  height: 100%;
-}
-
-.full_center {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  width: 20%;
 }
 
 .personal_info {
-  width: 80%;
-  height: 100%;
-}
-
-.full_container {
-  width: 100%;
-  height: 100%;
-}
-
-.vertical {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  width: 80%;
 }
 
 .info_col {
+  display: flex;
+  flex-direction: column;
   width: 50%;
   height: 80%;
+  margin: 1rem 0;
 }
 
 .info_col ul {
@@ -59,43 +47,36 @@
 .info_col ul li {
   background-color: white;
   width: 95%;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 2px;
-  margin-bottom: 5px;
+  padding: 2px;
+  margin: 2.5px 0
 }
 
-.graph_cont {
+.body {
   position: relative;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
 }
 
-.bignum {
-  line-height: 100pt;
-  font-size: 10em;
-  font-weight: 300;
-  text-align: center;
-}
-
-.middle {
-  text-align: center;
-}
-
-.mid-floater {
+.graph {
   height: 450px;
   width: 550px;
 }
 
-.pseudo-mid-floater {
+.score {
   position: absolute;
-  top: 36%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 14%;
+  left: 45%;
+  text-align: center;
 }
 
-.bottom-floater {
+.score__number {
+  line-height: 100pt;
+  font-size: 10em;
+  font-weight: 300;
+}
+
+.description {
   font-size: 0.7em;
   text-align: center;
   padding: 10px;
@@ -103,58 +84,33 @@
   width: 50%;
 }
 
-.info_inf {
-  width: 100%;
-}
-
-.puntaje {
-  height: 100%;
-  width: 100%;
-  display: table;
-}
-
-.puntajes {
+.scores {
   display: flex;
   justify-content: center;
-  align-items: center;
   margin: 1rem;
 }
 
-/* .puntajes table, td, th {
-  border: 1px solid black;
-  border-collapse: collapse;
+.scores__cell-7w {
+  width: 70%;
 }
 
-.puntajes table {
-  background-color: white;
-  width: 90%;
-  margin: 0 auto;
-  border-color: black;
-  font-size: 1em;
-} */
+.middle {
+  text-align: center;
+}
 
 .border {
   border: 1px solid black;
-  border-collapse: collapse;
   padding: 0.1rem;
-}
-
-.bigth {
-  width: 70%;
 }
 
 .highlight {
   background-color: #ffc107;
-  border: white !important;
-}
-
-.fixed {
-  position: fixed;
-  bottom: 1%;
-  right: 1%;
 }
 
 .button-pdf {
+  position: fixed;
+  bottom: 1%;
+  right: 1%;
   background-color: #fff;
   box-shadow: none;
   border: none;

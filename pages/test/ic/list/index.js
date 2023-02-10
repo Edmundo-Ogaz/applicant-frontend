@@ -30,17 +30,17 @@ export default function List({answers}) {
                       </ul>
                     </h1>
                     <hr/>
-                    <div className="bottom-floater">
+                    <div className="description">
                         <p style={{paddingLeft: '1rem'}}>Test diseñado para medir la eficiencia en el trabajo bajo presión, la reacción ante instrucciones complejas y la tolerancia a la frustración. Se evalua entre 1 y 6 puntos, obteniendo mayor puntaje en cuanto muestre mejor desempeño ante los retos enfrentados.</p>
                     </div>
                     <div id="info_inf">
-                        <div className="full_container" id="puntajes">
+                        <div className="full_container" id="scores">
                                 <table>
                                   <thead>
                                     <tr>
                                         <th>Puntaje</th>
                                         <th>Nivel</th>
-                                        <th className="bigth">Descripción</th>
+                                        <th className="scores__cell-7w">Descripción</th>
                                     </tr>
                                   </thead>
                                   <tbody>
