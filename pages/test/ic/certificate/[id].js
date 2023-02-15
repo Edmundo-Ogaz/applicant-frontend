@@ -253,29 +253,30 @@ export async function getServerSideProps({ params }) {
       return {
         redirect: {
           permanent: false,
-          destination: "/error",
-        },
-        props: {},
+          destination: `/error?message=bad params`,
+        }
       };
     }
 
-    const URL = `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants/${id}`
-    console.log('getServerSideProps', URL);
-    const testPortulant = await fetch(URL)
+    const testPortulant = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants/${id}`)
       .then(testPortulant => testPortulant.json())
-    console.log('getServerSideProps', testPortulant);
     const { test, postulant, answer, date, state } = { ...testPortulant }
     return {
-      props: { test, postulant, answer, date, state }
+      props: { 
+        test, 
+        postulant, 
+        answer, 
+        date, 
+        state 
+      }
     }
   } catch (e) {
-    console.error(e.message)
+    console.error(e)
     return {
       redirect: {
         permanent: false,
-        destination: "/error",
-      },
-      props: {},
+        destination: `/error?message=${e.message}`,
+      }
     };
   }
 }

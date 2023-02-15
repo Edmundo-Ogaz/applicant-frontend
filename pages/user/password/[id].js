@@ -95,9 +95,8 @@ export async function getServerSideProps({params}) {
       return {
         redirect: {
           permanent: false,
-          destination: "/error",
-        },
-        props:{},
+          destination: `/error?message=bad params`,
+        }
       };
     }
     const user = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/users/${id}`).then(user => user.json())
@@ -106,9 +105,8 @@ export async function getServerSideProps({params}) {
       return {
         redirect: {
           permanent: false,
-          destination: "/error",
-        },
-        props:{},
+          destination: `/error?message=user not found`,
+        }
       };
     }
     return {
@@ -117,13 +115,12 @@ export async function getServerSideProps({params}) {
       },
     }
   } catch(e) {
-    console.error(e.message)
+    console.error(e)
     return {
       redirect: {
         permanent: false,
-        destination: "/error",
-      },
-      props:{},
+        destination: `/error?message=${e.message}`,
+      }
     };
   }
 }

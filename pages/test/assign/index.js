@@ -17,15 +17,15 @@ export default function AssignTest({companies, tests}) {
   const [ isSaving, setIsSaving ] = useState(false);
   const [ isSearching, setIsSearching ] = useState(false);
 
-  const [ rut, setRut ] = useState();
-  const [ firstName, setFirstName ] = useState();
-  const [ lastName, setLastName ] = useState();
-  const [ email, setEmail ] = useState();
+  const [ rut, setRut ] = useState('');
+  const [ firstName, setFirstName ] = useState('');
+  const [ lastName, setLastName ] = useState('');
+  const [ email, setEmail ] = useState('');
 
-  const [ postulantId, setPostulantId ] = useState();
-  const [ testId, setTestId ] = useState();
-  const [ company, setCompany ] = useState();
-  const [ analyst, setAnalyst ] = useState();
+  const [ postulantId, setPostulantId ] = useState('');
+  const [ testId, setTestId ] = useState('');
+  const [ company, setCompany ] = useState('');
+  const [ analyst, setAnalyst ] = useState('');
 
   const [ analysts, setAnalysts ] = useState([]);
 
@@ -147,7 +147,7 @@ export default function AssignTest({companies, tests}) {
             </section>
             <label forhtml="test">
               <span className={styles['user__label-text']}>Test</span>
-              <select name="test" id="test" value={test} className={styles.user__input} onChange={ handleTest}>
+              <select name="test" id="test" value={testId} className={styles.user__input} onChange={ handleTest}>
                 <option value="">Selecionar...</option>
                 {tests.map((test) => <option key={test.id} value={test.id}>{test.name}</option>)}
               </select>
@@ -182,9 +182,21 @@ AssignTest.Auth = WithPrivateRoute
 export async function getServerSideProps() {
   try {
     console.log('getServerSideProps')
-    const companies = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/companies`).then(companies => companies.json())
-    const tests = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests`).then(tests => tests.json())
-    let data = await Promise.all([companies, tests]);
+    const companies = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/companies`)
+    const tests = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests`)
+    const data = await Promise.all([companies, tests])
+    .then(responses =>
+      Promise.all(responses.map(res => {
+        if (res.status !== 200)
+          return Promise.reject(new Error(res.statusText))
+        return res.json()
+      }))
+    )
+    .catch(error => {
+      console.log('reason', error)
+      throw error
+    });
+
     return {
       props: {
         companies: data[0],
@@ -192,13 +204,12 @@ export async function getServerSideProps() {
       },
     }
   } catch(e) {
-    console.log(e.message)
+    console.log(e)
     return {
       redirect: {
         permanent: false,
-        destination: "/error",
-      },
-      props:{},
+        destination: `/error?message=${e.message}`,
+      }
     };
   }
 }

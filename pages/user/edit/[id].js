@@ -135,11 +135,22 @@ export async function getServerSideProps({params}) {
     console.log('getServerSideProps')
     const id = params.id
     
-    const user = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/users/${id}`).then(user => user.json())
-    const companies = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/companies`).then(companies => companies.json())
-    const profiles = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/profiles`).then(profiles => profiles.json())
-    let data = await Promise.all([user, companies, profiles]);
-    console.log('get', user)
+    const user = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/users/${id}`)
+    const companies = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/companies`)
+    const profiles = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/profiles`)
+    const data = await Promise.all([user, companies, profiles])
+    .then(responses =>
+      Promise.all(responses.map(res => {
+        if (res.status !== 200)
+          return Promise.reject(new Error(res.statusText))
+        return res.json()
+      }))
+    )
+    .catch(error => {
+      console.log('reason', error)
+      throw error
+    });
+
     return {
       props: {
         user: data[0],
@@ -148,13 +159,12 @@ export async function getServerSideProps({params}) {
       },
     }
   } catch(e) {
-    console.log(e.message)
+    console.log(e)
     return {
       redirect: {
         permanent: false,
-        destination: "/error",
-      },
-      props:{},
+        destination: `/error?message=${e.message}`,
+      }
     };
   }
 }

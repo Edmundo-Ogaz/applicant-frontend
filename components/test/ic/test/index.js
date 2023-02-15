@@ -4,14 +4,16 @@ import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import LoadingSpinner from '../../../../components/LoadingSpinner';
+import LoadingSpinner from '@/components/LoadingSpinner/index.js';
 
 import styles from './ic.module.css';
 
-import data from '../data'
+import data from './data.json'
 
-export default function IC({id}) {
+export default function IC(props) {
 	console.log('IC')
+
+  const { id, url } = props;
 
   const TIME_IN_MINUTES = 8;
 
@@ -71,7 +73,7 @@ export default function IC({id}) {
         if (response?.ok === false) {
           throw new Error(json?.error)
         }
-        router.push('/test/ic/success')
+        router.push(url)
       //}
     } catch(e) {
       toast.error(e.message);
@@ -185,42 +187,4 @@ export default function IC({id}) {
       <ToastContainer />
     </>
   );
-}
-
-export async function getServerSideProps({query}) {
-  try {
-    console.log('getServerSideProps',query.id);
-    if (isNaN(query.id)) {
-      return {
-        redirect: {
-          permanent: false,
-          destination: `/error?message=Problemas al obtener parametros`,
-        }
-      };
-    }
-    const testsPortulants = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants/${query.id}`)
-      .then(testsPortulants => testsPortulants.json())
-
-    if (Object.keys(testsPortulants).length === 0) {
-      return {
-        redirect: {
-          permanent: false,
-          destination: `/error?message=No se pudo obtener el test del postulanta`,
-        }
-      };
-    }
-    return {
-      props: {
-        id: testsPortulants.id,
-      },
-    }
-  } catch(e) {
-    console.error(e)
-    return {
-      redirect: {
-        permanent: false,
-        destination: `/error?message=${e.message}`,
-      }
-    };
-  }
 }

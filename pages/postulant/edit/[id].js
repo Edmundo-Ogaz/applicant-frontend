@@ -138,13 +138,12 @@ export async function getServerSideProps({params}) {
       },
     }
   } catch(e) {
-    console.log(e.message)
+    console.log(e)
     return {
       redirect: {
         permanent: false,
-        destination: "/error",
-      },
-      props:{},
+        destination: `/error?message=${e.message}`,
+      }
     };
   }
 }

@@ -141,24 +141,20 @@ export default function List({answers}) {
 export async function getServerSideProps() {
   try {
     console.log('getServerSideProps');
-  const URL = `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants/ic`
-    console.log('getServerSideProps', URL);
-    const testsPortulants = await fetch(URL)
-    .then(testsPortulants => testsPortulants.json())
-    console.log('getServerSideProps', testsPortulants);
+    const testsPortulants = await fetch( `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants/ic`)
+      .then(testsPortulants => testsPortulants.json())
     return {
       props: {
         answers: testsPortulants,
       },
     }
   } catch(e) {
-    console.log(e.message)
+    console.log(e)
     return {
       redirect: {
         permanent: false,
-        destination: "/error",
-      },
-      props:{},
+        destination: `/error?message=${e.message}`,
+      }
     };
   }
 }

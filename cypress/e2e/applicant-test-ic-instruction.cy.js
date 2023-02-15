@@ -11,7 +11,7 @@ describe('applicant', () => {
   })
 
   it('search by rut', () => {
-    cy.visit('http://localhost:3000/test/ic/instruction?postulant=355826578262852096&company=1')
+    cy.visit('http://localhost:3000/test/ic/instruction/356042924923814400')
     cy.get('.display-4').should('have.text', 'TEST IC')
     cy.get('.lead').should('have.text', 'Evaluación de la aptitud para comprender e interpretar rápida y correctamente órdenes complejas.')
     cy.get('.jumbotron :nth-child(4)').should('have.text', 'Tienes 8 minutos para completar el test. Si te sales de la página, perderás tus respuestas. Es TÚ responsabilidad realizarlo de forma sensata. Buena suerte!')

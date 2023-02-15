@@ -1,0 +1,26 @@
+.avatar:hover > .title {
+    font-weight: 700;
+}
+
+.avatar:hover > .menu {
+    display: block;
+}
+
+.title {
+    cursor: pointer;
+    padding: 0 1rem;
+}
+
+.menu {
+    display: none;
+    position: absolute;
+    padding: 0px 1rem;
+}
+
+.item {
+    cursor: pointer;
+}
+
+.item:hover {
+    font-weight: 700;
+}

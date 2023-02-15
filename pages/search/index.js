@@ -176,19 +176,17 @@ export default function Search({companies, tests, states}) {
           </thead>
           <tbody>
             {list.map(item => {
-              let link = `/test/ic/certificate/${item.id}`
-              let linkQuery = ''
+              const test = item.test.name.toLowerCase()
+              let page = `certificate`
               if (item.state.id === process.env.NEXT_PUBLIC_TEST_STATE_PENDING_ID) {
-                link = `test/ic/instruction`
-                linkQuery = {id: item.id}
+                page = `instruction`
               }
               return(
                 <tr key={item.id} className="list-body-row">
                   <td>
                     <Link
                       href={{
-                        pathname: link,
-                        query: linkQuery,
+                        pathname: `/test/${test}/${page}/${item.id}`
                       }}
                     >
                       {item.postulant.firstName} {item.postulant.lastName}
@@ -217,11 +215,22 @@ Search.Auth = WithPrivateRoute
 export async function getServerSideProps() {
   try {
     console.log('getServerSideProps')
-    const companies = fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/companies`).then(companies => companies.json())
-    const tests = fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests`).then(tests => tests.json())
-    const states = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/states`).then(states => states.json())
-    let data = await Promise.all([companies, tests, states])
-    console.log('getServerSideProps', data)
+    const companies = fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/companies`)
+    const tests = fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests`)
+    const states = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/states`)
+    const data = await Promise.all([companies, tests, states])
+    .then(responses =>
+      Promise.all(responses.map(res => {
+        if (res.status !== 200)
+          return Promise.reject(new Error(res.statusText))
+        return res.json()
+      }))
+    )
+    .catch(error => {
+      console.log('reason', error)
+      throw error
+    });
+
     return {
       props: {
         companies: data[0],
@@ -234,9 +243,8 @@ export async function getServerSideProps() {
     return {
       redirect: {
         permanent: false,
-        destination: "/error",
-      },
-      props:{},
+        destination: `/error?message=${e.message}`,
+      }
     };
   }
 }

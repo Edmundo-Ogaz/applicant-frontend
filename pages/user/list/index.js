@@ -170,10 +170,21 @@ List.Auth = WithPrivateRoute
 export async function getServerSideProps() {
   try {
     console.log('getServerSideProps')
-    const companies = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/companies`).then(companies => companies.json())
-    const profiles = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/profiles`).then(profiles => profiles.json())
-    let data = await Promise.all([companies, profiles])
-    console.log('getServerSideProps', companies)
+    const companies = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/companies`)
+    const profiles = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/profiles`)
+    const data = await Promise.all([companies, profiles])
+    .then(responses =>
+      Promise.all(responses.map(res => {
+        if (res.status !== 200)
+          return Promise.reject(new Error(res.statusText))
+        return res.json()
+      }))
+    )
+    .catch(error => {
+      console.log('reason', error)
+      throw error
+    });
+
     return {
       props: {
         companies: data[0],
@@ -181,13 +192,12 @@ export async function getServerSideProps() {
       },
     }
   } catch(e) {
-    console.log(e.message)
+    console.error('error', e)
     return {
       redirect: {
         permanent: false,
-        destination: "/error",
-      },
-      props:{},
+        destination: `/error?message=${e.message}`,
+      }
     };
   }
 }
