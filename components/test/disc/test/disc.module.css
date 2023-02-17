@@ -1,0 +1,143 @@
+.center {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.disc-card
+{
+  height:25em;
+  width:19em;
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  -webkit-box-orient:vertical;
+  -webkit-box-direction:normal;
+  -ms-flex-direction:column;
+  flex-direction:column;
+  position:relative;
+  border-radius:16px;
+  overflow:hidden;
+  -webkit-box-shadow:  15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
+  box-shadow:  15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
+  background-color: #e9ecef;
+}
+
+.disc-card-header {
+    height: 1rem;
+    position: absolute;
+    top: 1.3rem;
+    left: 1.6rem;
+    font-size: 0.7rem;
+    z-index: 100;
+    color: gray;
+}
+
+.disc-card-body {
+    background-color: #FAFAFC;
+    height: 80%;
+    width: 100%;
+    position: absolute;
+    top: 0em;
+    padding: 0.5em 1em;
+    text-align: center;
+}
+
+.disc-card-table {
+    margin-top: 1em;
+    width: 100%;
+    height: 18em;
+    text-align: center;
+}
+
+.disc-card-table th {
+    height: 3em;
+    width: 50%;
+}
+
+.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+.item {
+    width: 40% !important;
+    text-align: left;
+}
+
+.item_20 {
+    width: 20% !important;
+}
+
+.disc-container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+    !important: ;
+}
+
+.disc-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    height: 25px;
+    width: 25px;
+    background-color: #DCDCDC;
+    z-index: 1;
+    font-family: "Helvetica Neue";
+    !important: ;
+}
+
+.disc-container:hover input ~ .checkmark {
+    background-color: #C0C0C0;
+}
+
+.disc-container input:checked ~ .checkmark {
+background-color: #ffc107 ;
+}
+
+.checkmark:after {
+    content: "+";
+    position: absolute;
+    display: none;
+    color: white;
+    font-weight: bolder;
+}
+
+.disc-container input:checked ~ .checkmark:after {
+display: block;
+}
+
+.disc-container .checkmark:after {
+width: 25px;
+height: 25px;
+-webkit-transform: rotate(45deg);
+-ms-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+
+.disc-card-footer {
+    position: absolute;
+    bottom: .1em;
+    right: 1em;
+}
+
+.display__none {
+    display:none
+}
