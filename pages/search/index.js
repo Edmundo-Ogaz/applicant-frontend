@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import Link from 'next/link'
-
 import { toast } from 'react-toastify';
 
 import WithPrivateRoute from '../../components/WithPrivateRoute.js'
@@ -9,6 +7,7 @@ import WithPrivateRoute from '../../components/WithPrivateRoute.js'
 import Layout from "../../components/layout";
 import LoadingSpinner from '../../components/LoadingSpinner/index.js';
 
+import ModalUrlInstruction from '@/components/model/instruction/index.js'
 import ModalIcCertificate from '@/components/model/ic/index.js'
 import ModalDiscCertificate from '@/components/model/disc/index.js'
 
@@ -16,6 +15,7 @@ export default function Search({companies, tests, states}) {
 	console.log('Search')
 
   const Modals = []
+  Modals[0] = ModalUrlInstruction
   Modals[process.env.NEXT_PUBLIC_TEST_IC_ID] = ModalIcCertificate
   Modals[process.env.NEXT_PUBLIC_TEST_DISC_ID] = ModalDiscCertificate
 
@@ -127,8 +127,21 @@ export default function Search({companies, tests, states}) {
   }
 
   function Modal() {
-    const Modal = Modals[testPostulant.test.id]
-    return <Modal setIsOpen={setIsOpenModal} testPostulant={testPostulant} />
+    console.log('modal', testPostulant)
+    let Modal
+    if (testPostulant.state.id === process.env.NEXT_PUBLIC_TEST_STATE_DONE_ID) {
+      console.log('modal', process.env.NEXT_PUBLIC_TEST_STATE_DONE_ID)
+      Modal = Modals[testPostulant.test.id]
+      return <Modal setIsOpen={setIsOpenModal} testPostulant={testPostulant} />
+    } else if (testPostulant.state.id === process.env.NEXT_PUBLIC_TEST_STATE_PENDING_ID) {
+      console.log('modal', process.env.NEXT_PUBLIC_TEST_STATE_PENDING_ID)
+      Modal = Modals[0]
+      const id = testPostulant.id
+      const type = testPostulant.test.name.toLowerCase()
+      return <Modal setIsOpen={setIsOpenModal} id={id} type={type} />
+    }
+    console.log('modal return')
+    return
   }
      
   return (
@@ -200,13 +213,9 @@ export default function Search({companies, tests, states}) {
               return(
                 <tr key={item.id} className="list-body-row">
                   <td>
-                    { item.state.id === process.env.NEXT_PUBLIC_TEST_STATE_DONE_ID ?
-                        (<a href="#" onClick={ () => handleModel(item.id) }>
-                          {item.postulant.firstName} {item.postulant.lastName}
-                        </a>)
-                      :
-                      `${item.postulant.firstName} ${item.postulant.lastName}`
-                    }
+                    <a href="#" onClick={ () => handleModel(item.id) }>
+                      {item.postulant.firstName} {item.postulant.lastName}
+                    </a>
                   </td>
                   <td>
                       {item.postulant.email}
