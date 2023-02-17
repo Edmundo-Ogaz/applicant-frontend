@@ -9,10 +9,19 @@ import WithPrivateRoute from '../../components/WithPrivateRoute.js'
 import Layout from "../../components/layout";
 import LoadingSpinner from '../../components/LoadingSpinner/index.js';
 
+import ModalIcCertificate from '@/components/model/ic/index.js'
+import ModalDiscCertificate from '@/components/model/disc/index.js'
+
 export default function Search({companies, tests, states}) {
 	console.log('Search')
 
+  const Modals = []
+  Modals[process.env.NEXT_PUBLIC_TEST_IC_ID] = ModalIcCertificate
+  Modals[process.env.NEXT_PUBLIC_TEST_DISC_ID] = ModalDiscCertificate
+
   const [ isSearching, setIsSearching ] = useState(false);
+  const [ testPostulant, setTestPostulant] = useState(null);
+  const [ isOpenModal, setIsOpenModal] = useState(false);
 
   const [ rut, setRut ] = useState();
   const [ name, setName ] = useState();
@@ -109,11 +118,23 @@ export default function Search({companies, tests, states}) {
   function handleState(event) {
 		setState(event.target.value)
 	}
+
+  async function handleModel(id) {
+    const testPostulant = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants/${id}`)
+      .then(testPortulant => testPortulant.json())
+    setTestPostulant(testPostulant)
+    setIsOpenModal(true)
+  }
+
+  function Modal() {
+    const Modal = Modals[testPostulant.test.id]
+    return <Modal setIsOpen={setIsOpenModal} testPostulant={testPostulant} />
+  }
      
   return (
     <>
       <Layout>
-        <h2>Buscar Resultados</h2>
+        <h2>Buscar Tests</h2>
         <form>
           <fieldset className='search__filter'>
             <legend className='search__filter-header'>Filtro</legend>
@@ -176,23 +197,20 @@ export default function Search({companies, tests, states}) {
           </thead>
           <tbody>
             {list.map(item => {
-              const test = item.test.name.toLowerCase()
-              let page = `certificate`
-              if (item.state.id === process.env.NEXT_PUBLIC_TEST_STATE_PENDING_ID) {
-                page = `instruction`
-              }
               return(
                 <tr key={item.id} className="list-body-row">
                   <td>
-                    <Link
-                      href={{
-                        pathname: `/test/${test}/${page}/${item.id}`
-                      }}
-                    >
-                      {item.postulant.firstName} {item.postulant.lastName}
-                    </Link>
+                    { item.state.id === process.env.NEXT_PUBLIC_TEST_STATE_DONE_ID ?
+                        (<a href="#" onClick={ () => handleModel(item.id) }>
+                          {item.postulant.firstName} {item.postulant.lastName}
+                        </a>)
+                      :
+                      `${item.postulant.firstName} ${item.postulant.lastName}`
+                    }
                   </td>
-                  <td>{item.postulant.email}</td>
+                  <td>
+                      {item.postulant.email}
+                  </td>
                   <td>{item.company.name}</td>
                   <td>{item.analyst.firstName} {item.analyst.lastName}</td>
                   <td>{item.test.name}</td>
@@ -204,7 +222,8 @@ export default function Search({companies, tests, states}) {
             )}
           </tbody>
         </table>
-        {isSearching && <LoadingSpinner/>}
+        { isSearching && <LoadingSpinner/> }
+        { isOpenModal && <Modal /> }
       </Layout>
     </>
   );

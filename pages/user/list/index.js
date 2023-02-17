@@ -149,7 +149,8 @@ export default function List({companies, profiles}) {
                     </Link>
                     <Link
                       href={{
-                        pathname: `/user/password/${user.id}`,
+                        pathname: `/user/password/link`,
+                        query: { id: user.id }
                       }}
                     >
                       <Image src="/images/edit_password.svg" alt="password" width="24" height="24" />
