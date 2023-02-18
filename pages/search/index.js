@@ -201,7 +201,8 @@ export default function Search({companies, tests, states}) {
               <th>Analista</th>
               <th>Test</th>
               <th>Estado</th>
-              <th>Fecha</th>
+              <th>Fecha Creación</th>
+              <th>Fecha Test</th>
             </tr>
           </thead>
           <tbody>
@@ -220,7 +221,8 @@ export default function Search({companies, tests, states}) {
                   <td>{item.analyst.firstName} {item.analyst.lastName}</td>
                   <td>{item.test.name}</td>
                   <td>{item.state.name}</td>
-                  <td>{item.date['@ts']}</td>
+                  <td>{item.createdAt['@ts']}</td>
+                  <td>{item.updatedAt['@ts']}</td>
                 </tr>
                 )
               }
