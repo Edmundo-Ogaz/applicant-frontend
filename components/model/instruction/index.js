@@ -15,7 +15,9 @@ export default function ModalIcCertificate({ id, type, setIsOpen }) {
           <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>
             x
           </button>
-          http://localhost:3000/public/test/{type}/instruction/{id}
+          <div className={styles.modalContent}>
+            http://localhost:3000/public/test/{type}/instruction/{id}
+          </div>
         </div>
       </div>
     </>

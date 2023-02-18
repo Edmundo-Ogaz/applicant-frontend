@@ -127,20 +127,16 @@ export default function Search({companies, tests, states}) {
   }
 
   function Modal() {
-    console.log('modal', testPostulant)
     let Modal
     if (testPostulant.state.id === process.env.NEXT_PUBLIC_TEST_STATE_DONE_ID) {
-      console.log('modal', process.env.NEXT_PUBLIC_TEST_STATE_DONE_ID)
       Modal = Modals[testPostulant.test.id]
       return <Modal setIsOpen={setIsOpenModal} testPostulant={testPostulant} />
     } else if (testPostulant.state.id === process.env.NEXT_PUBLIC_TEST_STATE_PENDING_ID) {
-      console.log('modal', process.env.NEXT_PUBLIC_TEST_STATE_PENDING_ID)
       Modal = Modals[0]
       const id = testPostulant.id
       const type = testPostulant.test.name.toLowerCase()
       return <Modal setIsOpen={setIsOpenModal} id={id} type={type} />
     }
-    console.log('modal return')
     return
   }
      
