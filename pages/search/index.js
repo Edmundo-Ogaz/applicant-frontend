@@ -139,6 +139,29 @@ export default function Search({companies, tests, states}) {
     }
     return
   }
+
+  function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+  }
+
+  function formatDate(date) {
+    if (!date instanceof Date || isNaN(date))
+      return ''
+    
+    return (
+      [
+        padTo2Digits(date.getMonth() + 1),
+        padTo2Digits(date.getDate()),
+        date.getFullYear(),
+      ].join('/') +
+      ' ' +
+      [
+        padTo2Digits(date.getHours()),
+        padTo2Digits(date.getMinutes()),
+        padTo2Digits(date.getSeconds()),
+      ].join(':')
+    );
+  }
      
   return (
     <>
@@ -221,8 +244,8 @@ export default function Search({companies, tests, states}) {
                   <td>{item.analyst.firstName} {item.analyst.lastName}</td>
                   <td>{item.test.name}</td>
                   <td>{item.state.name}</td>
-                  <td>{item.createdAt['@ts']}</td>
-                  <td>{item.updatedAt['@ts']}</td>
+                  <td>{formatDate(new Date(item.createdAt['@ts']))}</td>
+                  <td>{formatDate(new Date(item.updatedAt['@ts']))}</td>
                 </tr>
                 )
               }
