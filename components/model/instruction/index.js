@@ -16,7 +16,7 @@ export default function ModalIcCertificate({ id, type, setIsOpen }) {
             x
           </button>
           <div className={styles.modalContent}>
-            http://localhost:3000/public/test/{type}/instruction/{id}
+            {location.protocol}//{location.host}/public/test/{type}/instruction/{id}
           </div>
         </div>
       </div>
