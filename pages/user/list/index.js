@@ -10,6 +10,8 @@ import WithPrivateRoute from '../../../components/WithPrivateRoute.js'
 import Layout from "../../../components/layout";
 import LoadingSpinner from '../../../components/LoadingSpinner/index.js';
 
+import DateUtil from '@/utils/DateUtil.js';
+
 export default function List({companies, profiles}) {
 	console.log('List')
 
@@ -138,7 +140,7 @@ export default function List({companies, profiles}) {
                   <td>{ user.email }</td>
                   <td>{ user.company.name }</td>
                   <td>{ user.profile.name }</td>
-                  <td>{ user.updatedAt['@ts'] }</td>
+                  <td>{DateUtil.format(new Date(user.updatedPassword['@ts']))}</td>
                   <td>
                     <Link
                       href={{

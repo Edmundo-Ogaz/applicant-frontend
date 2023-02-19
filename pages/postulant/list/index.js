@@ -95,7 +95,6 @@ export default function List() {
                 <th>Email</th>
                 <th>Edad</th>
                 <th>Sexo</th>
-                <th>Actualizado</th>
                 <th>Acciones</th>
             </tr>
           </thead>
@@ -107,7 +106,6 @@ export default function List() {
                   <td>{ postulant.email }</td>
                   <td>{ postulant.age }</td>
                   <td>{ postulant.sexo }</td>
-                  <td>{ postulant.createdAt['@ts'] }</td>
                   <td>
                     <Link
                       href={{

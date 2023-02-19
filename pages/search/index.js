@@ -7,6 +7,8 @@ import WithPrivateRoute from '../../components/WithPrivateRoute.js'
 import Layout from "../../components/layout";
 import LoadingSpinner from '../../components/LoadingSpinner/index.js';
 
+import DateUtil from '@/utils/DateUtil.js'
+
 import ModalUrlInstruction from '@/components/model/instruction/index.js'
 import ModalIcCertificate from '@/components/model/ic/index.js'
 import ModalDiscCertificate from '@/components/model/disc/index.js'
@@ -244,8 +246,8 @@ export default function Search({companies, tests, states}) {
                   <td>{item.analyst.firstName} {item.analyst.lastName}</td>
                   <td>{item.test.name}</td>
                   <td>{item.state.name}</td>
-                  <td>{formatDate(new Date(item.createdAt['@ts']))}</td>
-                  <td>{formatDate(new Date(item.updatedAt['@ts']))}</td>
+                  <td>{DateUtil.format(new Date(item.createdAt['@ts']))}</td>
+                  <td>{DateUtil.format(new Date(item.updatedAt['@ts']))}</td>
                 </tr>
                 )
               }
