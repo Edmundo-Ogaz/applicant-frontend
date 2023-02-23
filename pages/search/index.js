@@ -45,25 +45,25 @@ export default function Search({companies, tests, states}) {
     setIsSearching(true)
       let query = ''
       if (rut)
-        query = `rut=${rut}`
+        query += `rut=${rut}&`
 
       if (name)
-        query = `name=${name}`
+        query += `name=${name}&`
       
       if (email)
-        query = `email=${email}`
+        query += `email=${email}&`
       
       if (company)
-        query = `company=${company}`
+        query += `company=${company}&`
 
       if (analyst)
-        query = `analyst=${analyst}`
+        query += `analyst=${analyst}&`
 
       if (test)
-        query = `test=${test}`
+        query += `test=${test}&`
       
       if (state)
-        query = `state=${state}`
+        query += `state=${state}&`
       
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants?${query}`,
@@ -140,29 +140,6 @@ export default function Search({companies, tests, states}) {
       return <Modal setIsOpen={setIsOpenModal} id={id} type={type} />
     }
     return
-  }
-
-  function padTo2Digits(num) {
-    return num.toString().padStart(2, '0');
-  }
-
-  function formatDate(date) {
-    if (!date instanceof Date || isNaN(date))
-      return ''
-    
-    return (
-      [
-        padTo2Digits(date.getMonth() + 1),
-        padTo2Digits(date.getDate()),
-        date.getFullYear(),
-      ].join('/') +
-      ' ' +
-      [
-        padTo2Digits(date.getHours()),
-        padTo2Digits(date.getMinutes()),
-        padTo2Digits(date.getSeconds()),
-      ].join(':')
-    );
   }
      
   return (
@@ -246,8 +223,8 @@ export default function Search({companies, tests, states}) {
                   <td>{item.analyst.firstName} {item.analyst.lastName}</td>
                   <td>{item.test.name}</td>
                   <td>{item.state.name}</td>
-                  <td>{DateUtil.format(new Date(item.createdAt['@ts']))}</td>
-                  <td>{DateUtil.format(new Date(item.updatedAt['@ts']))}</td>
+                  <td>{DateUtil.parse(item.createdAt)}</td>
+                  <td>{DateUtil.parse(item.updatedAt)}</td>
                 </tr>
                 )
               }

@@ -4,6 +4,8 @@ import { Doughnut } from 'react-chartjs-2';
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
+import DateUtil from '@/utils/DateUtil';
+
 import styles from './certificate.module.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -11,7 +13,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default function Certificate(props) {
   console.log('Certificate')
 
-  const { test, postulant, answer, date, state } = props
+  const { test, postulant, answer, updatedAt, state } = props
 
   const score = answer.score
   let level_background = [0, 0, 0, 0, 0, 0];
@@ -133,7 +135,7 @@ export default function Certificate(props) {
                 </div>
                 <div className={styles.info_col}>
                   <ul>
-                    <li>Rendido: {date['@ts']} </li>
+                    <li>Rendido: {DateUtil.parse(updatedAt)} </li>
                     <li>Válido hasta: P/D</li>
                     <li>Estado: {state.name} </li>
                     <li>Lugar de rendición: Online</li>

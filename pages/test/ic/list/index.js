@@ -124,7 +124,7 @@ export default function List({answers}) {
                                   <td>{ answer.correct }</td>
                                   <td>{ answer.wrong }</td>
                                   <td>{ answer.omitted }</td>
-                                  <td>{ answer.answerDate['@ts'] }</td>
+                                  <td>{ answer.updatedAt }</td>
                                   <td>{ answer.state }</td>
                               </tr>)
                             })}

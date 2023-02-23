@@ -140,7 +140,7 @@ export default function List({companies, profiles}) {
                   <td>{ user.email }</td>
                   <td>{ user.company.name }</td>
                   <td>{ user.profile.name }</td>
-                  <td>{DateUtil.format(new Date(user.updatedPassword['@ts']))}</td>
+                  <td>{DateUtil.parse(user.updatedPassword)}</td>
                   <td>
                     <Link
                       href={{

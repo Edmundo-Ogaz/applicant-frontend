@@ -2,9 +2,11 @@ function padTo2Digits(num) {
     return num.toString().padStart(2, '0');
   }
 
-function formatDate(date) {
-  if (!date instanceof Date || isNaN(date))
-    return ''
+function parse(str) {
+  if (!str) return ''
+
+  const date = new Date(str)
+  if (!date instanceof Date || isNaN(date)) return ''
 
 return (
     [
@@ -21,6 +23,6 @@ return (
   );
 }
 
-const DateUtil = { format: formatDate }
+const DateUtil = { parse }
 
 export default DateUtil

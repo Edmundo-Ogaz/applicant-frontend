@@ -7,7 +7,7 @@ import Certificate from '@/components/test/ic/certificate';
 export default function ModalIcCertificate({ id, url, setIsOpen, testPostulant }) {
 	console.log('ModalIcCertificate')
 
-  const { test, postulant, answer, date, state } = { ...testPostulant }
+  const { test, postulant, answer, updatedAt, state } = { ...testPostulant }
 
   return (
     <>
@@ -17,7 +17,7 @@ export default function ModalIcCertificate({ id, url, setIsOpen, testPostulant }
           <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>
             x
           </button>
-          <Certificate test={test} postulant={postulant} answer={answer} date={date} state={state}/>
+          <Certificate test={test} postulant={postulant} answer={answer} updatedAt={updatedAt} state={state}/>
         </div>
       </div>
     </>

@@ -8,11 +8,13 @@ import WithPrivateRoute from '../../../../components/WithPrivateRoute.js'
 
 import Layout from '@/components/layout/index.js';
 
+import DateUtil from '@/utils/DateUtil.js';
+
 import styles from './certificate.module.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function Certificate({ test, postulant, answer, date, state }) {
+export default function Certificate({ test, postulant, answer, updatedAt, state }) {
   console.log('Certificate')
 
   const score = answer.score
@@ -136,7 +138,7 @@ export default function Certificate({ test, postulant, answer, date, state }) {
                   </div>
                   <div className={styles.info_col}>
                     <ul>
-                      <li>Rendido: {date['@ts']} </li>
+                      <li>Rendido: {DateUtil.parse(updatedAt)} </li>
                       <li>Válido hasta: P/D</li>
                       <li>Estado: {state.name} </li>
                       <li>Lugar de rendición: Online</li>
@@ -260,13 +262,13 @@ export async function getServerSideProps({ params }) {
 
     const testPortulant = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants/${id}`)
       .then(testPortulant => testPortulant.json())
-    const { test, postulant, answer, date, state } = { ...testPortulant }
+    const { test, postulant, answer, updatedAt, state } = { ...testPortulant }
     return {
       props: { 
         test, 
         postulant, 
         answer, 
-        date, 
+        updatedAt, 
         state 
       }
     }
