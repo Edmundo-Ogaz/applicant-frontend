@@ -16,17 +16,16 @@ export default function CreatePostulant() {
 
   const [ isSaving, setIsSaving ] = useState();
 
-  const [ rut, setRut ] = useState();
-  const [ firstName, setFirstName ] = useState();
-  const [ lastName, setLastName ] = useState();
-  const [ age, setAge ] = useState();
-  const [ sexo, setSexo ] = useState();
-  const [ email, setEmail ] = useState();
+  const [ rut, setRut ] = useState('');
+  const [ firstName, setFirstName ] = useState('');
+  const [ lastName, setLastName ] = useState('');
+  const [ age, setAge ] = useState('');
+  const [ sexo, setSexo ] = useState('');
+  const [ email, setEmail ] = useState('');
 
   const handleSave = async (e) => {
     try {
       e.preventDefault()
-      console.log('handleSave')
       setIsSaving(true)
       const data = {
         rut, 

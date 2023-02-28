@@ -17,7 +17,7 @@ describe('applicant', () => {
     cy.get('#logo').should('have.text', 'Applicant')
     cy.get('#email').type(Cypress.env('username'))
     cy.get('#password').type('1234')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/users/login').as('apiLogin')
+    cy.intercept(`${Cypress.env('api')}/users/login').as('apiLogin')
     cy.get('#login').click()
     cy.wait('@apiLogin')
     cy.get('#logo').should('have.text', 'Applicant')
@@ -57,7 +57,7 @@ describe('applicant', () => {
 
     cy.get('#name').type('test')
     cy.get('#search').click()
-    cy.intercept('http://localhost:3000/user/edit/1').as('edit')
+    cy.intercept('http://localhost:3000/user/edit/1`).as('edit')
     cy.get(`${FILTER_TABLE_FIRST_ROW_SEVETH_COL} a:nth-child(1)`).click()
     //cy.wait('@edit')
 
@@ -91,14 +91,14 @@ describe('applicant', () => {
     cy.get('#name').clear()
 
     cy.get('#email').type('1234@1234.cl')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/postulants?email=1234@1234.cl').as('searchPostulantByEmail')
+    cy.intercept(`${Cypress.env('api')}/postulants?email=1234@1234.cl`).as('searchPostulantByEmail')
     cy.get('#search').click()
     cy.wait('@searchPostulantByEmail')
     cy.get(FILTER_TABLE_FIRST_ROW_FIRST_CELL).should('have.text', '15331265-6')
     cy.get('#email').clear()
 
     cy.get('#name').type('test')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/postulants?name=test').as('searchPostulantByName')
+    cy.intercept(`${Cypress.env('api')}/postulants?name=test`).as('searchPostulantByName')
     cy.get('#search').click()
     cy.wait('@searchPostulantByName')
     //cy.intercept('http://localhost:3000/postulant/edit/1').as('edit')
@@ -125,13 +125,13 @@ describe('applicant', () => {
     cy.get('h2').should('have.text', 'Asignar Test a Postulante')
     
     cy.get('#rut').type('15331265-6')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/postulants?rut=*').as('getPostulant')
+    cy.intercept(`${Cypress.env('api')}/postulants?rut=*`).as('getPostulant')
     cy.get('#search-button').click()
     cy.wait('@getPostulant')
     cy.get('#search-section :nth-child(3)').should('have.text', 'Nombre: Edmundo Ogaz')
   
     cy.get('#rut').type('16847835-6')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/postulants?rut=*').as('getPostulant')
+    cy.intercept(`${Cypress.env('api')}/postulants?rut=*`).as('getPostulant')
     cy.get('#search-button').click()
     cy.wait('@getPostulant')
     cy.get('.Toastify__toast-body > :nth-child(2)').should('have.text', 'BAD_REQUEST')
@@ -139,11 +139,12 @@ describe('applicant', () => {
     cy.get('#rut').clear()
 
     cy.get('#rut').type('16847835-6')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/postulants?rut=*').as('getPostulant')
+    cy.intercept(`${Cypress.env('api')}/postulants?rut=*`).as('getPostulant')
     cy.get('#search-button').click()
     cy.wait('@getPostulant')
     cy.get('.Toastify__toast-body > :nth-child(2)').should('have.text', 'NOT_FOUND')
-
+    cy.wait(5000)
+    
     //SEARCH
     cy.intercept('http://localhost:3000/search').as('search')
     cy.visit('http://localhost:3000/search')
@@ -151,18 +152,18 @@ describe('applicant', () => {
     cy.get('h2').should('have.text', 'Buscar Tests')
 
     cy.get('#rut').type('15331265-6')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/tests/postulants?rut=15331265-6&').as('searchByRut')
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?rut=15331265-6&`).as('searchByRut')
     cy.get('#search').click()
     cy.wait('@searchByRut')
     cy.get(FILTER_TABLE_FIRST_ROW_SECOND_COL).should('have.text', '1234@1234.cl')
     cy.get('#rut').clear()
 
-    cy.intercept('http://localhost:9000/.netlify/functions/server/tests/postulants?').as('apiSearch')
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?`).as('apiSearch')
     cy.get('#search').click()
     cy.wait('@apiSearch')
 
     cy.get('#name').type('Edmundo')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/tests/postulants?name=Edmundo&').as('searchByName')
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?name=Edmundo&`).as('searchByName')
     cy.get('#search').click()
     cy.wait('@searchByName')
     cy.get(FILTER_TABLE_FIRST_ROW_SECOND_COL).should('have.text', '1234@1234.cl')
@@ -172,7 +173,7 @@ describe('applicant', () => {
     cy.wait('@apiSearch')
 
     cy.get('#email').type('1234@1234.cl')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/tests/postulants?email=1234@1234.cl&').as('searchByEmail')
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?email=1234@1234.cl&`).as('searchByEmail')
     cy.get('#search').click()
     cy.wait('@searchByEmail')
     cy.get(FILTER_TABLE_FIRST_ROW_SECOND_COL).should('have.text', '1234@1234.cl')
@@ -181,11 +182,11 @@ describe('applicant', () => {
     cy.get('#search').click()
     cy.wait('@apiSearch')
 
-    cy.intercept('http://localhost:9000/.netlify/functions/server/users?companyId=1&profileId=2').as('searchAnalysts')
+    cy.intercept(`${Cypress.env('api')}/users?companyId=1&profileId=2`).as('searchAnalysts')
     cy.get('#company').select('1')
     cy.wait('@searchAnalysts')
     cy.get('#email').type('1234@1234.cl')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/tests/postulants?email=1234@1234.cl&company=1&').as('searchByCompany')
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?email=1234@1234.cl&company=1&`).as('searchByCompany')
     cy.get('#search').click()
     cy.wait('@searchByCompany')
     cy.get(FILTER_TABLE_FIRST_ROW_SECOND_COL).should('have.text', '1234@1234.cl')
@@ -195,12 +196,12 @@ describe('applicant', () => {
     cy.get('#search').click()
     cy.wait('@apiSearch')
 
-    cy.intercept('http://localhost:9000/.netlify/functions/server/users?companyId=1&profileId=2').as('searchByCompanyAndState')
+    cy.intercept(`${Cypress.env('api')}/users?companyId=1&profileId=2`).as('searchByCompanyAndState')
     cy.get('#company').select('1')
     cy.wait('@searchByCompanyAndState')
     cy.get('#analyst').select('1')
     cy.get('#email').type('1234@1234.cl')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/tests/postulants?email=1234@1234.cl&company=1&analyst=1&').as('searchByAnalyst')
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?email=1234@1234.cl&company=1&analyst=1&`).as('searchByAnalyst')
     cy.get('#search').click()
     cy.wait('@searchByAnalyst')
     cy.get(FILTER_TABLE_FIRST_ROW_SECOND_COL).should('have.text', '1234@1234.cl')
@@ -213,7 +214,7 @@ describe('applicant', () => {
 
     cy.get('#test').select('1')
     cy.get('#email').type('1234@1234.cl')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/tests/postulants?email=1234@1234.cl&test=1&').as('searchByTest')
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?email=1234@1234.cl&test=1&`).as('searchByTest')
     cy.get('#search').click()
     cy.wait('@searchByTest')
     cy.get(FILTER_TABLE_FIRST_ROW_SECOND_COL).should('have.text', '1234@1234.cl')
@@ -225,7 +226,7 @@ describe('applicant', () => {
 
     cy.get('#state').select('1')
     cy.get('#email').type('1234@1234.cl')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/tests/postulants?email=1234@1234.cl&state=1&').as('searchByState')
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?email=1234@1234.cl&state=1&`).as('searchByState')
     cy.get('#search').click()
     cy.wait('@searchByState')
     cy.get(FILTER_TABLE_FIRST_ROW_SECOND_COL).should('have.text', '1234@1234.cl')
@@ -237,7 +238,7 @@ describe('applicant', () => {
 
     cy.get('#test').select('1')
     cy.get('#state').select('1')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/tests/postulants?test=1&state=1&').as('searchByTestAndState')
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?test=1&state=1&`).as('searchByTestAndState')
     cy.get('#search').click()
     cy.wait('@searchByTestAndState')
     cy.get(FILTER_TABLE_FIRST_ROW_SEXTH_COL).should('have.text', 'pendiente')

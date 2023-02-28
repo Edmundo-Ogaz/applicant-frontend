@@ -26,7 +26,6 @@ export default function EditPostulant({postulant}) {
 
   const handleSave = async (e) => {
     try {
-      console.log('handleSave')
       e.preventDefault()
       setSaving(true)
       const data = {
@@ -87,7 +86,7 @@ export default function EditPostulant({postulant}) {
           <fieldset className={styles.user__body}>
             <label forhtml="rut">
               <span className={styles['user__label-text']}>Rut</span>
-              <input type="text" id="rut" value={rut} className={styles.user__input} disabled="true"/>
+              <input type="text" id="rut" value={rut} className={styles.user__input} disabled={true}/>
             </label>
             <label forhtml="firstName">
               <span className={styles['user__label-text']}>Nombres</span>

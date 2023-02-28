@@ -5,7 +5,7 @@ describe('applicant', () => {
     cy.visit('http://localhost:3000')
     cy.get('#email').type(Cypress.env('username'))
     cy.get('#password').type('1234')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/users/login').as('login')
+    cy.intercept(`${Cypress.env('api')}/users/login`).as('login')
     cy.get('#login').click()
     cy.wait('@login')
   })

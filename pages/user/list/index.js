@@ -27,7 +27,6 @@ export default function List({companies, profiles}) {
 
   const handleSearch = async (e) => {
     try {
-    console.log('handleSearch')
     e.preventDefault()
     setIsSearching(true)
       let query = ''

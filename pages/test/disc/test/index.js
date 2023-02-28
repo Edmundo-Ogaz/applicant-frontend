@@ -32,7 +32,6 @@ export default function DISC({ id }) {
 
   const handleSaving = async (e) => {
     try {
-      console.log('handleSave')
       e.preventDefault()
       //if (confirm("¿Desea enviar las respuestas?") == true) {
       setIsSaving(true)

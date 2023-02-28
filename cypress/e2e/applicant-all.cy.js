@@ -1,0 +1,7 @@
+import './applicant-login.cy'
+import './applicant-user-list.cy'
+import './applicant-user-edit.cy'
+import './applicant-postulant-list.cy'
+import './applicant-postulant-edit.cy'
+import './applicant-test-assign-search.cy'
+import './applicant-search.cy'

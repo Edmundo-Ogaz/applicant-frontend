@@ -56,7 +56,7 @@ export default function IC(props) {
   const handleSaving = async (e) => {
     try {
       console.log('handleSave')
-      e.preventDefault()
+      e?.preventDefault()
       //if (confirm("¿Desea enviar las respuestas?") == true) {
         setIsSaving(true)
         const response = await fetch(

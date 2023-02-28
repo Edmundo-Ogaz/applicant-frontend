@@ -26,7 +26,6 @@ export default function EditUser({user, companies, profiles}) {
 
   const handleSave = async (e) => {
     try {
-      console.log('handleSave')
       e.preventDefault()
       setSaving(true)
       const data = {

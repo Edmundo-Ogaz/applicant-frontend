@@ -8,5 +8,7 @@ module.exports = defineConfig({
   },
   env: {
     username: 'test@test.cl',
+    api: 'http://localhost:9000/.netlify/functions/server',
+    api2: 'http://localhost:8080',
   },
 });

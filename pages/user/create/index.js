@@ -25,7 +25,6 @@ export default function CreateUser({companies, profiles}) {
 
   const handleSave = async (e) => {
     try {
-      console.log('handleSave')
       e.preventDefault()
       setSaving(true)
       const data = {

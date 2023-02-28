@@ -1,70 +1,78 @@
 /// <reference types="cypress" />
 
-const FILTER_TABLE_SECOND_CELL = 'table tbody tr:nth-child(1) td:nth-child(2)'
+const FILTER_TABLE_FIRST_ROW = 'table tbody tr:nth-child(1)'
 
-describe('applicant', () => {
+describe('applicant search', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000')
-    cy.get('#email').type(Cypress.env('username'))
-    cy.get('#password').type('1234')
-    cy.intercept('http://localhost:9000/.netlify/functions/server/users/login').as('login')
-    cy.get('#login').click()
+    cy.intercept('http://localhost:3000/login').as('login')
+    cy.visit('http://localhost:3000/login')
+    cy.reload(true)
     cy.wait('@login')
+    cy.get('#email').type(Cypress.env('username'), {force: true})
+    cy.get('#password').type('1234', {force: true})
+    cy.intercept(`${Cypress.env('api')}/users/login`).as('apiLogin')
+    cy.get('#login').click()
+    cy.wait('@apiLogin')
+    cy.intercept('http://localhost:3000/search').as('search')
+    cy.visit('http://localhost:3000/search')
+    cy.wait('@search')
   })
 
   it('search title', () => {
-    cy.visit('http://localhost:3000/search')
-    cy.get('h2').should('have.text', 'Buscar Resultados')
+    cy.get('h2').should('have.text', 'Buscar Tests')
   })
 
   it('search by rut', () => {
-    cy.visit('http://localhost:3000/search')
-    cy.get('#rut').type('15331265-6')
+    cy.get('#rut').type('15331265-6	')
     cy.get('#search').click()
-    cy.get(FILTER_TABLE_SECOND_CELL).should('have.text', '1234@1234.cl')
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(2)`).should('have.text', '1234@1234.cl')
   })
 
   it('search by name', () => {
-    cy.visit('http://localhost:3000/search')
-    cy.get('#name').type('Edmundo')
+    cy.get('#name').type('test')
     cy.get('#search').click()
-    cy.get(FILTER_TABLE_SECOND_CELL).should('have.text', '1234@1234.cl')
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(2)`).should('have.text', 'test@test.cl')
   })
 
   it('search by email', () => {
-    cy.visit('http://localhost:3000/search')
-    cy.get('#email').type('1234@1234.cl')
+    cy.get('#email').type('test@test.cl')
     cy.get('#search').click()
-    cy.get(FILTER_TABLE_SECOND_CELL).should('have.text', '1234@1234.cl')
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(2)`).should('have.text', 'test@test.cl')
   })
 
   it('search by company', () => {
-    cy.visit('http://localhost:3000/search')
     cy.get('#company').select('1')
     cy.get('#search').click()
-    cy.get(FILTER_TABLE_SECOND_CELL).should('have.text', '1234@1234.cl')
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(2)`).should('have.text', 'test@test.cl')
   })
 
   it('search by analyst', () => {
-    cy.visit('http://localhost:3000/search')
+    cy.intercept(`${Cypress.env('api')}/users?companyId=1&profileId=2`).as('searchByCompanyAndState')
     cy.get('#company').select('1')
-    cy.wait(2000)
+    cy.wait('@searchByCompanyAndState')
     cy.get('#analyst').select('1')
+    cy.get('#email').type('test@test.cl')
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?email=test@test.cl&company=1&analyst=1&`).as('searchByAnalyst')
     cy.get('#search').click()
-    cy.get(FILTER_TABLE_SECOND_CELL).should('have.text', '1234@1234.cl')
+    cy.wait('@searchByAnalyst')
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(2)`).should('have.text', 'test@test.cl')
   })
 
   it('search by test', () => {
-    cy.visit('http://localhost:3000/search')
     cy.get('#test').select('1')
+    cy.get('#email').type('test@test.cl')
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?email=test@test.cl&test=1&`).as('searchByTest')
     cy.get('#search').click()
-    cy.get(FILTER_TABLE_SECOND_CELL).should('have.text', '1234@1234.cl')
+    cy.wait('@searchByTest')
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(2)`).should('have.text', 'test@test.cl')
   })
 
   it('search by state', () => {
-    cy.visit('http://localhost:3000/search')
     cy.get('#state').select('1')
+    cy.get('#email').type('test@test.cl')
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?email=test@test.cl&state=1&`).as('searchByState')
     cy.get('#search').click()
-    cy.get(FILTER_TABLE_SECOND_CELL).should('have.text', '1234@1234.cl')
+    cy.wait('@searchByState')
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(2)`).should('have.text', 'test@test.cl')
   })
 })

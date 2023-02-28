@@ -32,7 +32,6 @@ export default function AssignTest({companies, tests}) {
   const handleSearch = async (e) => {
     try {
       e.preventDefault()
-      console.log('handleSearch')
       setIsSearching(true)
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/postulants?rut=${rut}`,
@@ -56,7 +55,6 @@ export default function AssignTest({companies, tests}) {
 
   const handleSave = async (e) => {
     try {
-      console.log('handleSave')
       e.preventDefault()
       setIsSaving(true)
       const assigner = {

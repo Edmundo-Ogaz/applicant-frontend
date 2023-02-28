@@ -40,7 +40,6 @@ export default function Search({companies, tests, states}) {
 
   const handleSearch = async (e) => {
     try {
-    console.log('handleSearch')
     e.preventDefault()
     setIsSearching(true)
       let query = ''
@@ -130,10 +129,10 @@ export default function Search({companies, tests, states}) {
 
   function Modal() {
     let Modal
-    if (testPostulant.state.id === process.env.NEXT_PUBLIC_TEST_STATE_DONE_ID) {
+    if (testPostulant.state.id == process.env.NEXT_PUBLIC_TEST_STATE_DONE_ID) {
       Modal = Modals[testPostulant.test.id]
       return <Modal setIsOpen={setIsOpenModal} testPostulant={testPostulant} />
-    } else if (testPostulant.state.id === process.env.NEXT_PUBLIC_TEST_STATE_PENDING_ID) {
+    } else if (testPostulant.state.id == process.env.NEXT_PUBLIC_TEST_STATE_PENDING_ID) {
       Modal = Modals[0]
       const id = testPostulant.id
       const type = testPostulant.test.name.toLowerCase()
@@ -211,20 +210,20 @@ export default function Search({companies, tests, states}) {
             {list.map(item => {
               return(
                 <tr key={item.id} className="list-body-row">
-                  <td>
+                  <td style={{width: 'calc(15%)'}}>
                     <a href="#" onClick={ () => handleModel(item.id) }>
                       {item.postulant.firstName} {item.postulant.lastName}
                     </a>
                   </td>
-                  <td>
+                  <td style={{width: 'calc(15%)'}}>
                       {item.postulant.email}
                   </td>
-                  <td>{item.company.name}</td>
-                  <td>{item.analyst.firstName} {item.analyst.lastName}</td>
-                  <td>{item.test.name}</td>
-                  <td>{item.state.name}</td>
-                  <td>{DateUtil.parse(item.createdAt)}</td>
-                  <td>{DateUtil.parse(item.updatedAt)}</td>
+                  <td style={{width: 'calc(10%)'}}>{item.company.name}</td>
+                  <td style={{width: 'calc(15%)'}}>{item.analyst.firstName} {item.analyst.lastName}</td>
+                  <td style={{width: 'calc(5%)'}}>{item.test.name}</td>
+                  <td style={{width: 'calc(5%)'}}>{item.state.name}</td>
+                  <td style={{width: 'calc(15%)'}}>{DateUtil.parse(item.createdAt)}</td>
+                  <td style={{width: 'calc(15%)'}}>{DateUtil.parse(item.updatedAt)}</td>
                 </tr>
                 )
               }
