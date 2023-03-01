@@ -8,7 +8,7 @@ export default function Link({id}) {
   return (
     <>
       <Layout>
-      http://localhost:3000/user/password/{id}
+        {location.protocol}{'//'}{location.host}/user/password/{id}
       </Layout>
     </>
   );
