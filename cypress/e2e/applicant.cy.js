@@ -17,7 +17,7 @@ describe('applicant', () => {
     cy.get('#logo').should('have.text', 'Applicant')
     cy.get('#email').type(Cypress.env('username'))
     cy.get('#password').type('1234')
-    cy.intercept(`${Cypress.env('api')}/users/login').as('apiLogin')
+    cy.intercept(`${Cypress.env('api')}/users/login`).as('apiLogin')
     cy.get('#login').click()
     cy.wait('@apiLogin')
     cy.get('#logo').should('have.text', 'Applicant')
@@ -57,7 +57,7 @@ describe('applicant', () => {
 
     cy.get('#name').type('test')
     cy.get('#search').click()
-    cy.intercept('http://localhost:3000/user/edit/1`).as('edit')
+    cy.intercept(`http://localhost:3000/user/edit/1`).as('edit')
     cy.get(`${FILTER_TABLE_FIRST_ROW_SEVETH_COL} a:nth-child(1)`).click()
     //cy.wait('@edit')
 

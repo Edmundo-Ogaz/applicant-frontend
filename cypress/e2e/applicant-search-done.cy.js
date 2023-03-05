@@ -2,7 +2,7 @@
 
 const FILTER_TABLE_FIRST_ROW = 'table tbody tr:nth-child(1)'
 
-describe('applicant search pending', () => {
+describe('applicant search done', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000')
     cy.get('#email').type(Cypress.env('username'))
@@ -12,12 +12,13 @@ describe('applicant search pending', () => {
     cy.wait('@login')
   })
 
-  it('search pending', () => {
+  it('search ic done', () => {
     cy.visit('http://localhost:3000/search')
-    cy.get('#state').select('1')
+    cy.get('#test').select('1')
+    cy.get('#state').select('2')
     cy.get('#search').click()
-    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(6)`).should('have.text', 'pendiente')
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(6)`).should('have.text', 'completo')
     cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(1)`).click()
-    cy.get('#modal #url').should("contain", "/instruction/")
+    cy.get('#certificate #logo a').should("have.text", "Aquí va un logo")
   })
 })

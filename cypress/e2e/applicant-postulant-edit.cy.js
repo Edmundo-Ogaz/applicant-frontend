@@ -2,7 +2,7 @@
 
 const FILTER_TABLE_FIRST_ROW_SEXTH_COL = 'table tbody tr:nth-child(1) td:nth-child(6)'
 
-describe('applicant', () => {
+describe('applicant edit', () => {
   beforeEach(() => {
     cy.intercept('http://localhost:3000/login').as('login')
     cy.visit('http://localhost:3000/login')
@@ -15,8 +15,8 @@ describe('applicant', () => {
     cy.intercept('http://localhost:3000/postulant/list').as('list')
     cy.visit('http://localhost:3000/postulant/list')
     cy.wait('@list')
-    cy.get('#name').type('test')
-    cy.intercept(`${Cypress.env('api')}/postulants?name=test`).as('searchPostulantByName')
+    cy.get('#rut').type('15331265-6')
+    cy.intercept(`${Cypress.env('api')}/postulants?rut=15331265-6`).as('searchPostulantByName')
     cy.get('#search').click()
     cy.wait('@searchPostulantByName')
     //cy.intercept('http://localhost:3000/postulant/edit/1').as('edit')
@@ -27,14 +27,14 @@ describe('applicant', () => {
     cy.get('h2').should('have.text', 'Actualizar Postulante')
     cy.get('#rut').should('be.disabled')
     cy.get('#firstName').clear() 
-    cy.get('#firstName').type('test')
+    cy.get('#firstName').type('Edmundo Manuyel Jesús')
     cy.get('#lastName').clear() 
-    cy.get('#lastName').type('test')
+    cy.get('#lastName').type('Ogaz Baltierra')
     cy.get('#email').clear() 
-    cy.get('#email').type('test@test.cl')
+    cy.get('#email').type('1234@1234.cl')
     cy.get('#age').clear() 
     cy.get('#age').type('87')
-    cy.get('#sexo').select('femenino')
+    cy.get('#sexo').select('masculino')
     cy.get('#save').click()
     cy.get('.Toastify__toast-body > :nth-child(2)').should('have.text', 'Saved')
   })

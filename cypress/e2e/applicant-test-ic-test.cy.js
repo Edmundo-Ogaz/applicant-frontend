@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('applicant', () => {
+describe('applicant test ic test', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000')
     cy.get('#email').type(Cypress.env('username'))
@@ -11,7 +11,7 @@ describe('applicant', () => {
   })
 
   it('ic test instruction', () => {
-    cy.visit('http://localhost:3000/test/ic/test?id=356042924923814400')
+    cy.visit(`http://localhost:3000/public/test/ic/test?id=${Cypress.env('test_ic_id')}`)
     //cy.get('#time-alert').should('have.css', 'display', 'none') 
     // cy.get('#time-alert')
     //     .invoke('attr', 'style', 'display: block')
@@ -29,7 +29,7 @@ describe('applicant', () => {
   })
 
   it('ic test', () => {
-    cy.visit('http://localhost:3000/test/ic/test?id=356042924923814400')
+    cy.visit(`http://localhost:3000/public/test/ic/test?id=${Cypress.env('test_ic_id')}`)
     cy.get('#ic_form table thead tr th:nth-child(1)').should('have.text', 'CANTIDAD ASEGURADA')
     cy.get('#ic_form table thead tr th:nth-child(2)').should('have.text', 'CLASES DE SEGURO')
     cy.get('#ic_form table thead tr th:nth-child(3)').should('have.text', 'FECHA')
@@ -211,13 +211,5 @@ describe('applicant', () => {
     cy.get('#ic_form table tbody tr:nth-child(25) td:nth-child(4) label input').should('have.value', '24')
     cy.get('#ic_form table tbody tr:nth-child(25) td:nth-child(5) label input').should('have.value', '49')
     cy.get('#ic_form table tbody tr:nth-child(25) td:nth-child(6) label input').should('have.value', '74')
-
-
-
-
-
-
-
-
   })
 })

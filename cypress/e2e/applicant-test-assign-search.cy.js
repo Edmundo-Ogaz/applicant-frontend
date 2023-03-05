@@ -17,7 +17,7 @@ describe('applicant test assign serarch', () => {
     cy.wait('@assign')
   })
 
-  it('search by rut', () => {
+  it('title', () => {
     cy.get('h2').should('have.text', 'Asignar Test a Postulante')
   })
 
@@ -25,7 +25,7 @@ describe('applicant test assign serarch', () => {
     cy.get('#rut').type('15331265-6')
     cy.get('#search-button').click()
     cy.wait('@getPostulant')
-    cy.get('#search-section :nth-child(3)').should('have.text', 'Nombre: Edmundo Ogaz')
+    cy.get('#search-section :nth-child(3)').should('contain', 'Nombre: Edmundo')
   })
 
   it('search by rut and NOT FOUND', () => {

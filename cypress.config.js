@@ -7,8 +7,16 @@ module.exports = defineConfig({
     },
   },
   env: {
-    username: 'test@test.cl',
-    api: 'http://localhost:9000/.netlify/functions/server',
-    api2: 'http://localhost:8080',
+    username: '1234@1234.cl',
+    api1: 'http://localhost:9000/.netlify/functions/server',
+    api: 'http://localhost:8080',
+    api3: 'https://pse9lbwkvk.execute-api.us-west-2.amazonaws.com/prod',
+    //test_ic_id: 1,
+    test_ic_id: 3,
   },
+    // test: {
+    //   ic: {
+    //     id: 3
+    //   }
+    // }
 });

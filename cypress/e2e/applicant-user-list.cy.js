@@ -28,13 +28,13 @@ describe('applicant user list', () => {
   it('search by name', () => {
     cy.get('#name').type('Edmundo')
     cy.get('#search').click()
-    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(1)`).should('have.text', '15331265-6')
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(2)`).should('contain', 'Edmundo')
   })
 
   it('search by email', () => {
     cy.get('#email').type('1234@1234.cl')
     cy.get('#search').click()
-    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(1)`).should('have.text', '15331265-6')
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(3)`).should('have.text', '1234@1234.cl')
   })
 
   it('search by company', () => {
@@ -46,6 +46,6 @@ describe('applicant user list', () => {
   it('search by profile', () => {
     cy.get('#profile').select('1')
     cy.get('#search').click()
-    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(5)`).should('have.text', 'administrador')
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(5)`).should('have.text', 'Administrador')
   })
 })

@@ -10,12 +10,12 @@ export default function ModalIcCertificate({ id, type, setIsOpen }) {
   return (
     <>
       <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
-      <div className={styles.centered}>
+      <div id="modal" className={styles.centered}>
         <div className={styles.modal}>
           <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>
             x
           </button>
-          <div className={styles.modalContent}>
+          <div id="url" className={styles.modalContent}>
             {location.protocol}{'//'}{location.host}/public/test/{type}/instruction/{id}
           </div>
         </div>
