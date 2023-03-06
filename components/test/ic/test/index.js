@@ -85,9 +85,9 @@ export default function IC(props) {
   const handleCheck = (event) => {
     var updatedList = [...checkedState];
     if (event.target.checked) {
-      updatedList = [...checkedState, event.target.value];
+      updatedList = [...checkedState, parseInt(event.target.value)];
     } else {
-      updatedList.splice(checkedState.indexOf(event.target.value), 1);
+      updatedList.splice(checkedState.indexOf(parseInt(event.target.value)), 1);
     }
     setCheckedState(updatedList);
   };
