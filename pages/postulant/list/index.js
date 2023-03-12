@@ -60,13 +60,14 @@ export default function List() {
       if (response?.ok === false) {
         throw new Error(json?.error)
       }
-      json.data = json.data.map((postulant) => [
+      json.data = json.data.map((postulant, idx) => [
         postulant.rut,
         `${postulant.firstName} ${postulant.lastName}`,
         postulant.email,
         postulant.age,
         postulant.sexo,
         <Link
+          key={idx}
           href={{
             pathname: `/postulant/edit/${postulant.id}`,
           }}

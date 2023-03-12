@@ -91,8 +91,8 @@ export default function Search({companies, tests, states}) {
       if (response?.ok === false) {
         throw new Error(json?.error)
       }
-      json.data = json.data.map((item) => [
-        <a href="#" onClick={ () => handleModel(item.id) }>
+      json.data = json.data.map((item, idx) => [
+        <a key={idx} href="#" onClick={ () => handleModel(item.id) }>
           {item.postulant.firstName} {item.postulant.lastName}
         </a>,
         item.postulant.email,

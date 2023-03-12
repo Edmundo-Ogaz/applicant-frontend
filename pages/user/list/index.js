@@ -71,7 +71,7 @@ export default function List({companies, profiles}) {
       if (response?.ok === false) {
         throw new Error(json?.error)
       }
-      json.data = json.data.map((user) => [
+      json.data = json.data.map((user, idx) => [
         user.rut,
         `${user.firstName} ${user.lastName}`,
         user.email,
@@ -80,6 +80,7 @@ export default function List({companies, profiles}) {
         DateUtil.parse(user.updatedPassword),
         <>
           <Link
+            key={idx}
             href={{
               pathname: `/user/edit/${user.id}`,
             }}
