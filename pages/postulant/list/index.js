@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -10,8 +10,20 @@ import WithPrivateRoute from '../../../components/WithPrivateRoute.js'
 import Layout from "../../../components/layout";
 import LoadingSpinner from '../../../components/LoadingSpinner/index.js';
 
+import Table from '@/components/table/index'
+
 export default function List() {
 	console.log('List')
+
+  const ROWS_PER_PAGE = 5
+  const COLUMS = [ 
+    {name: 'RUT'},
+    {name: 'Nombre'},
+    {name: 'Email'},
+    {name: 'Edad'},
+    {name: 'Sexo'},
+    {name: 'Acciones'},
+  ]
 
   const [ isSearching, setIsSearching ] = useState(false);
 
@@ -19,22 +31,28 @@ export default function List() {
   const [ name, setName ] = useState();
   const [ email, setEmail ] = useState();
 
-  const [ postulants, setPostulants ] = useState([]);
+  const [ search, setSearch ] = useState({data: [], total: 0});
 
-  const handleSearch = async (e) => {
+  useEffect(() => {
+    handleSearch(null, 0)
+  }, [])
+
+  const handleSearch = async (e, offset = 0) => {
     try {
-      e.preventDefault()
+      e?.preventDefault()
       setIsSearching(true)
       let query = ''
       if (rut)
-        query = `rut=${rut}`
+        query += `rut=${rut}&`
 
       if (name)
-        query = `name=${name}`
+        query += `name=${name}&`
       
       if (email)
-        query = `email=${email}`
+        query += `email=${email}&`
       
+      query += `limit=${ROWS_PER_PAGE}&offset=${offset}`
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/postulants?${query}`,
         )
@@ -42,7 +60,21 @@ export default function List() {
       if (response?.ok === false) {
         throw new Error(json?.error)
       }
-      setPostulants(json)
+      json.data = json.data.map((postulant) => [
+        postulant.rut,
+        `${postulant.firstName} ${postulant.lastName}`,
+        postulant.email,
+        postulant.age,
+        postulant.sexo,
+        <Link
+          href={{
+            pathname: `/postulant/edit/${postulant.id}`,
+          }}
+        >
+          <Image src="/images/edit_icon.svg" alt="edit" width="24" height="24" />
+        </Link>
+      ])
+      setSearch(json)
     } catch(e) {
       toast.error(e.message);
     } finally {
@@ -61,6 +93,10 @@ export default function List() {
   function handleEmail(event) {
 		setEmail(event.target.value)
 	}
+
+  function handlePageChange(page) {
+    handleSearch(null, (page - 1) * ROWS_PER_PAGE);
+  }
 
   return (
     <>
@@ -86,7 +122,7 @@ export default function List() {
             {isSearching ? 'Searching...' : 'Search'}
           </button>
         </form>
-        <table className="search__list">
+        {/* <table className="search__list">
           <thead className="list-header">
             <tr>
                 <th>RUT</th>
@@ -117,7 +153,13 @@ export default function List() {
               </tr>)
             })}
           </tbody>
-        </table>
+        </table> */}
+        <Table 
+          colums={COLUMS} 
+          data={search.data} 
+          totalPages={search.total && Math.ceil(search.total / ROWS_PER_PAGE)} 
+          onPageChange={handlePageChange} 
+        />
         {isSearching && <LoadingSpinner/>}
       </Layout>
     </>

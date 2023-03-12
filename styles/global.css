@@ -72,7 +72,16 @@ button:hover, button:focus {
   transition: 0.15s ease-in-out;
 }
 
-table.search__list {
+button:disabled {
+  cursor: not-allowed;
+  box-shadow: none;
+  background-color: #cccccc;
+  color: #999999;
+  border-color: #cccccc;
+  opacity: 0.5;
+}
+
+/* table.search__list {
   text-align: center;
   border-collapse: collapse;
   width: 100%;
@@ -86,7 +95,7 @@ thead.list-header {
 tr.list-body-row {
   border-bottom: 1px solid #000;
   height: 2.5rem;
-}
+} */
 
 th, td {
   padding: .5rem;

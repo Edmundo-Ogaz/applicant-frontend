@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react'
 
 import { toast } from 'react-toastify';
 
@@ -6,6 +6,8 @@ import WithPrivateRoute from '../../components/WithPrivateRoute.js'
 
 import Layout from "../../components/layout";
 import LoadingSpinner from '../../components/LoadingSpinner/index.js';
+
+import Table from '@/components/table/index'
 
 import DateUtil from '@/utils/DateUtil.js'
 
@@ -15,6 +17,18 @@ import ModalDiscCertificate from '@/components/model/disc/index.js'
 
 export default function Search({companies, tests, states}) {
 	console.log('Search')
+
+  const ROWS_PER_PAGE = 5
+  const COLUMS = [ 
+    {name: 'Candidato', style: {width: 'calc(15%)'}},
+    {name: 'Email',  style: {width: 'calc(15%)'}},
+    {name: 'Empresa',  style: {width: 'calc(10%)'}},
+    {name: 'Analista',  style: {width: 'calc(15%)'}},
+    {name: 'Test',  style: {width: 'calc(5%)'}},
+    {name: 'Estado',  style: {width: 'calc(5%)'}},
+    {name: 'Fecha Creación',  style: {width: 'calc(15%)'}},
+    {name: 'Fecha Test', style: {width: 'calc(15%)'}},
+  ]
 
   const Modals = []
   Modals[0] = ModalUrlInstruction
@@ -34,13 +48,17 @@ export default function Search({companies, tests, states}) {
   const [ analyst, setAnalyst ] = useState();
   const [ state, setState ] = useState();
 
-  const [ list, setList ] = useState([]);
+  const [ search, setSearch ] = useState({data: [], total: 0});
 
   const [ analysts, setAnalysts ] = useState([]);
 
-  const handleSearch = async (e) => {
+  useEffect(() => {
+    handleSearch(null, 0)
+  }, [])
+
+  const handleSearch = async (e, offset = 0) => {
     try {
-    e.preventDefault()
+    e?.preventDefault()
     setIsSearching(true)
       let query = ''
       if (rut)
@@ -64,6 +82,8 @@ export default function Search({companies, tests, states}) {
       if (state)
         query += `state=${state}&`
       
+      query += `limit=${ROWS_PER_PAGE}&offset=${offset}`
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants?${query}`,
         )
@@ -71,7 +91,19 @@ export default function Search({companies, tests, states}) {
       if (response?.ok === false) {
         throw new Error(json?.error)
       }
-      setList(json)
+      json.data = json.data.map((item) => [
+        <a href="#" onClick={ () => handleModel(item.id) }>
+          {item.postulant.firstName} {item.postulant.lastName}
+        </a>,
+        item.postulant.email,
+        item.company.name,
+        `${item.analyst.firstName} ${item.analyst.lastName}`,
+        item.test.name,
+        item.state.name,
+        DateUtil.parse(item.createdAt),
+        DateUtil.parse(item.updatedAt)
+      ])
+      setSearch(json)
     } catch(e) {
       toast.error(e.message);
     } finally {
@@ -119,6 +151,10 @@ export default function Search({companies, tests, states}) {
   function handleState(event) {
 		setState(event.target.value)
 	}
+
+  function handlePageChange(page) {
+    handleSearch(null, (page - 1) * ROWS_PER_PAGE);
+  }
 
   async function handleModel(id) {
     const testPostulant = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants/${id}`)
@@ -193,7 +229,7 @@ export default function Search({companies, tests, states}) {
             {isSearching ? 'Searching...' : 'Search'}
           </button>
         </form>
-        <table className="search__list">
+        {/* <table className="search__list">
           <thead className="list-header">
             <tr>
               <th>Candidato</th>
@@ -229,7 +265,13 @@ export default function Search({companies, tests, states}) {
               }
             )}
           </tbody>
-        </table>
+        </table> */}
+        <Table 
+          colums={COLUMS} 
+          data={search.data} 
+          totalPages={search.total && Math.ceil(search.total / ROWS_PER_PAGE)} 
+          onPageChange={handlePageChange} 
+        />
         { isSearching && <LoadingSpinner/> }
         { isOpenModal && <Modal /> }
       </Layout>

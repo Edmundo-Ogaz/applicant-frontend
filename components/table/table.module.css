@@ -1,0 +1,21 @@
+.search__list {
+  text-align: center;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.list-header {
+  background-color: #ffc107;
+  height: 2.5rem;
+}
+
+.list-body-row {
+  border-bottom: 1px solid #000;
+  height: 2.5rem;
+}
+
+.footer__button {
+    padding: .1rem .5rem;
+    color: #000000;
+    background-color: #dcdcdc;
+}
