@@ -117,7 +117,7 @@ export default function CreateUser({companies, profiles}) {
               </select>
             </label>
             <label forhtml="profile">
-              <span className={styles['user__label-text']}>Perfil</span>
+              <span className={styles['user__label-text']}>Rol</span>
               <select name="profile" id="profile" value={profile} className={styles.user__input} onChange={ handleProfile}>
                 <option value="">Selecionar...</option>
                 {profiles.map((profile) => <option key={profile.id} value={profile.id}>{profile.name}</option>)}

@@ -23,7 +23,7 @@ export default function List({companies, profiles}) {
     {name: 'Nombre'},
     {name: 'Email'},
     {name: 'Empresa'},
-    {name: 'Perfil'},
+    {name: 'Rol'},
     {name: 'Password Actualizado'},
     {name: 'Acciones'},
   ]
@@ -157,7 +157,7 @@ export default function List({companies, profiles}) {
               </select>
             </label>
             <label forhtml="profile">
-              <span>Perfil</span>
+              <span>Rol</span>
               <select name="profile" id="profile" className="search__input" onChange={ handleProfile}>
                 <option value="">Selecionar...</option>
                 {profiles.map((profile) => <option key={profile.id} value={profile.id}>{profile.name}</option>)}
@@ -168,48 +168,6 @@ export default function List({companies, profiles}) {
             {isSearching ? 'Searching...' : 'Search'}
           </button>
         </form>
-        {/* <table className="search__list">
-          <thead className="list-header">
-            <tr>
-                <th>RUT</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Empresa</th>
-                <th>Perfil</th>
-                <th>Password Actualizado</th>
-                <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => {
-              return (<tr key={user.id} className="list-body-row">
-                  <td>{ user.rut }</td>
-                  <td>{ user.firstName } { user.lastName }</td>
-                  <td>{ user.email }</td>
-                  <td>{ user.company.name }</td>
-                  <td>{ user.profile.name }</td>
-                  <td>{DateUtil.parse(user.updatedPassword)}</td>
-                  <td>
-                    <Link
-                      href={{
-                        pathname: `/user/edit/${user.id}`,
-                      }}
-                    >
-                      <Image src="/images/edit_icon.svg" alt="edit" width="24" height="24" />
-                    </Link>
-                    <Link
-                      href={{
-                        pathname: `/user/password/link`,
-                        query: { id: user.id }
-                      }}
-                    >
-                      <Image src="/images/edit_password.svg" alt="password" width="24" height="24" />
-                    </Link>
-                  </td>
-              </tr>)
-            })}
-          </tbody>
-        </table> */}
         <Table 
           colums={COLUMS} 
           data={search.data} 
