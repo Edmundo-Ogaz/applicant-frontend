@@ -12,6 +12,7 @@ describe('applicant user list', () => {
     cy.intercept(`${Cypress.env('api')}/users/login`).as('apiLogin')
     cy.get('#login').click()
     cy.wait('@apiLogin')
+    document.cookie = `applicantApp=logged=true,id=test,email=test,company=1;`;
     cy.visit('http://localhost:3000/user/list')
   })
 
@@ -38,7 +39,8 @@ describe('applicant user list', () => {
   })
 
   it('search by company', () => {
-    cy.get('#company').select('1')
+    cy.get('#company').should('be.disabled')
+    cy.get('#company').select('1', {force: true})
     cy.get('#search').click()
     cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(4)`).should('have.text', 'Applicant')
   })

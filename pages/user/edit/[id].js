@@ -102,7 +102,7 @@ export default function EditUser({user, companies, profiles}) {
             </label>
             <label forhtml="company">
               <span className={styles['user__label-text']}>Empresa</span>
-              <select name="company" id="company" value={company} className={styles.user__input} onChange={ handleCompany}>
+              <select name="company" id="company" value={company} className={styles.user__input} disabled={true} onChange={ handleCompany}>
                 <option value="">Selecionar...</option>
                 {companies.map((param) => 
                   <option key={param.id} value={param.id}>{param.name}</option>)}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { toast } from 'react-toastify'
 
@@ -22,6 +22,11 @@ export default function CreateUser({companies, profiles}) {
   const [ email, setEmail ] = useState();
   const [ company, setCompany ] = useState();
   const [ profile, setProfile ] = useState();
+
+  useEffect(() => {
+    const user = Cookie.getUser()
+    setCompany(user.company)
+  }, [])
 
   const handleSave = async (e) => {
     try {
@@ -54,7 +59,6 @@ export default function CreateUser({companies, profiles}) {
         setFirstName('');
         setLastName('');
         setEmail('');
-        setCompany('');
         setProfile('');
     } catch(e) {
       toast.error(e.message);
@@ -111,7 +115,7 @@ export default function CreateUser({companies, profiles}) {
             </label>
             <label forhtml="company">
               <span className={styles['user__label-text']}>Empresa</span>
-              <select name="company" id="company" value={company} className={styles.user__input} onChange={ handleCompany}>
+              <select name="company" id="company" value={company} className={styles.user__input} disabled={true} onChange={ handleCompany}>
                 <option value="">Selecionar...</option>
                 {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
               </select>

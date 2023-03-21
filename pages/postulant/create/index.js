@@ -19,7 +19,7 @@ export default function CreatePostulant() {
   const [ rut, setRut ] = useState('');
   const [ firstName, setFirstName ] = useState('');
   const [ lastName, setLastName ] = useState('');
-  const [ age, setAge ] = useState('');
+  const [ age, setAge ] = useState(1);
   const [ sexo, setSexo ] = useState('');
   const [ email, setEmail ] = useState('');
 
@@ -54,7 +54,7 @@ export default function CreatePostulant() {
       setRut('')
       setFirstName('')
       setLastName('')
-      setAge('')
+      setAge(1)
       setSexo('')
       setEmail('')
     } catch(e) {
@@ -106,10 +106,10 @@ export default function CreatePostulant() {
                 <span className={styles['user__label-text']}>Apellidos</span>
                 <input type="text" id="lastName" value={lastName} size="50" className={styles.user__input} onChange={ handleLastName } />
               </label>
-              <label forhtml="age">
+              {/* <label forhtml="age">
                 <span className={styles['user__label-text']}>Edad</span>
                 <input type="number" id="age" value={age} min="1" max="100" className={styles.user__input} onChange={ handleAge } />
-              </label>
+              </label> */}
               <label forhtml="sexo">
                 <span className={styles['user__label-text']}>Sexo</span>
                 <select name="sexo" id="sexo" value={sexo} className={styles.user__input} onChange={ handleSexo}>

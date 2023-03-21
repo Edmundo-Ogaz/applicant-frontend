@@ -7,7 +7,7 @@ module.exports = defineConfig({
     },
   },
   env: {
-    username: '1234@1234.cl',
+    username: 'angelica.ogaz@gmail.com',
     api1: 'http://localhost:9000/.netlify/functions/server',
     api: 'http://localhost:8080',
     api3: 'https://pse9lbwkvk.execute-api.us-west-2.amazonaws.com/prod',

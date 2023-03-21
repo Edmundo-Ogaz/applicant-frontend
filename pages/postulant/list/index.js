@@ -12,6 +12,8 @@ import LoadingSpinner from '../../../components/LoadingSpinner/index.js';
 
 import Table from '@/components/table/index'
 
+import Cookie from '@/utils/Cookie'
+
 export default function List() {
 	console.log('List')
 
@@ -123,38 +125,6 @@ export default function List() {
             {isSearching ? 'Searching...' : 'Search'}
           </button>
         </form>
-        {/* <table className="search__list">
-          <thead className="list-header">
-            <tr>
-                <th>RUT</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Edad</th>
-                <th>Sexo</th>
-                <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {postulants.map((postulant) => {
-              return (<tr key={postulant.id} className="list-body-row">
-                  <td>{ postulant.rut }</td>
-                  <td>{ postulant.firstName } { postulant.lastName }</td>
-                  <td>{ postulant.email }</td>
-                  <td>{ postulant.age }</td>
-                  <td>{ postulant.sexo }</td>
-                  <td>
-                    <Link
-                      href={{
-                        pathname: `/postulant/edit/${postulant.id}`,
-                      }}
-                    >
-                      <Image src="/images/edit_icon.svg" alt="edit" width="24" height="24" />
-                    </Link>
-                  </td>
-              </tr>)
-            })}
-          </tbody>
-        </table> */}
         <Table 
           colums={COLUMS} 
           data={search.data} 

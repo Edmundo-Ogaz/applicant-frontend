@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styles from './table.module.css'
 
 export default function Table({colums, data, totalPages, onPageChange}) {
-	console.log('table', data)
+	console.log('table')
 
   const [currentPage, setCurrentPage] = useState(1);
 

@@ -100,10 +100,10 @@ export default function EditPostulant({postulant}) {
               <span className={styles['user__label-text']}>Email</span>
               <input type="text" id="email" value={email} size="30"className={styles.user__input} onChange={ handleEmail } />
             </label>
-            <label forhtml="age">
+            {/* <label forhtml="age">
               <span className={styles['user__label-text']}>Edad</span>
               <input type="number" id="age" value={age} min="1" max="100" className={styles.user__input} onChange={ handleAge } />
-            </label>
+            </label> */}
             <label forhtml="sexo">
               <span className={styles['user__label-text']}>Sexo</span>
               <select name="sexo" id="sexo" value={sexo} className={styles.user__input} onChange={ handleSexo}>

@@ -1,11 +1,11 @@
 const NAME_COOKIE = 'applicantApp'
 
 function add(user) {
-  if (!user || !user.id, !user.email) {
+  if (!user || !user.id || !user.email || !user.company) {
     return
   }
 
-  document.cookie = `${NAME_COOKIE}=logged=true,id=${user.id},email=${user.email};`;
+  document.cookie = `${NAME_COOKIE}=logged=true,id=${user.id},email=${user.email},company=${user.company};`;
 }
 
 function getUser() {

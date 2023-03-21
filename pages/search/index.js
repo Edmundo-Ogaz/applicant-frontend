@@ -9,6 +9,7 @@ import LoadingSpinner from '../../components/LoadingSpinner/index.js';
 
 import Table from '@/components/table/index'
 
+import Cookie from '@/utils/Cookie'
 import DateUtil from '@/utils/DateUtil.js'
 
 import ModalUrlInstruction from '@/components/model/instruction/index.js'
@@ -53,14 +54,21 @@ export default function Search({companies, tests, states}) {
   const [ analysts, setAnalysts ] = useState([]);
 
   useEffect(() => {
-    handleSearch(null, 0)
+    const user = Cookie.getUser()
+    setCompany(user.company)
+    searchAnalyst(user.company)
+    handleSearchInit(user.company)
   }, [])
 
-  const handleSearch = async (e, offset = 0) => {
-    try {
+  const handleSearchInit = async (company, offset = 0) => {
+    let query = `company=${company}&`
+    query += `limit=${ROWS_PER_PAGE}&offset=${offset}`
+    handleSearch(query)
+  }
+
+  const handleSearchButton = async (e, offset = 0) => {
     e?.preventDefault()
-    setIsSearching(true)
-      let query = ''
+    let query = ''
       if (rut)
         query += `rut=${rut}&`
 
@@ -81,9 +89,15 @@ export default function Search({companies, tests, states}) {
       
       if (state)
         query += `state=${state}&`
-      
+
       query += `limit=${ROWS_PER_PAGE}&offset=${offset}`
 
+      handleSearch(query)
+  }
+
+  const handleSearch = async (query) => {
+    try {
+      setIsSearching(true)
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants?${query}`,
         )
@@ -125,18 +139,23 @@ export default function Search({companies, tests, states}) {
 
   async function handleCompany(event) {
     const companyId = event.target.value
-		setCompany(event.target.value)
+    setCompany(event.target.value)
+    searchAnalyst(companyId)
+  }
+  async function searchAnalyst(companyId) {
     try {
+      setIsSearching(true)
       const URL_BASE = process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API
       const PROFILE_ANALYST_ID = process.env.NEXT_PUBLIC_PROFILE_ANALYST_ID
-      const USER_ANALYST = await fetch(
-        `${URL_BASE}/users?companyId=${companyId}&profileId=${PROFILE_ANALYST_ID}`,
+      const analyst = await fetch(
+        `${URL_BASE}/users?company=${companyId}&profile=${PROFILE_ANALYST_ID}`,
       )
       .then(users => users.json())
-      console.log('Saved', USER_ANALYST)
-      setAnalysts(USER_ANALYST)
+      setAnalysts(analyst.data)
     } catch(e) {
       toast.error(e.message);
+    } finally {
+      setIsSearching(false)
     }
 	}
   
@@ -153,7 +172,7 @@ export default function Search({companies, tests, states}) {
 	}
 
   function handlePageChange(page) {
-    handleSearch(null, (page - 1) * ROWS_PER_PAGE);
+    handleSearchButton(null, (page - 1) * ROWS_PER_PAGE);
   }
 
   async function handleModel(id) {
@@ -198,7 +217,7 @@ export default function Search({companies, tests, states}) {
             </label>
             <label forhtml="company">
               <span>Empresa</span>
-              <select name="company" id="company" className="search__input" onChange={ handleCompany}>
+              <select name="company" id="company" value={company} className="search__input" disabled={true} onChange={ handleCompany}>
                 <option value="">Selecionar...</option>
                 {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
               </select>
@@ -225,47 +244,10 @@ export default function Search({companies, tests, states}) {
               </select>
             </label>
           </fieldset>
-          <button id="search" onClick={ handleSearch } disabled={ isSearching }>
+          <button id="search" onClick={ handleSearchButton } disabled={ isSearching }>
             {isSearching ? 'Searching...' : 'Search'}
           </button>
         </form>
-        {/* <table className="search__list">
-          <thead className="list-header">
-            <tr>
-              <th>Candidato</th>
-              <th>Email</th>
-              <th>Empresa</th>
-              <th>Analista</th>
-              <th>Test</th>
-              <th>Estado</th>
-              <th>Fecha Creación</th>
-              <th>Fecha Test</th>
-            </tr>
-          </thead>
-          <tbody>
-            {list.map(item => {
-              return(
-                <tr key={item.id} className="list-body-row">
-                  <td style={{width: 'calc(15%)'}}>
-                    <a href="#" onClick={ () => handleModel(item.id) }>
-                      {item.postulant.firstName} {item.postulant.lastName}
-                    </a>
-                  </td>
-                  <td style={{width: 'calc(15%)'}}>
-                      {item.postulant.email}
-                  </td>
-                  <td style={{width: 'calc(10%)'}}>{item.company.name}</td>
-                  <td style={{width: 'calc(15%)'}}>{item.analyst.firstName} {item.analyst.lastName}</td>
-                  <td style={{width: 'calc(5%)'}}>{item.test.name}</td>
-                  <td style={{width: 'calc(5%)'}}>{item.state.name}</td>
-                  <td style={{width: 'calc(15%)'}}>{DateUtil.parse(item.createdAt)}</td>
-                  <td style={{width: 'calc(15%)'}}>{DateUtil.parse(item.updatedAt)}</td>
-                </tr>
-                )
-              }
-            )}
-          </tbody>
-        </table> */}
         <Table 
           colums={COLUMS} 
           data={search.data} 

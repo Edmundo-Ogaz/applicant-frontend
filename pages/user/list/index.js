@@ -12,6 +12,7 @@ import LoadingSpinner from '../../../components/LoadingSpinner/index.js';
 
 import Table from '@/components/table/index'
 
+import Cookie from '@/utils/Cookie'
 import DateUtil from '@/utils/DateUtil.js';
 
 export default function List({companies, profiles}) {
@@ -39,16 +40,26 @@ export default function List({companies, profiles}) {
   const [ search, setSearch ] = useState({data: [], total: 0});
 
   useEffect(() => {
+    const user = Cookie.getUser()
+    setCompany(user.company)
+    handleSearchInit(user.company)
+  }, [])
+
+  const handleSearchInit = async (company, offset = 0) => {
+    let query = `company=${company}&`
+    query += `limit=${ROWS_PER_PAGE}&offset=${offset}`
+    handleSearch(query)
+  }
+
+  useEffect(() => {
     handleSearch(null, 0)
   }, [])
 
-  const handleSearch = async (e, offset = 0) => {
-    try {
+  const handleSearchButton = async (e, offset = 0) => {
     e?.preventDefault()
-    setIsSearching(true)
       let query = ''
       if (rut)
-        query = `rut=${rut}`
+        query = `rut=${rut}&`
 
       if (name)
         query += `name=${name}&`
@@ -64,6 +75,12 @@ export default function List({companies, profiles}) {
       
       query += `limit=${ROWS_PER_PAGE}&offset=${offset}`
 
+      handleSearch(query)
+    }
+
+    const handleSearch = async (query) => {
+    try {
+      setIsSearching(true)
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/users?${query}`,
         )
@@ -127,7 +144,7 @@ export default function List({companies, profiles}) {
 	}
 
   function handlePageChange(page) {
-    handleSearch(null, (page - 1) * ROWS_PER_PAGE);
+    handleSearchButton(null, (page - 1) * ROWS_PER_PAGE);
   }
 
   return (
@@ -151,7 +168,7 @@ export default function List({companies, profiles}) {
             </label>
             <label forhtml="company">
               <span>Empresa</span>
-              <select name="company" id="company" className="search__input" onChange={ handleCompany}>
+              <select name="company" id="company" value={company} className="search__input" disabled={true} onChange={ handleCompany}>
                 <option value="">Selecionar...</option>
                 {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
               </select>
@@ -164,7 +181,7 @@ export default function List({companies, profiles}) {
               </select>
             </label>
           </fieldset>
-          <button id="search" onClick={ handleSearch } disabled={ isSearching }>
+          <button id="search" onClick={ handleSearchButton } disabled={ isSearching }>
             {isSearching ? 'Searching...' : 'Search'}
           </button>
         </form>

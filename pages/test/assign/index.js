@@ -36,16 +36,17 @@ export default function AssignTest({companies, tests}) {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/postulants?rut=${rut}`,
         )
-      const arrJson = await response.json();
+      const json = await response.json();
       if (response?.ok === false) {
-        throw new Error(arrJson?.error)
-      } else if (!Array.isArray(arrJson) ||  arrJson.length != 1) {
+        throw new Error(json?.error)
+      } else if (!Array.isArray(json.data) ||  json.data.length != 1) {
         throw new Error('NOT_FOUND')
       }
-      setPostulantId(arrJson[0].id)
-      setFirstName(arrJson[0].firstName)
-      setLastName(arrJson[0].lastName)
-      setEmail(arrJson[0].email)
+
+      setPostulantId(json.data[0].id)
+      setFirstName(json.data[0].firstName)
+      setLastName(json.data[0].lastName)
+      setEmail(json.data[0].email)
     } catch(e) {
       toast.error(e.message);
     } finally {
@@ -152,7 +153,7 @@ export default function AssignTest({companies, tests}) {
             </label>
             <label forhtml="company">
               <span className={styles['user__label-text']}>Empresa</span>
-              <select name="company" id="company" value={company} className={styles.user__input} onChange={ handleCompany}>
+              <select name="company" id="company" value={company} className={styles.user__input} disabled={true} onChange={ handleCompany}>
                 <option value="">Selecionar...</option>
                 {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
               </select>
