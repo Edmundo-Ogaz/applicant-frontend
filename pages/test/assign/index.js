@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { toast } from 'react-toastify';
 
@@ -28,6 +28,12 @@ export default function AssignTest({companies, tests}) {
   const [ analyst, setAnalyst ] = useState('');
 
   const [ analysts, setAnalysts ] = useState([]);
+
+  useEffect(() => {
+    const user = Cookie.getUser()
+    setCompany(user.company)
+    searchAnalyst(user.company)
+  }, [])
 
   const handleSearch = async (e) => {
     try {
@@ -84,7 +90,6 @@ export default function AssignTest({companies, tests}) {
       setLastName('')
       setEmail('')
       setTestId('')
-      setCompany('')
       setAnalyst('')
     } catch(e) {
       toast.error(e.message);
@@ -102,10 +107,13 @@ export default function AssignTest({companies, tests}) {
 	}
 
   async function handleCompany(event) {
+    const companyId = event.target.value
+    setCompany(event.target.value)
+    searchAnalyst(companyId)
+  }
+  async function searchAnalyst(companyId) {
     try {
-      setIsSearching(false)
-      const companyId = event.target.value
-      setCompany(event.target.value)
+      setIsSearching(true)
       const URL_BASE = process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API
       const PROFILE_ANALYST_ID = process.env.NEXT_PUBLIC_PROFILE_ANALYST_ID
       const response = await fetch(
@@ -115,7 +123,7 @@ export default function AssignTest({companies, tests}) {
       if (response?.ok === false) {
         throw new Error(json?.error)
       }
-      setAnalysts(json)
+      setAnalysts(json.data)
     } catch(e) {
       toast.error(e.message);
     } finally {
