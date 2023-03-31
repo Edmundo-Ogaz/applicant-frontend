@@ -199,7 +199,7 @@ export default function Certificate(props) {
         <div className="row">
           <div className="col-md-8" style={{height: "max-content"}}>
             <div className="col" style={{height: "max-content"}}>
-              <Bubble options={optionsBubble} data={dataBubble} />
+              <Bubble data={dataBubble} options={optionsBubble} />
               <div className={styles.tick} style={{position: "absolute", bottom: "0", left: "0"}}>
                   Bajo
               </div>
@@ -213,7 +213,7 @@ export default function Certificate(props) {
           </div>
           <div className="col-md-4">
             <p className=" text-center">Muy Alta</p>
-            <Scatter options={options} data={data} plugins={[alwaysShowTooltip]}/>
+            <Scatter data={data} options={options} />
             <p className=" text-center">Muy Baja</p>
           </div>
         </div>
@@ -221,7 +221,7 @@ export default function Certificate(props) {
       <div className="container">
         <div className="row">
           <div className="col-8">
-              <Bar data={dataBar} options={optionsBar} />
+            <Bar data={dataBar} options={optionsBar} />
           </div>
           <div className="col-4">
             <table className="table table-bordered">
