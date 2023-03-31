@@ -3,7 +3,7 @@ export default function Error({message}) {
 
   return (
     <>
-      Error {message}
+      {message}
     </>
   );
 }
