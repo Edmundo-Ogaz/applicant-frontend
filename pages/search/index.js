@@ -15,6 +15,7 @@ import DateUtil from '@/utils/DateUtil.js'
 import ModalUrlInstruction from '@/components/model/instruction/index.js'
 import ModalIcCertificate from '@/components/model/ic/index.js'
 import ModalDiscCertificate from '@/components/model/disc/index.js'
+import ModalCealCertificate from '@/components/model/ceal/index.js'
 
 export default function Search({companies, tests, states}) {
 	console.log('Search')
@@ -35,6 +36,7 @@ export default function Search({companies, tests, states}) {
   Modals[0] = ModalUrlInstruction
   Modals[process.env.NEXT_PUBLIC_TEST_IC_ID] = ModalIcCertificate
   Modals[process.env.NEXT_PUBLIC_TEST_DISC_ID] = ModalDiscCertificate
+  Modals[process.env.NEXT_PUBLIC_TEST_CEAL_ID] = ModalCealCertificate
 
   const [ isSearching, setIsSearching ] = useState(false);
   const [ testPostulant, setTestPostulant] = useState(null);

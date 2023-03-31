@@ -1,22 +1,19 @@
-import Link from 'next/link'
+import TestIc from '@/components/test/ceal/test/index.js'
 
-import IcInstruction from '@/components/test/ic/instruction/index.js'
-
-export default function Instruction({id}) {
-	console.log('Instruction')
+export default function Ceal({id}) {
+	console.log('Ceal')
 
   return (
     <>
-    <IcInstruction id={id} url={'/public/test/ic/test'}/>
+      <TestIc id={id} url={'/public/test/ceal/success'}/>
     </>
   );
 }
 
-export async function getServerSideProps({params}) {
+export async function getServerSideProps({query}) {
   try {
-    console.log('getServerSideProps', params.id);
-    const id = params.id
-    if (isNaN(id)) {
+    console.log('getServerSideProps',query.id);
+    if (isNaN(query.id)) {
       return {
         redirect: {
           permanent: false,
@@ -24,7 +21,7 @@ export async function getServerSideProps({params}) {
         }
       };
     }
-    const testsPortulants = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants/${id}`)
+    const testsPortulants = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/postulants/${query.id}`)
       .then(testsPortulants => testsPortulants.json())
 
     if (Object.keys(testsPortulants).length === 0) {
@@ -47,11 +44,11 @@ export async function getServerSideProps({params}) {
 
     return {
       props: {
-        id: testsPortulants.id
+        id: testsPortulants.id,
       },
     }
   } catch(e) {
-    console.log(e)
+    console.error(e)
     return {
       redirect: {
         permanent: false,

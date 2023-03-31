@@ -1,3 +1,17 @@
+.tick{
+  font-size: small;
+  font-weight: lighter;
+}
+
+.destacado {
+  background-color: #ffc107;
+}
+
+.footer {
+  height: 10%;
+  background-color: #ffc107;;
+}
+
 .main {
   display: flex;
   justify-content: center;

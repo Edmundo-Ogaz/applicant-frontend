@@ -1,13 +1,13 @@
 import Link from 'next/link'
 
-import IcInstruction from '@/components/test/ic/instruction/index.js'
+import CealInstruction from '@/components/test/ceal/instruction/index.js'
 
 export default function Instruction({id}) {
 	console.log('Instruction')
 
   return (
     <>
-    <IcInstruction id={id} url={'/public/test/ic/test'}/>
+    <CealInstruction id={id} url={'/public/test/ceal/test'}/>
     </>
   );
 }

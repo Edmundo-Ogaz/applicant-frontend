@@ -17,7 +17,7 @@ export async function getServerSideProps({query}) {
       return {
         redirect: {
           permanent: false,
-          destination: `/error?message=Problemas al obtener parametros`,
+          destination: `/public/error?message=Problemas al obtener parametros`,
         }
       };
     }
@@ -28,10 +28,20 @@ export async function getServerSideProps({query}) {
       return {
         redirect: {
           permanent: false,
-          destination: `/error?message=No se pudo obtener el test del postulanta`,
+          destination: `/public/error?message=No se pudo obtener el test del postulanta`,
         }
       };
     }
+
+    if (testsPortulants.state.id == process.env.NEXT_PUBLIC_TEST_STATE_DONE_ID) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: `/public/error?message=Test terminado`,
+        }
+      };
+    }
+
     return {
       props: {
         id: testsPortulants.id,
@@ -42,7 +52,7 @@ export async function getServerSideProps({query}) {
     return {
       redirect: {
         permanent: false,
-        destination: `/error?message=${e.message}`,
+        destination: `/public/error?message=${e.message}`,
       }
     };
   }

@@ -21,28 +21,25 @@ export default function Layout({ children }) {
       case '1':
         navigate('/')
         break;
-      case '2-2':
+      case '2-1':
         navigate('/search')
         break;
-      case '2-3':
-        navigate('/test/ic/list')
-        break;
-      case '3-3':
+      case '2-2':
         navigate('/test/assign')
         break;
-      case '4-1-1':
+      case '3-1':
         navigate('/user/list')
         break;
-      case '4-1-2':
+      case '3-2':
         navigate('/user/create')
         break;
-      case '4-2-1':
+      case '4-1':
         navigate('/postulant/list')
         break;
-      case '4-2-2':
+      case '4-2':
         navigate('/postulant/create')
         break;
-      case '5-2':
+      case '6-1':
         Cookie.remove()
         navigate('/login')
         break;

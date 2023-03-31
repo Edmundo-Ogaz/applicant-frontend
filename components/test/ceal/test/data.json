@@ -1,0 +1,459 @@
+[
+    {
+      "id" : 1,
+      "question" : "Sus subordinados no han estado respondiendo a su conversación amistosa y a su obvio interés por el bienestar de ellos.  El rendimiento del grupo se ha mantenido bajo.",
+      "alternatives": [
+            {
+              "id_alternativa" : 1,
+              "letter_alternative" : "A",
+              "respuesta" : "Enfatizo el uso de procedimientos uniformes y la necesidad del cumplimiento de las tareas.",
+              "estilo" : 1,
+              "efectividad" : 2,
+              "id_pregunta_id" : 1
+            },
+            {
+              "id_alternativa" : 2,
+              "letter_alternative" : "B",
+              "respuesta" : "Estoy disponible para la discusión, pero presiono.",
+              "estilo" : 3,
+              "efectividad" : -1,
+              "id_pregunta_id" : 1
+            },
+            {
+              "id_alternativa" : 3,
+              "letter_alternative" : "C",
+              "respuesta" : "Hablo con los subordinados y luego establezco objetivos.",
+              "estilo" : 2,
+              "efectividad" : 1,
+              "id_pregunta_id" : 1
+            },
+            {
+              "id_alternativa" : 4,
+              "letter_alternative" : "D",
+              "respuesta" : "Me cuido de no intervenir.",
+              "estilo" : 4,
+              "efectividad" : -2,
+              "id_pregunta_id" : 1
+            }
+          ]
+    },
+    {
+      "id" : 2,
+      "question" : "El rendimiento observable de su grupo está aumentando, Ud. se ha preocupado de que todos los miembros estén conscientes de sus funciones y normas.",
+      "alternatives": [
+          {
+            "id_alternativa" : 5,
+            "letter_alternative" : "A",
+            "respuesta" : "Me comprometo a la interacción amistosa, pero continúo asegurándome de que todos los miembros estén conscientes de sus funciones y normas de rendimiento.",
+            "estilo" : 2,
+            "efectividad" : 2,
+            "id_pregunta_id" : 2
+          },
+          {
+            "id_alternativa" : 6,
+            "letter_alternative" : "B",
+            "respuesta" : "No ejecuto ninguna acción definida.",
+            "estilo" : 4,
+            "efectividad" : -2,
+            "id_pregunta_id" : 2
+          },
+          {
+            "id_alternativa" : 7,
+            "letter_alternative" : "C",
+            "respuesta" : "Hago lo que puedo para que el grupo se sienta importante y comprometido.",
+            "estilo" : 3,
+            "efectividad" : 1,
+            "id_pregunta_id" : 2
+          },
+          {
+            "id_alternativa" : 8,
+            "letter_alternative" : "D",
+            "respuesta" : "D)\tEnfatizo la importancia de las tareas y sus plazos.",
+            "estilo" : 1,
+            "efectividad" : -1,
+            "id_pregunta_id" : 2
+          }
+        ]
+    },
+    {
+      "id" : 3,
+      "question" : "Los miembros de su grupo se muestran incapaces de resolver un problema por su cuenta. Normalmente Ud. los ha dejado solos. El rendimiento y las relaciones interpersonales del grupo han estado buenas.",
+      "alternatives": [
+          {
+            "id_alternativa" : 9,
+            "letter_alternative" : "A",
+            "respuesta" : "Comprometo al grupo y juntos tratamos de resolver el problema.",
+            "estilo" : 2,
+            "efectividad" : 1,
+            "id_pregunta_id" : 3
+          },
+          {
+            "id_alternativa" : 10,
+            "letter_alternative" : "B",
+            "respuesta" : "Dejo que el grupo lo resuelva.",
+            "estilo" : 4,
+            "efectividad" : -1,
+            "id_pregunta_id" : 3
+          },
+          {
+            "id_alternativa" : 11,
+            "letter_alternative" : "C",
+            "respuesta" : "Actúo rápida y firmemente para corregir y reorientar.",
+            "estilo" : 1,
+            "efectividad" : -2,
+            "id_pregunta_id" : 3
+          },
+          {
+            "id_alternativa" : 12,
+            "letter_alternative" : "D",
+            "respuesta" : "Estimulo al grupo para que trabaje en el problema y estoy disponible para la discusión.",
+            "estilo" : 3,
+            "efectividad" : 2,
+            "id_pregunta_id" : 3
+          }
+        ]        
+    },
+    {
+      "id" : 4,
+      "question" : "Ud. está considerando un gran cambio. Sus subordinados tienen una buena historia de rendimiento. Ellos están de acuerdo con la necesidad de cambio.",
+      "alternatives": [
+          {
+            "id_alternativa" : 13,
+            "letter_alternative" : "A",
+            "respuesta" : "Permito que el grupo participe en el desarrollo del cambio, pero no presiono.",
+            "estilo" : 3,
+            "efectividad" : 1,
+            "id_pregunta_id" : 4
+          },
+          {
+            "id_alternativa" : 14,
+            "letter_alternative" : "B",
+            "respuesta" : "Anuncio los cambios y los implemento con una supervisión estrecha.",
+            "estilo" : 1,
+            "efectividad" : -2,
+            "id_pregunta_id" : 4
+          },
+          {
+            "id_alternativa" : 15,
+            "letter_alternative" : "C",
+            "respuesta" : "Permito que el grupo formule su propia dirección.",
+            "estilo" : 4,
+            "efectividad" : 2,
+            "id_pregunta_id" : 4
+          },
+          {
+            "id_alternativa" : 16,
+            "letter_alternative" : "D",
+            "respuesta" : "Incorporo las recomendaciones del grupo pero dirijo el cambio.",
+            "estilo" : 2,
+            "efectividad" : -1,
+            "id_pregunta_id" : 4
+          }
+        ]        
+    },
+    {
+      "id" : 5,
+      "question" : "El rendimiento de su grupo ha estado bajando en los últimos meses. Los miembros se han mostrado indiferentes con el cumplimiento de los objetivos propuestos. Continuamente ha sido necesario recordarles que hagan sus tareas a tiempo. En el pasado, el redefinir las funciones ha sido una ayuda.",
+      "alternatives": [
+          {
+            "id_alternativa" : 17,
+            "letter_alternative" : "A",
+            "respuesta" : "Permito que el grupo formule su propia dirección.",
+            "estilo" : 4,
+            "efectividad" : -2,
+            "id_pregunta_id" : 5
+          },
+          {
+            "id_alternativa" : 18,
+            "letter_alternative" : "B",
+            "respuesta" : "Acojo recomendaciones del grupo, pero veo que se cumplan los objetivos.",
+            "estilo" : 2,
+            "efectividad" : 1,
+            "id_pregunta_id" : 5
+          },
+          {
+            "id_alternativa" : 19,
+            "letter_alternative" : "C",
+            "respuesta" : "Redefino los objetivos y superviso cuidadosamente.",
+            "estilo" : 1,
+            "efectividad" : 2,
+            "id_pregunta_id" : 5
+          },
+          {
+            "id_alternativa" : 20,
+            "letter_alternative" : "D",
+            "respuesta" : "Permito que el grupo participe en la definición de los objetivos, pero no presiono.",
+            "estilo" : 3,
+            "efectividad" : -1,
+            "id_pregunta_id" : 5
+          }
+        ]        
+    },
+    {
+      "id" : 6,
+      "question" : "Ud. se incorporó a una situación manejada eficientemente. El administrador anterior era muy exigente. Ud. quiere mantener una situación productiva pero le gustaría comenzar a humanizar el ambiente.",
+      "alternatives": [
+          {
+            "id_alternativa" : 21,
+            "letter_alternative" : "A",
+            "respuesta" : "Hago lo que puedo para que el grupo se sienta importante y  comprometido.",
+            "estilo" : 3,
+            "efectividad" : -1,
+            "id_pregunta_id" : 6
+          },
+          {
+            "id_alternativa" : 22,
+            "letter_alternative" : "B",
+            "respuesta" : "Enfatizo la importancia de las tareas y sus plazos.",
+            "estilo" : 1,
+            "efectividad" : 1,
+            "id_pregunta_id" : 6
+          },
+          {
+            "id_alternativa" : 23,
+            "letter_alternative" : "C",
+            "respuesta" : "Me cuido de no intervenir.",
+            "estilo" : 4,
+            "efectividad" : -2,
+            "id_pregunta_id" : 6
+          },
+          {
+            "id_alternativa" : 24,
+            "letter_alternative" : "D",
+            "respuesta" : "Hago que el grupo se comprometa en la toma de decisiones, pero veo que los objetivos se cumplan.",
+            "estilo" : 2,
+            "efectividad" : 2,
+            "id_pregunta_id" : 6
+          }
+        ]        
+    },
+    {
+      "id" : 7,
+      "question" : "Ud. está considerando la posibilidad de realizar cambios mayores en la estructura de su organización. Los miembros del grupo han hecho algunas sugerencias acerca del cambio necesario. El grupo ha demostrado flexibilidad en sus operaciones diarias.",
+      "alternatives": [
+          {
+            "id_alternativa" : 25,
+            "letter_alternative" : "A",
+            "respuesta" : "Defino el cambio y superviso cuidadosamente.",
+            "estilo" : 1,
+            "efectividad" : -2,
+            "id_pregunta_id" : 7
+          },
+          {
+            "id_alternativa" : 26,
+            "letter_alternative" : "B",
+            "respuesta" : "Obtengo sugerencias del grupo sobre el cambio y permito que los miembros organicen la implementación.",
+            "estilo" : 3,
+            "efectividad" : 2,
+            "id_pregunta_id" : 7
+          },
+          {
+            "id_alternativa" : 27,
+            "letter_alternative" : "C",
+            "respuesta" : "Me muestro dispuesto a realizar los cambios recomendados, pero mantengo el control de la",
+            "estilo" : 2,
+            "efectividad" : -1,
+            "id_pregunta_id" : 7
+          },
+          {
+            "id_alternativa" : 28,
+            "letter_alternative" : "D",
+            "respuesta" : "Evito la confrontación: dejo las cosas solas.",
+            "estilo" : 4,
+            "efectividad" : 1,
+            "id_pregunta_id" : 7
+          }
+        ]        
+    },
+    {
+      "id" : 8,
+      "question" : "El rendimiento del grupo y las relaciones interpersonales son buenas. Ud. se siente inseguro acerca de cómo está dirigiendo el grupo.",
+      "alternatives": [
+          {
+            "id_alternativa" : 29,
+            "letter_alternative" : "A",
+            "respuesta" : "Dejo al grupo solo.",
+            "estilo" : 4,
+            "efectividad" : 2,
+            "id_pregunta_id" : 8
+          },
+          {
+            "id_alternativa" : 30,
+            "letter_alternative" : "B",
+            "respuesta" : "Discuto la situación con el grupo y luego inicio los cambios necesarios.",
+            "estilo" : 2,
+            "efectividad" : -1,
+            "id_pregunta_id" : 8
+          },
+          {
+            "id_alternativa" : 31,
+            "letter_alternative" : "C",
+            "respuesta" : "Doy algunos pasos para dirigir a mis subordinados para que trabajen de una manera bien definida.",
+            "estilo" : 1,
+            "efectividad" : -2,
+            "id_pregunta_id" : 8
+          },
+          {
+            "id_alternativa" : 32,
+            "letter_alternative" : "D",
+            "respuesta" : "Tengo cuidado de no dañar las relaciones jefe - subordinados, siendo demasiado directivo.",
+            "estilo" : 3,
+            "efectividad" : 1,
+            "id_pregunta_id" : 8
+          }
+        ]
+    },
+    {
+      "id" : 9,
+      "question" : "Su superior le ha asignado la dirección de una tarea fuera del horario de trabajo, haciendo las recomendaciones requeridas para el cambio. El grupo no tiene claro sus objetivos. La asistencia a reuniones de trabajo ha estado pobre. Las sesiones se han transformado en reuniones sociales. Potencialmente el grupo tiene el talento necesario para ayudar.",
+      "alternatives": [
+          {
+            "id_alternativa" : 33,
+            "letter_alternative" : "A",
+            "respuesta" : "Dejo que el grupo lo resuelva.",
+            "estilo" : 4,
+            "efectividad" : -2,
+            "id_pregunta_id" : 9
+          },
+          {
+            "id_alternativa" : 34,
+            "letter_alternative" : "B",
+            "respuesta" : "Incorporo las recomendaciones del grupo, pero veo que los objetivos se cumplan.",
+            "estilo" : 2,
+            "efectividad" : 1,
+            "id_pregunta_id" : 9
+          },
+          {
+            "id_alternativa" : 35,
+            "letter_alternative" : "C",
+            "respuesta" : "Redefino los objetivos y superviso cuidadosamente.",
+            "estilo" : 1,
+            "efectividad" : 2,
+            "id_pregunta_id" : 9
+          },
+          {
+            "id_alternativa" : 36,
+            "letter_alternative" : "D",
+            "respuesta" : "Permito que el grupo se comprometa estableciendo objetivos, pero no presiono.",
+            "estilo" : 3,
+            "efectividad" : -1,
+            "id_pregunta_id" : 9
+          }
+        ]        
+    },
+    {
+      "id" : 10,
+      "question" : "Sus subordinados, generalmente capaces de asumir responsabilidades, no están respondiendo a su reciente redefinición de las normas.",
+      "alternatives": [
+          {
+            "id_alternativa" : 37,
+            "letter_alternative" : "A",
+            "respuesta" : "Permito que el grupo se comprometa en la redefinición de las normas, pero no presiono.",
+            "estilo" : 3,
+            "efectividad" : 1,
+            "id_pregunta_id" : 10
+          },
+          {
+            "id_alternativa" : 38,
+            "letter_alternative" : "B",
+            "respuesta" : "Redefino las normas y superviso cuidadosamente.",
+            "estilo" : 1,
+            "efectividad" : -2,
+            "id_pregunta_id" : 10
+          },
+          {
+            "id_alternativa" : 39,
+            "letter_alternative" : "C",
+            "respuesta" : "Evito la confrontación, no presionando.",
+            "estilo" : 4,
+            "efectividad" : -1,
+            "id_pregunta_id" : 10
+          },
+          {
+            "id_alternativa" : 40,
+            "letter_alternative" : "D",
+            "respuesta" : "Incorporo recomendaciones del grupo, pero veo que se cumplan las nuevas normas.",
+            "estilo" : 2,
+            "efectividad" : 2,
+            "id_pregunta_id" : 10
+          }
+        ]        
+    },
+    {
+      "id" : 11,
+      "question" : "Ud. ha sido promovido a una nueva posición. El supervisor anterior no estaba comprometido con los asuntos del grupo. El grupo ha manejado adecuadamente sus tareas y ese estilo de dirección. Las relaciones en el grupo son buenas.",
+      "alternatives": [
+          {
+            "id_alternativa" : 41,
+            "letter_alternative" : "A",
+            "respuesta" : "Doy pasos para dirigir a los subordinados a trabajar de una manera bien definida.",
+            "estilo" : 1,
+            "efectividad" : -2,
+            "id_pregunta_id" : 11
+          },
+          {
+            "id_alternativa" : 42,
+            "letter_alternative" : "B",
+            "respuesta" : "Comprometo a los subordinados en la toma de decisiones y refuerzo las buenas contribuciones.",
+            "estilo" : 3,
+            "efectividad" : 2,
+            "id_pregunta_id" : 11
+          },
+          {
+            "id_alternativa" : 43,
+            "letter_alternative" : "C",
+            "respuesta" : "Discuto el rendimiento pasado con el grupo y luego examino la necesidad de nuevas prácticas.",
+            "estilo" : 2,
+            "efectividad" : -1,
+            "id_pregunta_id" : 11
+          },
+          {
+            "id_alternativa" : 44,
+            "letter_alternative" : "D",
+            "respuesta" : "Continúo dejando al grupo solo.",
+            "estilo" : 4,
+            "efectividad" : 1,
+            "id_pregunta_id" : 11
+          }
+        ]        
+    },
+    {
+      "id" : 12,
+      "question" : "La información reciente indica la existencia de dificultades internas entre los subordinados. El grupo tiene una historia de excelentes logros. Los miembros han mantenido en forma efectiva los objetivos a largo plazo y han trabajado en armonía todo el año anterior. Todos están bien calificados para sus tareas.",
+      "alternatives": [
+          {
+            "id_alternativa" : 45,
+            "letter_alternative" : "A",
+            "respuesta" : "Pruebo una solución mía con los subordinados, mientras reviso la necesidad de nuevas práctica.",
+            "estilo" : 2,
+            "efectividad" : -1,
+            "id_pregunta_id" : 12
+          },
+          {
+            "id_alternativa" : 46,
+            "letter_alternative" : "B",
+            "respuesta" : "Permito a los miembros del grupo que lo resuelvan por sí mismos.",
+            "estilo" : 4,
+            "efectividad" : 2,
+            "id_pregunta_id" : 12
+          },
+          {
+            "id_alternativa" : 47,
+            "letter_alternative" : "c",
+            "respuesta" : "Actúo rápida y firmemente para corregir y reorientar.",
+            "estilo" : 1,
+            "efectividad" : -2,
+            "id_pregunta_id" : 12
+          },
+          {
+            "id_alternativa" : 48,
+            "letter_alternative" : "D",
+            "respuesta" : "Estoy disponible para la discusión, pero tengo cuidado de no dañar las relaciones jefe- subordinados.",
+            "estilo" : 3,
+            "efectividad" : 1,
+            "id_pregunta_id" : 12
+          }
+        ]        
+    }
+  ]
+  
