@@ -153,7 +153,6 @@ export default function CEAL(props) {
           )}
         </div>
         <div className={styles.endTest}>
-          <input type="submit" value="Finalizar Test" className="btn btn-warning" />
           <button
             className="btn btn-warning"
             onClick={ handleSaving } 
