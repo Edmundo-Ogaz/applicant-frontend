@@ -52,6 +52,7 @@ export default function Search({companies, tests, states}) {
   const [ state, setState ] = useState();
 
   const [ search, setSearch ] = useState({data: [], total: 0});
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [ analysts, setAnalysts ] = useState([]);
 
@@ -68,7 +69,7 @@ export default function Search({companies, tests, states}) {
     handleSearch(query)
   }
 
-  const handleSearchButton = async (e, offset = 0) => {
+  const handleSearchButton = async (e, offset = 0, currentPage = 1) => {
     e?.preventDefault()
     let query = ''
       if (rut)
@@ -95,6 +96,7 @@ export default function Search({companies, tests, states}) {
       query += `limit=${ROWS_PER_PAGE}&offset=${offset}`
 
       handleSearch(query)
+      setCurrentPage(currentPage)
   }
 
   const handleSearch = async (query) => {
@@ -107,10 +109,24 @@ export default function Search({companies, tests, states}) {
       if (response?.ok === false) {
         throw new Error(json?.error)
       }
-      json.data = json.data.map((item, idx) => [
-        <a key={idx} href="#" onClick={ () => handleModel(item.id) }>
-          {item.postulant.firstName} {item.postulant.lastName}
-        </a>,
+      json.data = json.data.map((item, idx) => {
+        const user = Cookie.getUser()
+        let element = `${item.postulant.firstName} ${item.postulant.lastName}`
+        if (item.state.id == process.env.NEXT_PUBLIC_TEST_STATE_PENDING_ID) {
+          element = <a key={idx} href="#" onClick={ () => handleModel(item.id) }>
+            {item.postulant.firstName} {item.postulant.lastName}
+          </a>
+        } else if (item.state.id == process.env.NEXT_PUBLIC_TEST_STATE_DONE_ID) {
+          if (user.profile == process.env.NEXT_PUBLIC_PROFILE_ADMIN_ID
+            || (user.profile == process.env.NEXT_PUBLIC_PROFILE_ANALYST_ID 
+              && item.analyst.id == user.id)) {
+                element = <a key={idx} href="#" onClick={ () => handleModel(item.id) }>
+                  {item.postulant.firstName} {item.postulant.lastName}
+                </a>
+          }
+        }
+        return [
+        element,
         item.postulant.email,
         item.company.name,
         `${item.analyst.firstName} ${item.analyst.lastName}`,
@@ -118,7 +134,7 @@ export default function Search({companies, tests, states}) {
         item.state.name,
         DateUtil.parse(item.createdAt),
         DateUtil.parse(item.updatedAt)
-      ])
+      ]})
       setSearch(json)
     } catch(e) {
       toast.error(e.message);
@@ -174,7 +190,7 @@ export default function Search({companies, tests, states}) {
 	}
 
   function handlePageChange(page) {
-    handleSearchButton(null, (page - 1) * ROWS_PER_PAGE);
+    handleSearchButton(null, (page - 1) * ROWS_PER_PAGE, page);
   }
 
   async function handleModel(id) {
@@ -188,12 +204,10 @@ export default function Search({companies, tests, states}) {
     let Modal
     if (testPostulant.state.id == process.env.NEXT_PUBLIC_TEST_STATE_DONE_ID) {
       Modal = Modals[testPostulant.test.id]
-      return <Modal setIsOpen={setIsOpenModal} testPostulant={testPostulant} />
+      return <Modal testPostulant={testPostulant} setIsOpen={setIsOpenModal} />
     } else if (testPostulant.state.id == process.env.NEXT_PUBLIC_TEST_STATE_PENDING_ID) {
       Modal = Modals[0]
-      const id = testPostulant.id
-      const type = testPostulant.test.name.toLowerCase()
-      return <Modal setIsOpen={setIsOpenModal} id={id} type={type} />
+      return <Modal id={testPostulant.id} setIsOpen={setIsOpenModal} />
     }
     return
   }
@@ -251,10 +265,11 @@ export default function Search({companies, tests, states}) {
           </button>
         </form>
         <Table 
-          colums={COLUMS} 
-          data={search.data} 
-          totalPages={search.total && Math.ceil(search.total / ROWS_PER_PAGE)} 
-          onPageChange={handlePageChange} 
+          colums={COLUMS}
+          data={search.data}
+          currentPage={currentPage}
+          totalPages={search.total && Math.ceil(search.total / ROWS_PER_PAGE)}
+          onPageChange={handlePageChange}
         />
         { isSearching && <LoadingSpinner/> }
         { isOpenModal && <Modal /> }

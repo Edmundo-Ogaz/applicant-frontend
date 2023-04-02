@@ -120,7 +120,7 @@ export default function CEAL(props) {
             (<div key={index} className={`box ${styles.box}`}>
               <div>
                 <div className={styles.content}>
-                  <div className={styles.questions}>
+                  <div className={`question ${styles.questions}`}>
                     <div className="row">
                       <div className="col-1" style={{textAlign: "center"}}>
                         {question.id}
@@ -132,7 +132,7 @@ export default function CEAL(props) {
                   </div>
                   <div className={styles.answers}>
                     {question.alternatives.map((answer, index) =>
-                      (<div key={index} className={styles.answer}>
+                      (<div key={index} className={`answer ${styles.answer}`}>
                         <div className="row">
                           <div className="col-1">
                             <label className={styles.check}>

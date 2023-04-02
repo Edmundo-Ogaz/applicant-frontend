@@ -10,7 +10,7 @@ describe('applicant test ic test', () => {
     cy.wait('@login')
   })
 
-  it('ic test instruction', () => {
+  it('ic test', () => {
     cy.visit(`http://localhost:3000/public/test/ic/test?id=${Cypress.env('test_ic_id')}`)
     //cy.get('#time-alert').should('have.css', 'display', 'none') 
     // cy.get('#time-alert')
@@ -28,7 +28,7 @@ describe('applicant test ic test', () => {
     cy.get('#button_send').should('have.text', 'ENVIAR RESPUESTAS')
   })
 
-  it('ic test', () => {
+  it('ic test labels', () => {
     cy.visit(`http://localhost:3000/public/test/ic/test?id=${Cypress.env('test_ic_id')}`)
     cy.get('#ic_form table thead tr th:nth-child(1)').should('have.text', 'CANTIDAD ASEGURADA')
     cy.get('#ic_form table thead tr th:nth-child(2)').should('have.text', 'CLASES DE SEGURO')
@@ -211,5 +211,108 @@ describe('applicant test ic test', () => {
     cy.get('#ic_form table tbody tr:nth-child(25) td:nth-child(4) label input').should('have.value', '24')
     cy.get('#ic_form table tbody tr:nth-child(25) td:nth-child(5) label input').should('have.value', '49')
     cy.get('#ic_form table tbody tr:nth-child(25) td:nth-child(6) label input').should('have.value', '74')
+  })
+
+  it('ic test clicks', () => {
+    cy.visit(`http://localhost:3000/public/test/ic/test?id=${Cypress.env('test_ic_id')}`)
+    cy.get('#ic_form table tbody tr:nth-child(1) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(1) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(1) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(2) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(2) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(2) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(3) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(3) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(3) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(4) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(4) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(4) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(5) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(5) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(5) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(6) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(6) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(6) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(7) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(7) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(7) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(8) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(8) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(8) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(9) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(9) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(9) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(10) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(10) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(10) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(11) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(11) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(11) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(12) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(12) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(12) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(13) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(13) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(13) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(14) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(14) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(14) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(15) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(15) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(15) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(16) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(16) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(16) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(17) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(17) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(17) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(18) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(18) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(18) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(19) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(19) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(19) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(20) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(20) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(20) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(21) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(21) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(21) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(22) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(22) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(22) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(23) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(23) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(23) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(24) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(24) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(24) td:nth-child(6) label span').click()
+
+    cy.get('#ic_form table tbody tr:nth-child(25) td:nth-child(4) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(25) td:nth-child(5) label span').click()
+    cy.get('#ic_form table tbody tr:nth-child(25) td:nth-child(6) label span').click()
   })
 })

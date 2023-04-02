@@ -100,7 +100,6 @@ export async function getServerSideProps({params}) {
       };
     }
     const user = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/users/${id}`).then(user => user.json())
-    console.log(user)
     if (Object.keys(user).length === 0) {
       return {
         redirect: {

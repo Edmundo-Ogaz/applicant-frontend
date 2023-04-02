@@ -34,12 +34,13 @@ export default function List() {
   const [ email, setEmail ] = useState();
 
   const [ search, setSearch ] = useState({data: [], total: 0});
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    handleSearch(null, 0)
+    handleSearch()
   }, [])
 
-  const handleSearch = async (e, offset = 0) => {
+  const handleSearch = async (e = null, offset = 0, currentPage = 1) => {
     try {
       e?.preventDefault()
       setIsSearching(true)
@@ -78,6 +79,7 @@ export default function List() {
         </Link>
       ])
       setSearch(json)
+      setCurrentPage(currentPage)
     } catch(e) {
       toast.error(e.message);
     } finally {
@@ -98,7 +100,7 @@ export default function List() {
 	}
 
   function handlePageChange(page) {
-    handleSearch(null, (page - 1) * ROWS_PER_PAGE);
+    handleSearch(null, (page - 1) * ROWS_PER_PAGE, page);
   }
 
   return (
@@ -126,10 +128,11 @@ export default function List() {
           </button>
         </form>
         <Table 
-          colums={COLUMS} 
-          data={search.data} 
-          totalPages={search.total && Math.ceil(search.total / ROWS_PER_PAGE)} 
-          onPageChange={handlePageChange} 
+          colums={COLUMS}
+          data={search.data}
+          currentPage={currentPage}
+          totalPages={search.total && Math.ceil(search.total / ROWS_PER_PAGE)}
+          onPageChange={handlePageChange}
         />
         {isSearching && <LoadingSpinner/>}
       </Layout>

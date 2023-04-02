@@ -10,7 +10,7 @@ describe('applicant test ic instruction', () => {
     cy.wait('@login')
   })
 
-  it('search by rut', () => {
+  it('ic test instruction', () => {
     cy.visit(`http://localhost:3000/public/test/ic/instruction/${Cypress.env('test_ic_id')}`)
     cy.get('.display-4').should('have.text', 'TEST IC')
     cy.get('.lead').should('have.text', 'Evaluación de la aptitud para comprender e interpretar rápida y correctamente órdenes complejas.')

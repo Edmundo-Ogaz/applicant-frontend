@@ -19,7 +19,7 @@ export default function Instruction(props) {
               <li> - Debe marcar la elección para cada situación en la hoja de respuestas, colocando la letra A,B,C ó D que, según su opinión, describe mejor su comportamiento de líder. </li>
               <li> - No deje ninguna pregunta sin responder. </li>
               <li> - Responda con sinceridad y espontaneidad. </li>
-              <li> - Es una prueba sin tiempo </li>
+              <li> - Es una prueba sin tiempo. </li>
             </ul>
           <hr className="my-4"/>
           <Link

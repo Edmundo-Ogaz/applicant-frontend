@@ -24,20 +24,26 @@ describe('applicant search', () => {
   })
 
   it('search by rut', () => {
-    cy.get('#rut').type('15331265-6	')
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?rut=15331265-6&company=1&limit=5&offset=0`).as('searchByRut')
+    cy.get('#rut').type('15331265-6')
     cy.get('#search').click()
+    cy.wait('@searchByRut')
     cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(2)`).should('have.text', '1234@1234.cl')
   })
 
   it('search by name', () => {
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?name=Edmundo&company=1&limit=5&offset=0`).as('searchByName')
     cy.get('#name').type('Edmundo')
     cy.get('#search').click()
+    cy.wait('@searchByName')
     cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(1)`).should('contain', 'Edmundo')
   })
 
   it('search by email', () => {
+    cy.intercept(`${Cypress.env('api')}/tests/postulants?email=1234@1234.cl&company=1&limit=5&offset=0`).as('searchByEmail')
     cy.get('#email').type('1234@1234.cl')
     cy.get('#search').click()
+    cy.wait('@searchByEmail')
     cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(2)`).should('have.text', '1234@1234.cl')
   })
 

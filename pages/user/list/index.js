@@ -38,6 +38,7 @@ export default function List({companies, profiles}) {
   const [ profile, setProfile ] = useState();
 
   const [ search, setSearch ] = useState({data: [], total: 0});
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const user = Cookie.getUser()
@@ -55,7 +56,7 @@ export default function List({companies, profiles}) {
     handleSearch(null, 0)
   }, [])
 
-  const handleSearchButton = async (e, offset = 0) => {
+  const handleSearchButton = async (e, offset = 0, currentPage = 1) => {
     e?.preventDefault()
       let query = ''
       if (rut)
@@ -76,6 +77,7 @@ export default function List({companies, profiles}) {
       query += `limit=${ROWS_PER_PAGE}&offset=${offset}`
 
       handleSearch(query)
+      setCurrentPage(currentPage)
     }
 
     const handleSearch = async (query) => {
@@ -144,7 +146,7 @@ export default function List({companies, profiles}) {
 	}
 
   function handlePageChange(page) {
-    handleSearchButton(null, (page - 1) * ROWS_PER_PAGE);
+    handleSearchButton(null, (page - 1) * ROWS_PER_PAGE, page);
   }
 
   return (
@@ -186,10 +188,11 @@ export default function List({companies, profiles}) {
           </button>
         </form>
         <Table 
-          colums={COLUMS} 
-          data={search.data} 
-          totalPages={search.total && Math.ceil(search.total / ROWS_PER_PAGE)} 
-          onPageChange={handlePageChange} 
+          colums={COLUMS}
+          data={search.data}
+          currentPage={currentPage}
+          totalPages={search.total && Math.ceil(search.total / ROWS_PER_PAGE)}
+          onPageChange={handlePageChange}
         />
         {isSearching && <LoadingSpinner/>}
       </Layout>

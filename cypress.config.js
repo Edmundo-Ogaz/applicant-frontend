@@ -11,8 +11,9 @@ module.exports = defineConfig({
     api1: 'http://localhost:9000/.netlify/functions/server',
     api: 'http://localhost:8080',
     api3: 'https://pse9lbwkvk.execute-api.us-west-2.amazonaws.com/prod',
-    //test_ic_id: 1,
-    test_ic_id: 3,
+    test_ic_id: 16,
+    test_disc_id: 15,
+    test_ceal_id: 13,
   },
     // test: {
     //   ic: {
