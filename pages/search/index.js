@@ -17,10 +17,11 @@ import ModalIcCertificate from '@/components/model/ic/index.js'
 import ModalDiscCertificate from '@/components/model/disc/index.js'
 import ModalCealCertificate from '@/components/model/ceal/index.js'
 
+import styles from './search.module.css'
 export default function Search({companies, tests, states}) {
 	console.log('Search')
 
-  const ROWS_PER_PAGE = 5
+  const ROWS_PER_PAGE = 10
   const COLUMS = [ 
     {name: 'Candidato', style: {width: 'calc(15%)'}},
     {name: 'Email',  style: {width: 'calc(15%)'}},
@@ -216,7 +217,7 @@ export default function Search({companies, tests, states}) {
   return (
     <>
       <Layout>
-        <h2>Buscar Tests</h2>
+        {/* <h2>Buscar Tests</h2> */}
         <form>
           <fieldset className='search__filter'>
             <legend className='search__filter-header'>Filtro</legend>
@@ -261,7 +262,7 @@ export default function Search({companies, tests, states}) {
               </select>
             </label>
           </fieldset>
-          <button id="search" onClick={ handleSearchButton } disabled={ isSearching }>
+          <button id="search" className={styles.search__button} onClick={ handleSearchButton } disabled={ isSearching }>
             {isSearching ? 'Searching...' : 'Search'}
           </button>
         </form>

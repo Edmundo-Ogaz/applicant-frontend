@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import styles from './table.module.css'
 
 export default function Table({colums, data, currentPage, totalPages, onPageChange}) {
@@ -15,7 +13,7 @@ export default function Table({colums, data, currentPage, totalPages, onPageChan
         <thead className={styles['list-header']}>
           <tr>
             {colums.map(item => {
-              return(<th key={item.name} style={item.style}>{item.name}</th>)})}
+              return(<th key={item.name} className={styles.list__cell} style={item.style}>{item.name}</th>)})}
           </tr>
         </thead>
         <tbody>
@@ -23,7 +21,7 @@ export default function Table({colums, data, currentPage, totalPages, onPageChan
             return(
               <tr key={idx} className={styles['list-body-row']}>
                 {row.map((item, idx) => 
-                  <td key={idx}>{item}</td>
+                  <td key={idx} className={styles.list__cell}>{item}</td>
                 )}
               </tr>
             )

@@ -6,7 +6,7 @@
 
 .list-header {
   background-color: #ffc107;
-  height: 2.5rem;
+  /* height: 2.5rem; */
 }
 
 .list-body-row {
@@ -14,8 +14,15 @@
   height: 2.5rem;
 }
 
+.list__cell {
+  padding: .0rem .1rem;
+  font-size: .8rem;
+}
+
 .footer__button {
     padding: .1rem .5rem;
     color: #000000;
     background-color: #dcdcdc;
 }
+
+
