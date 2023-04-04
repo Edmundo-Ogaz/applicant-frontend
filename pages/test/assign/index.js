@@ -108,16 +108,17 @@ export default function AssignTest({companies, tests}) {
 
   async function handleCompany(event) {
     const companyId = event.target.value
-    setCompany(event.target.value)
+    setCompany(companyId)
     searchAnalyst(companyId)
   }
   async function searchAnalyst(companyId) {
     try {
       setIsSearching(true)
       const URL_BASE = process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API
+      const PROFILE_ADMIN_ID = process.env.NEXT_PUBLIC_PROFILE_ADMIN_ID
       const PROFILE_ANALYST_ID = process.env.NEXT_PUBLIC_PROFILE_ANALYST_ID
       const response = await fetch(
-        `${URL_BASE}/users?companyId=${companyId}&profileId=${PROFILE_ANALYST_ID}`,
+        `${URL_BASE}/users?company=${companyId}&profiles=${PROFILE_ADMIN_ID},${PROFILE_ANALYST_ID}`,
       )
       const json = await response.json();
       if (response?.ok === false) {

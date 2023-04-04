@@ -55,7 +55,7 @@ describe('applicant search', () => {
   })
 
   it('search by analyst', () => {
-    cy.intercept(`${Cypress.env('api')}/users?company=1&profile=2`).as('searchByCompanyAndProfile')
+    cy.intercept(`${Cypress.env('api')}/users?company=1&profiles=1,2`).as('searchByCompanyAndProfile')
     cy.get('#company').should('be.disabled')
     //cy.get('#company').select('1', {force: true})
     cy.wait('@searchByCompanyAndProfile')

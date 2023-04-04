@@ -137,7 +137,6 @@ export default function List({companies, profiles}) {
 	}
 
   async function handleCompany(event) {
-    const companyId = event.target.value
 		setCompany(event.target.value)
 	}
 

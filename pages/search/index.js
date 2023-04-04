@@ -164,9 +164,10 @@ export default function Search({companies, tests, states}) {
     try {
       setIsSearching(true)
       const URL_BASE = process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API
+      const PROFILE_ADMIN_ID = process.env.NEXT_PUBLIC_PROFILE_ADMIN_ID
       const PROFILE_ANALYST_ID = process.env.NEXT_PUBLIC_PROFILE_ANALYST_ID
       const analyst = await fetch(
-        `${URL_BASE}/users?company=${companyId}&profile=${PROFILE_ANALYST_ID}`,
+        `${URL_BASE}/users?company=${companyId}&profiles=${PROFILE_ADMIN_ID},${PROFILE_ANALYST_ID}`,
       )
       .then(users => users.json())
       setAnalysts(analyst.data)

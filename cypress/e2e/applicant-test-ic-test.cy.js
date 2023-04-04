@@ -11,7 +11,7 @@ describe('applicant test ic test', () => {
   })
 
   it('ic test', () => {
-    cy.visit(`http://localhost:3000/public/test/ic/test?id=${Cypress.env('test_ic_id')}`)
+    cy.visit(`http://localhost:3000/public/test/start?id=${Cypress.env('test_ic_id')}`)
     //cy.get('#time-alert').should('have.css', 'display', 'none') 
     // cy.get('#time-alert')
     //     .invoke('attr', 'style', 'display: block')
@@ -29,7 +29,7 @@ describe('applicant test ic test', () => {
   })
 
   it('ic test labels', () => {
-    cy.visit(`http://localhost:3000/public/test/ic/test?id=${Cypress.env('test_ic_id')}`)
+    cy.visit(`http://localhost:3000/public/test/start?id=${Cypress.env('test_ic_id')}`)
     cy.get('#ic_form table thead tr th:nth-child(1)').should('have.text', 'CANTIDAD ASEGURADA')
     cy.get('#ic_form table thead tr th:nth-child(2)').should('have.text', 'CLASES DE SEGURO')
     cy.get('#ic_form table thead tr th:nth-child(3)').should('have.text', 'FECHA')
@@ -214,7 +214,7 @@ describe('applicant test ic test', () => {
   })
 
   it('ic test clicks', () => {
-    cy.visit(`http://localhost:3000/public/test/ic/test?id=${Cypress.env('test_ic_id')}`)
+    cy.visit(`http://localhost:3000/public/test/start?id=${Cypress.env('test_ic_id')}`)
     cy.get('#ic_form table tbody tr:nth-child(1) td:nth-child(4) label span').click()
     cy.get('#ic_form table tbody tr:nth-child(1) td:nth-child(5) label span').click()
     cy.get('#ic_form table tbody tr:nth-child(1) td:nth-child(6) label span').click()
