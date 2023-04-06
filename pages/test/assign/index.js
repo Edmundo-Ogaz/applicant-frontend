@@ -23,11 +23,12 @@ export default function AssignTest({companies, tests}) {
   const [ email, setEmail ] = useState('');
 
   const [ postulantId, setPostulantId ] = useState('');
-  const [ testId, setTestId ] = useState('');
   const [ company, setCompany ] = useState('');
   const [ analyst, setAnalyst ] = useState('');
 
   const [ analysts, setAnalysts ] = useState([]);
+
+  const [testCheckboxs, setTestCheckboxs] = useState(tests.map((test) => ({checked: false, ...test})));
 
   useEffect(() => {
     const user = Cookie.getUser()
@@ -64,13 +65,21 @@ export default function AssignTest({companies, tests}) {
     try {
       e.preventDefault()
       setIsSaving(true)
+
+      const testIds = []
+      for (const checkbox of testCheckboxs) {
+        if (checkbox.checked)
+          testIds.push(checkbox.id)
+      }
+
       const assigner = {
-        companyId: company, 
-        analystId: analyst, 
+        companyId: company,
+        analystId: analyst,
+        testIds,
         createdById: Cookie.getUser().id
       }
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/tests/${testId}/postulants/${postulantId}`,
+        `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/postulants/${postulantId}`,
         {
           method: 'POST',
           body: JSON.stringify(assigner),
@@ -78,6 +87,7 @@ export default function AssignTest({companies, tests}) {
             'Content-Type': 'application/json'
           },
         })
+      
       const json = await response.json();
       if (response?.ok === false) {
         throw new Error(json?.error)
@@ -89,8 +99,24 @@ export default function AssignTest({companies, tests}) {
       setFirstName('')
       setLastName('')
       setEmail('')
-      setTestId('')
+      setTestCheckboxs(tests.map((test) => ({checked: false, ...test})))
       setAnalyst('')
+
+      const dataMail = {
+        postulantId: postulantId,
+        testsAssignedIds: json,
+        host: location.protocol+'//'+location.host
+
+      }
+      fetch(
+        `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/mails`,
+        {
+          method: 'POST',
+          body: JSON.stringify(dataMail),
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        })
     } catch(e) {
       toast.error(e.message);
     } finally {
@@ -101,16 +127,20 @@ export default function AssignTest({companies, tests}) {
   function handleRut(event) {
 		setRut(event.target.value)
 	}
-  
-  function handleTest(event) {
-		setTestId(event.target.value)
-	}
+
+  const handleCheck = (index) => {
+    const updatedList = [...testCheckboxs];
+    updatedList[index].checked = !updatedList[index].checked;
+    setTestCheckboxs(updatedList);
+    console.log('handleCheck')
+  }
 
   async function handleCompany(event) {
     const companyId = event.target.value
     setCompany(companyId)
     searchAnalyst(companyId)
   }
+
   async function searchAnalyst(companyId) {
     try {
       setIsSearching(true)
@@ -153,13 +183,6 @@ export default function AssignTest({companies, tests}) {
               <p>Nombre: {firstName} {lastName}</p>
               <p>Email: {email}</p>
             </section>
-            <label forhtml="test">
-              <span className={styles['user__label-text']}>Test</span>
-              <select name="test" id="test" value={testId} className={styles.user__input} onChange={ handleTest}>
-                <option value="">Selecionar...</option>
-                {tests.map((test) => <option key={test.id} value={test.id}>{test.name}</option>)}
-              </select>
-            </label>
             <label forhtml="company">
               <span className={styles['user__label-text']}>Empresa</span>
               <select name="company" id="company" value={company} className={styles.user__input} disabled={true} onChange={ handleCompany}>
@@ -174,6 +197,17 @@ export default function AssignTest({companies, tests}) {
                 {analysts.map((analyst) => <option key={analyst.id} value={analyst.id}>{analyst.firstName} {analyst.lastName}</option>)}
               </select>
             </label>
+            <div id="test">
+              <span className={styles['user__label-text']}>Test</span>
+              <fieldset className={`${styles.assign__test} ${styles.user__input}`}>
+                {tests.map((test, index) => {
+                  return <div key={test.id} className={styles['assign__test-item']}>
+                    <input type="checkbox" checked={testCheckboxs[index].checked} onChange={() => handleCheck(index)} />
+                    <label>{test.name}</label>
+                  </div>
+                })}
+              </fieldset>
+            </div>
           </fieldset>
           <button id="save-button" className={styles['user__button']} onClick={ handleSave } disabled={ isSaving }>
             {isSaving ? 'Saving...' : 'Save'}

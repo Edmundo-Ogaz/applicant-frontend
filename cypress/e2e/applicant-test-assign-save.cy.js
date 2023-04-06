@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('applicant', () => {
+describe('applicant assign test', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000')
     cy.get('#email').type(Cypress.env('username'))
@@ -18,10 +18,10 @@ describe('applicant', () => {
     cy.get('#search-button').click()
     cy.wait('@getPostulant')
     cy.get('#search-section :nth-child(3)').should('have.text', 'Nombre: Edmundo Dante del Carmen Ogaz Barahona')
-    cy.get('#test').select('1')
+    cy.get('#test fieldset div:nth-child(1) input').click()
     cy.get('#company').should('be.disabled')
     cy.get('#analyst').select('1')
-    cy.intercept(`${Cypress.env('api')}/tests/1/postulants/1`,
+    cy.intercept('POST', `${Cypress.env('api')}/postulants/1`,
     {
       statusCode: 200,
       body: 

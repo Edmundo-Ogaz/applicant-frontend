@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('applicant test assign serarch', () => {
+describe('applicant assign test serarch postulant', () => {
   beforeEach(() => {
     cy.intercept(`${Cypress.env('api')}/postulants?rut=*`).as('getPostulant')
 

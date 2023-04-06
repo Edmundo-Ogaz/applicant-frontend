@@ -18,7 +18,7 @@ describe('applicant search done', () => {
     cy.get('#state').select('2')
     cy.get('#search').click()
     cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(6)`).should('have.text', 'completo')
-    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(1)`).click()
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(1) a`).click()
     cy.get('#certificate #logo a').should("have.text", "Aquí va un logo")
   })
 })

@@ -17,7 +17,7 @@ describe('applicant search pending', () => {
     cy.get('#state').select('1')
     cy.get('#search').click()
     cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(6)`).should('have.text', 'pendiente')
-    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(1)`).click()
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(1) a`).click()
     cy.get('#modal #url').should("contain", "/instruction/")
   })
 })

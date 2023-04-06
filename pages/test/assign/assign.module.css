@@ -10,3 +10,13 @@
 .user__input {
   margin: 0.2rem 1rem;
 }
+
+.assign__test {
+  padding: 0 1rem;
+  border: solid;
+  display: inline-grid;
+}
+
+.assign__test-item {
+  /* display: inline-block; */
+}
