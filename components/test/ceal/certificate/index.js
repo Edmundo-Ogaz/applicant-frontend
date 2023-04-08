@@ -1,3 +1,5 @@
+import Head from '../../certificate/head';
+
 import {
   Chart as ChartJS,
   LinearScale,
@@ -7,8 +9,6 @@ import {
 } from 'chart.js';
 import { Bubble, Scatter, Bar } from 'react-chartjs-2';
 
-import DateUtil from '@/utils/DateUtil';
-
 import styles from './certificate.module.css';
 
 ChartJS.register(LinearScale, PointElement, Tooltip, Legend);
@@ -16,7 +16,7 @@ ChartJS.register(LinearScale, PointElement, Tooltip, Legend);
 export default function Certificate(props) {
   console.log('Certificate')
 
-  const { test, postulant, answer, updatedAt, state } = props
+  const { test, postulant, company, answer, updatedAt, state } = props
 
   const dataBubble = {
     datasets: [
@@ -96,7 +96,7 @@ export default function Certificate(props) {
     datasets: [{
       data: [{
         x: 0,
-        y: -1
+        y: answer.totalEffectiveness
       }],
       pointRadius: 10,
       backgroundColor: 'rgb(11, 98, 164)'
@@ -111,7 +111,7 @@ export default function Certificate(props) {
       tooltip: {
         enabled: true,
         callbacks: {
-          label: () => "Efectividad total Value: -1",
+          label: () => `Efectividad total Value: ${answer.totalEffectiveness}`,
         }
       }
     },
@@ -171,31 +171,7 @@ export default function Certificate(props) {
   return (
     <>
       <div className="container">
-        <div className={styles.header}>
-          <div id="logo" className={styles.logo}>
-            <a>Aquí va un logo</a>
-          </div>
-          <div className={styles.personal_info}>
-              <div className={styles.info_col}>
-                <ul>
-                  <li>Nombre: {postulant.firstName} {postulant.lastName}</li>
-                  <li>RUN: {postulant.rut}</li>
-                  <li>Edad: {postulant.age}</li>
-                  <li>Sexo: {postulant.sexo}</li>
-                  <li>Ciudad: P/D</li>
-                </ul>
-              </div>
-              <div className={styles.info_col}>
-                <ul>
-                  <li>Rendido: {DateUtil.parse(updatedAt)} </li>
-                  <li>Válido hasta: P/D</li>
-                  <li>Estado: {state.name} </li>
-                  <li>Lugar de rendición: Online</li>
-                  <li>Cod: --- </li>
-                </ul>
-              </div>
-          </div>
-        </div>
+        <Head postulant={postulant} company={company} updatedAt={updatedAt} state={state} />
         <div className="row">
           <div className="col-md-8" style={{height: "max-content"}}>
             <div className="col" style={{height: "max-content"}}>
@@ -316,7 +292,7 @@ export default function Certificate(props) {
                   <td className="text-center">
                     3
                     <br />
-                    Dedicado
+                    Relacionado
                   </td>
                   <td className={`text-justify ${answer.countEffectiveness[2] > 0? styles.destacado : ''}`}>
                     Promotor

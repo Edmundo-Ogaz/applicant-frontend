@@ -4,8 +4,8 @@ import styles from "./modal.module.css";
 
 import Certificate from '@/components/test/ic/certificate';
 
-export default function ModalIcCertificate({ id, setIsOpen }) {
-	console.log('ModalIcCertificate')
+export default function ModalInstruction({ testPostulant, setIsOpen }) {
+	console.log('ModalInstruction')
 
   return (
     <>
@@ -16,7 +16,7 @@ export default function ModalIcCertificate({ id, setIsOpen }) {
             x
           </button>
           <div id="url" className={styles.modalContent}>
-            {location.protocol}{'//'}{location.host}/public/test/instruction/{id}
+            {location.protocol}{'//'}{location.host}/public/test/instruction/{testPostulant.id}
           </div>
         </div>
       </div>

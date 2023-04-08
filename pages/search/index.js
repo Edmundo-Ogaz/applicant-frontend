@@ -12,10 +12,8 @@ import Table from '@/components/table/index'
 import Cookie from '@/utils/Cookie'
 import DateUtil from '@/utils/DateUtil.js'
 
-import ModalUrlInstruction from '@/components/model/instruction/index.js'
-import ModalIcCertificate from '@/components/model/ic/index.js'
-import ModalDiscCertificate from '@/components/model/disc/index.js'
-import ModalCealCertificate from '@/components/model/ceal/index.js'
+import ModalInstruction from '@/components/model/instruction/index.js'
+import ModalCertificate from '@/components/model/certificate/index.js'
 
 import styles from './search.module.css'
 export default function Search({companies, tests, states}) {
@@ -34,10 +32,8 @@ export default function Search({companies, tests, states}) {
   ]
 
   const Modals = []
-  Modals[0] = ModalUrlInstruction
-  Modals[process.env.NEXT_PUBLIC_TEST_IC_ID] = ModalIcCertificate
-  Modals[process.env.NEXT_PUBLIC_TEST_DISC_ID] = ModalDiscCertificate
-  Modals[process.env.NEXT_PUBLIC_TEST_CEAL_ID] = ModalCealCertificate
+  Modals[process.env.NEXT_PUBLIC_TEST_STATE_PENDING_ID] = ModalInstruction
+  Modals[process.env.NEXT_PUBLIC_TEST_STATE_DONE_ID] = ModalCertificate
 
   const [ isSearching, setIsSearching ] = useState(false);
   const [ testPostulant, setTestPostulant] = useState(null);
@@ -203,15 +199,8 @@ export default function Search({companies, tests, states}) {
   }
 
   function Modal() {
-    let Modal
-    if (testPostulant.state.id == process.env.NEXT_PUBLIC_TEST_STATE_DONE_ID) {
-      Modal = Modals[testPostulant.test.id]
-      return <Modal testPostulant={testPostulant} setIsOpen={setIsOpenModal} />
-    } else if (testPostulant.state.id == process.env.NEXT_PUBLIC_TEST_STATE_PENDING_ID) {
-      Modal = Modals[0]
-      return <Modal id={testPostulant.id} setIsOpen={setIsOpenModal} />
-    }
-    return
+    const Modal = Modals[testPostulant.state.id]
+    return <Modal testPostulant={testPostulant} setIsOpen={setIsOpenModal} />
   }
      
   return (
