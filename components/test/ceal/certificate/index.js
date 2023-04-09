@@ -7,6 +7,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bubble, Scatter, Bar } from 'react-chartjs-2';
 
 import styles from './certificate.module.css';
@@ -98,21 +99,32 @@ export default function Certificate(props) {
         x: 0,
         y: answer.totalEffectiveness
       }],
-      pointRadius: 10,
+      pointRadius: 5,
       backgroundColor: 'rgb(11, 98, 164)'
-    }],
+    }]
   };
 
   const options = {
     plugins: {
       legend: {
-        display: false,
+        display: false
+      },
+      datalabels: {
+        anchor: 'end',
+        align: 'top',
+        labels: {
+          title: {
+            font: {
+              weight: 'bold'
+            }
+          }
+        },
+        formatter: function(value, context) {
+          return `Efectividad total: ${value.y}`;
+        }
       },
       tooltip: {
-        enabled: true,
-        callbacks: {
-          label: () => `Efectividad total Value: ${answer.totalEffectiveness}`,
-        }
+        enabled: false
       }
     },
     scales: {
@@ -127,7 +139,7 @@ export default function Certificate(props) {
           stepSize: 12
         }
       }
-    },
+    }
   }
 
   const dataBar = {
@@ -159,15 +171,6 @@ export default function Certificate(props) {
     }
   }
 
-  const alwaysShowTooltip = {
-    id: "alwaysShowTooltip",
-    afterDraw(chart, args, options) {
-      const {ctx} = chart
-      ctx.save()
-      console.log(chart)
-    }
-  }
-
   return (
     <>
       <div className="container">
@@ -189,7 +192,7 @@ export default function Certificate(props) {
           </div>
           <div className="col-md-4">
             <p className=" text-center">Muy Alta</p>
-            <Scatter data={data} options={options} />
+            <Scatter data={data} options={options} plugins={[ChartDataLabels]} />
             <p className=" text-center">Muy Baja</p>
           </div>
         </div>

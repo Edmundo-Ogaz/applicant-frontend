@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 import DateUtil from '@/utils/DateUtil'
 import styles from './certificate.module.css'
 
@@ -8,8 +6,7 @@ export default function Head({postulant, company, state, updatedAt}) {
   return (
     <div className={styles.header}>
       <div id="logo" className={styles.logo}>
-        {/* <img src="/images/logo_applicant.jpg" alt="logo" width="125" height="125" /> */}
-        <Image src="/images/logo_applicant.jpg" alt="logo" width="125" height="125" />
+        <img src="/images/logo_applicant.jpg" alt="logo" width="125" height="125" />
       </div>
       <div className={styles.personal_info}>
           <div className={styles.info_col}>
