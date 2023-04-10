@@ -1,6 +1,8 @@
 import './applicant-login.cy'
+import './applicant-user-create.cy'
 import './applicant-user-list.cy'
 import './applicant-user-edit.cy'
+import './applicant-postulant-create.cy'
 import './applicant-postulant-list.cy'
 import './applicant-postulant-edit.cy'
 import './applicant-test-assign-search.cy'

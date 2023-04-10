@@ -8,11 +8,13 @@ describe('applicant', () => {
     cy.intercept(`${Cypress.env('api')}/users/login`).as('login')
     cy.get('#login').click()
     cy.wait('@login')
+    cy.visit('http://localhost:3000/user/create')
   })
 
-  it('create', () => {
-    cy.visit('http://localhost:3000/user/create')
+  it('title', () => {
     cy.get('h2').should('have.text', 'Crear Usuario')
+  })
+  it('create', () => {
     cy.get('#rut').type('15331265-6')
     cy.get('#firstName').type('Edmundo')
     cy.get('#lastName').type('Ogaz')
@@ -20,27 +22,36 @@ describe('applicant', () => {
     cy.get('#company').should('be.disabled')
     cy.get('#company').select('1', {force: true})
     cy.get('#profile').select('1')
+    cy.intercept('POST', `${Cypress.env('api')}/users`,
+    {
+      statusCode: 200,
+      body: 
+        {
+          sucess: true,
+        }
+    }).as('apisave')
     cy.get('#save').click()
     cy.get('.Toastify__toast-body > :nth-child(2)').should('have.text', 'Saved')
-    cy.wait(5000)
-    cy.get('#rut').clear()
+  })
+  it('rut already exit', () => {
     cy.get('#rut').type('15331265-6')
-    cy.get('#firstName').clear()
     cy.get('#firstName').type('Edmundo')
-    cy.get('#lastName').clear()
     cy.get('#lastName').type('Ogaz')
-    cy.get('#email').clear()
     cy.get('#email').type('edmundo.ogaz@gmail.cl')
     cy.get('#company').should('be.disabled')
     cy.get('#company').select('2', {force: true})
     cy.get('#profile').select('2')
     cy.get('#save').click()
     cy.get('.Toastify__toast-body > :nth-child(2)').should('have.text', 'USER_EXIST')
-    cy.wait(5000)
-    cy.get('#rut').clear()
+  })
+  it('email already exit', () => {
     cy.get('#rut').type('3838123-1')
-    cy.get('#email').clear()
+    cy.get('#firstName').type('Edmundo')
+    cy.get('#lastName').type('Ogaz')
     cy.get('#email').type('1234@1234.cl')
+    cy.get('#company').should('be.disabled')
+    cy.get('#company').select('2', {force: true})
+    cy.get('#profile').select('2')
     cy.get('#save').click()
     cy.get('.Toastify__toast-body > :nth-child(2)').should('have.text', 'USER_EXIST')
   })

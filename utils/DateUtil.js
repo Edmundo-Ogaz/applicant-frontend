@@ -10,19 +10,34 @@ function parse(str) {
 
 return (
     [
-    padTo2Digits(date.getMonth() + 1),
-    padTo2Digits(date.getDate()),
-    date.getFullYear(),
+      padTo2Digits(date.getDate()),
+      padTo2Digits(date.getMonth() + 1),
+      date.getFullYear(),
     ].join('/') +
     ' ' +
     [
-    padTo2Digits(date.getHours()),
-    padTo2Digits(date.getMinutes()),
-    padTo2Digits(date.getSeconds()),
+      padTo2Digits(date.getHours()),
+      padTo2Digits(date.getMinutes()),
+      padTo2Digits(date.getSeconds()),
     ].join(':')
   );
 }
 
-const DateUtil = { parse }
+function format(str) {
+  if (!str) return ''
+
+  const date = new Date(str)
+  if (!date instanceof Date || isNaN(date)) return ''
+
+return (
+    [
+      date.getFullYear(),
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+    ].join('-')
+  );
+}
+
+const DateUtil = { parse, format }
 
 export default DateUtil

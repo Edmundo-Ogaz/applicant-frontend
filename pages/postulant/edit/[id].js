@@ -8,6 +8,7 @@ import Layout from '../../../components/layout';
 import LoadingSpinner from '../../../components/LoadingSpinner/index.js';
 
 import Cookie from '../../../utils/Cookie.js';
+import DateUtil from '@/utils/DateUtil.js';
 
 import styles from './edit.module.css';
 
@@ -21,7 +22,7 @@ export default function EditPostulant({postulant}) {
   const [ firstName, setFirstName ] = useState(postulant.firstName);
   const [ lastName, setLastName ] = useState(postulant.lastName);
   const [ email, setEmail ] = useState(postulant.email);
-  const [ age, setAge ] = useState(postulant.age ? postulant.age : 0);
+  const [ birthday, setBirthday ] = useState(DateUtil.format(postulant.birthday));
   const [ sexo, setSexo ] = useState(postulant.sexo);
 
   const handleSave = async (e) => {
@@ -33,7 +34,7 @@ export default function EditPostulant({postulant}) {
         firstName, 
         lastName, 
         email, 
-        age, 
+        birthday,
         sexo, 
         updatedBy: Cookie.getUser().id
       }
@@ -70,8 +71,8 @@ export default function EditPostulant({postulant}) {
 		setEmail(event.target.value)
 	}
 
-  function handleAge(event) {
-		setAge(event.target.value)
+  function handleBirthday(event) {
+		setBirthday(event.target.value)
 	}
 
   function handleSexo(event) {
@@ -100,10 +101,10 @@ export default function EditPostulant({postulant}) {
               <span className={styles['user__label-text']}>Email</span>
               <input type="text" id="email" value={email} size="30"className={styles.user__input} onChange={ handleEmail } />
             </label>
-            {/* <label forhtml="age">
-              <span className={styles['user__label-text']}>Edad</span>
-              <input type="number" id="age" value={age} min="1" max="100" className={styles.user__input} onChange={ handleAge } />
-            </label> */}
+            <label forhtml="birthday">
+                <span className={styles['user__label-text']}>Fecha Nacimiento</span>
+                <input type="date" id="birthday" name="birthday" value={birthday} min="1900-01-01" max="2023-12-31" className={styles.user__input} onChange={ handleBirthday } />
+              </label>
             <label forhtml="sexo">
               <span className={styles['user__label-text']}>Sexo</span>
               <select name="sexo" id="sexo" value={sexo} className={styles.user__input} onChange={ handleSexo}>

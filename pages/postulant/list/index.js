@@ -12,6 +12,8 @@ import LoadingSpinner from '../../../components/LoadingSpinner/index.js';
 
 import Table from '@/components/table/index'
 
+import DateUtil from '@/utils/DateUtil.js';
+
 import Cookie from '@/utils/Cookie'
 
 export default function List() {
@@ -22,7 +24,7 @@ export default function List() {
     {name: 'RUT'},
     {name: 'Nombre'},
     {name: 'Email'},
-    {name: 'Edad'},
+    {name: 'Fecha Nacimiento'},
     {name: 'Sexo'},
     {name: 'Acciones'},
   ]
@@ -67,7 +69,7 @@ export default function List() {
         postulant.rut,
         `${postulant.firstName} ${postulant.lastName}`,
         postulant.email,
-        postulant.age,
+        DateUtil.format(postulant.birthday),
         postulant.sexo,
         <Link
           key={idx}
