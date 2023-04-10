@@ -2,13 +2,14 @@
 
 describe('applicant assign test serarch postulant', () => {
   beforeEach(() => {
-    cy.intercept(`${Cypress.env('api')}/postulants?rut=*`).as('getPostulant')
+    cy.intercept(`${Cypress.env('api')}/postulants?company=1&rut=*`).as('getPostulant')
 
     cy.intercept('http://localhost:3000/login').as('login')
     cy.visit('http://localhost:3000/login')
     cy.wait('@login')
     cy.get('#email').type(Cypress.env('username'))
     cy.get('#password').type('1234')
+    cy.get('#company').select('1')
     cy.intercept(`${Cypress.env('api')}/users/login`).as('apiLogin')
     cy.get('#login').click()
     cy.wait('@apiLogin')

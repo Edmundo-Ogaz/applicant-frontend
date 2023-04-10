@@ -154,3 +154,17 @@
 .fluid-input--open .fluid-input-label {
   transform: translateY(-40px);
 }
+
+.user__body {
+  display: grid;
+}
+
+.user__label-text {
+  display: inline-block;
+  width: 4.5rem;
+}
+
+.user__input {
+  /* margin: 0.2rem 0rem; */
+  /* margin: 15px auto; */
+}

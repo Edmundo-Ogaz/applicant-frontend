@@ -41,7 +41,7 @@ export default function AssignTest({companies, tests}) {
       e.preventDefault()
       setIsSearching(true)
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/postulants?rut=${rut}`,
+        `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/postulants?company=${company}&rut=${rut}`,
         )
       const json = await response.json();
       if (response?.ok === false) {
