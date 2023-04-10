@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { toast } from 'react-toastify';
 
@@ -16,6 +16,7 @@ export default function CreatePostulant() {
 
   const [ isSaving, setIsSaving ] = useState();
 
+  const [ company, setCompany ] = useState();
   const [ rut, setRut ] = useState('');
   const [ firstName, setFirstName ] = useState('');
   const [ lastName, setLastName ] = useState('');
@@ -23,11 +24,17 @@ export default function CreatePostulant() {
   const [ sexo, setSexo ] = useState('');
   const [ email, setEmail ] = useState('');
 
+  useEffect(() => {
+    const user = Cookie.getUser()
+    setCompany(user.company)
+  }, [])
+
   const handleSave = async (e) => {
     try {
       e.preventDefault()
       setIsSaving(true)
       const data = {
+        company,
         rut, 
         firstName, 
         lastName, 

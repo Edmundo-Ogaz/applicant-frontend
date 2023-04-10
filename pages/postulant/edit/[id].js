@@ -18,6 +18,7 @@ export default function EditPostulant({postulant}) {
 
   const [ saving, setSaving ] = useState(false);
   
+  const [ company, setCompany ] = useState(postulant.company);
   const [ rut, setRut ] = useState(postulant.rut);
   const [ firstName, setFirstName ] = useState(postulant.firstName);
   const [ lastName, setLastName ] = useState(postulant.lastName);
@@ -30,6 +31,7 @@ export default function EditPostulant({postulant}) {
       e.preventDefault()
       setSaving(true)
       const data = {
+        company,
         rut, 
         firstName, 
         lastName, 

@@ -52,10 +52,6 @@ export default function List({companies, profiles}) {
     handleSearch(query)
   }
 
-  useEffect(() => {
-    handleSearch(null, 0)
-  }, [])
-
   const handleSearchButton = async (e, offset = 0, currentPage = 1) => {
     e?.preventDefault()
       let query = ''

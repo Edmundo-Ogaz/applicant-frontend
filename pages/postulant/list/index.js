@@ -31,6 +31,7 @@ export default function List() {
 
   const [ isSearching, setIsSearching ] = useState(false);
 
+  const [ company, setCompany ] = useState();
   const [ rut, setRut ] = useState();
   const [ name, setName ] = useState();
   const [ email, setEmail ] = useState();
@@ -39,25 +40,38 @@ export default function List() {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    handleSearch()
+    const user = Cookie.getUser()
+    setCompany(user.company)
+    handleSearchInit(user.company)
   }, [])
 
-  const handleSearch = async (e = null, offset = 0, currentPage = 1) => {
+  const handleSearchInit = async (company, offset = 0) => {
+    let query = `company=${company}&`
+    query += `limit=${ROWS_PER_PAGE}&offset=${offset}`
+    handleSearch(query)
+  }
+
+  const handleSearchButton = async (e, offset = 0, currentPage = 1) => {
+    e?.preventDefault()
+    let query = `company=${company}&`
+  
+    if (rut)
+      query += `rut=${rut}&`
+
+    if (name)
+      query += `name=${name}&`
+    
+    if (email)
+      query += `email=${email}&`
+    
+    query += `limit=${ROWS_PER_PAGE}&offset=${offset}`
+    handleSearch(query)
+    setCurrentPage(currentPage)
+  }
+
+  const handleSearch = async (query) => {
     try {
-      e?.preventDefault()
       setIsSearching(true)
-      let query = ''
-      if (rut)
-        query += `rut=${rut}&`
-
-      if (name)
-        query += `name=${name}&`
-      
-      if (email)
-        query += `email=${email}&`
-      
-      query += `limit=${ROWS_PER_PAGE}&offset=${offset}`
-
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/postulants?${query}`,
         )
@@ -81,7 +95,6 @@ export default function List() {
         </Link>
       ])
       setSearch(json)
-      setCurrentPage(currentPage)
     } catch(e) {
       toast.error(e.message);
     } finally {
@@ -102,7 +115,7 @@ export default function List() {
 	}
 
   function handlePageChange(page) {
-    handleSearch(null, (page - 1) * ROWS_PER_PAGE, page);
+    handleSearchButton(null, (page - 1) * ROWS_PER_PAGE, page);
   }
 
   return (
@@ -125,7 +138,7 @@ export default function List() {
               <input type="text" id="email" size="50" className="search__input" onChange={ handleEmail } />
             </label>
           </fieldset>
-          <button id="search" onClick={ handleSearch } disabled={ isSearching }>
+          <button id="search" onClick={ handleSearchButton } disabled={ isSearching }>
             {isSearching ? 'Searching...' : 'Search'}
           </button>
         </form>
