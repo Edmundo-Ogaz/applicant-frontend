@@ -66,6 +66,7 @@ export default function RegisterPassword({user}) {
         </h2>
         <p>Nombre: {user.firstName} {user.lastName}</p>
         <p>Email: {user.email}</p>
+        <p>Compañía: {user.company.name}</p>
         <form className={styles.user__form} onSubmit={ handleSubmit }>
           <label forhtml="password" className={styles.user__label}>
             <span className={styles['user__label-text']}>Password</span>

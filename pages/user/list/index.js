@@ -15,6 +15,9 @@ import Table from '@/components/table/index'
 import Cookie from '@/utils/Cookie'
 import DateUtil from '@/utils/DateUtil.js';
 
+import ModalLink from '@/components/model/link/index.js'
+
+import styles from './list.module.css'
 export default function List({companies, profiles}) {
 	console.log('List')
 
@@ -39,6 +42,8 @@ export default function List({companies, profiles}) {
 
   const [ search, setSearch ] = useState({data: [], total: 0});
   const [currentPage, setCurrentPage] = useState(1);
+  const [ user, setUser] = useState(null);
+  const [ isOpenModal, setIsOpenModal] = useState(false);
 
   useEffect(() => {
     const user = Cookie.getUser()
@@ -102,14 +107,7 @@ export default function List({companies, profiles}) {
           >
             <Image src="/images/edit_icon.svg" alt="edit" width="24" height="24" />
           </Link>
-          <Link
-            href={{
-              pathname: `/user/password/link`,
-              query: { id: user.id }
-            }}
-          >
-            <Image src="/images/edit_password.svg" alt="password" width="24" height="24" />
-          </Link>
+          <Image className={styles['list__icon-password']} src="/images/edit_password.svg" alt="password" width="24" height="24" onClick={() => handleModel(user)} />
         </>
       ])
       setSearch(json)
@@ -142,6 +140,11 @@ export default function List({companies, profiles}) {
 
   function handlePageChange(page) {
     handleSearchButton(null, (page - 1) * ROWS_PER_PAGE, page);
+  }
+
+  async function handleModel(user) {
+    setUser(user)
+    setIsOpenModal(true)
   }
 
   return (
@@ -190,6 +193,7 @@ export default function List({companies, profiles}) {
           onPageChange={handlePageChange}
         />
         {isSearching && <LoadingSpinner/>}
+        { isOpenModal && <ModalLink link={`/user/password/${user.id}`} setIsOpen={setIsOpenModal} /> }
       </Layout>
     </>
   );

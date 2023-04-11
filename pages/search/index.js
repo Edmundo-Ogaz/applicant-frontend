@@ -255,7 +255,7 @@ export default function Search({companies, tests, states}) {
             {isSearching ? 'Searching...' : 'Search'}
           </button>
         </form>
-        <Table 
+        <Table
           colums={COLUMS}
           data={search.data}
           currentPage={currentPage}
