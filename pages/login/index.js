@@ -8,13 +8,12 @@ import LoadingSpinner from '../../components/LoadingSpinner';
 
 import styles from './login.module.css';
 
-export default function Login({companies}) {
+export default function Login() {
 	console.log('Login')
   //Cookie.remove()
   const [ isLoading, setIsLoading ] = useState();
 	const [ username, setUsername ] = useState();
 	const [ password, setPassword ] = useState();
-	const [ company, setCompany ] = useState();
 	const [ error, setError ] = useState();
 
   const handleLogin = async () => {
@@ -24,7 +23,7 @@ export default function Login({companies}) {
         `${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/users/login`, 
         {
           method: 'POST',
-          body: JSON.stringify({email: username, password, company}),
+          body: JSON.stringify({email: username, password}),
           headers: {
             'Content-Type': 'application/json'
           },
@@ -51,10 +50,6 @@ export default function Login({companies}) {
 		setPassword(event.target.value)
 	}
 
-  function handleCompany(event) {
-		setCompany(event.target.value)
-	}
-
   return (
     <div className={styles.login}>
       <div className={styles.title}>
@@ -69,13 +64,6 @@ export default function Login({companies}) {
           <span className={styles['user__label-text']}>Password</span>
           <input id="password" type="password" className={styles.user__input} onChange={ handlePassword } />
         </label>
-        <label forhtml="company">
-          <span className={styles['user__label-text']}>Empresa</span>
-          <select name="company" id="company" value={company} className={styles.user__input} onChange={ handleCompany}>
-            <option value="">Selecionar...</option>
-            {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
-          </select>
-        </label>
       </fieldset>
       {error && <><small style={ { color: 'red' } }>{error}</small></>}
       <button id="login" className={styles['login-button']} onClick={ handleLogin } disabled={ isLoading }>
@@ -85,25 +73,4 @@ export default function Login({companies}) {
       <ToastContainer />
     </div>
     );
-}
-
-export async function getServerSideProps() {
-  try {
-    console.log('getServerSideProps')
-    
-    const companies = await fetch(`${process.env.NEXT_PUBLIC_NETLIFY_SERVERLESS_API}/companies`).then((response) => response.json())
-    return {
-      props: {
-        companies
-      },
-    }
-  } catch(e) {
-    console.error(e)
-    return {
-      redirect: {
-        permanent: false,
-        destination: `/public/error?message=${e.message}`,
-      }
-    };
-  }
 }

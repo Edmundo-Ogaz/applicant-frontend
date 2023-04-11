@@ -5,7 +5,6 @@ describe('applicant test ic instruction', () => {
     cy.visit('http://localhost:3000')
     cy.get('#email').type(Cypress.env('username'))
     cy.get('#password').type('1234')
-    cy.get('#company').select('1')
     cy.intercept(`${Cypress.env('api')}/users/login`).as('login')
     cy.get('#login').click()
     cy.wait('@login')

@@ -9,7 +9,6 @@ describe('applicant user list', () => {
     cy.wait('@login')
     cy.get('#email').type(Cypress.env('username'))
     cy.get('#password').type('1234')
-    cy.get('#company').select('1')
     cy.intercept(`${Cypress.env('api')}/users/login`).as('apiLogin')
     cy.get('#login').click()
     cy.wait('@apiLogin')
@@ -22,9 +21,9 @@ describe('applicant user list', () => {
   })
 
   it('search by rut', () => {
-    cy.get('#rut').type('15331265-6')
+    cy.get('#rut').type('3848123-1')
     cy.get('#search').click()
-    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(1)`).should('have.text', '15331265-6')
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(1)`).should('have.text', '3848123-1')
   })
 
   it('search by name', () => {
@@ -34,9 +33,9 @@ describe('applicant user list', () => {
   })
 
   it('search by email', () => {
-    cy.get('#email').type('1234@1234.cl')
+    cy.get('#email').type('edmundo.ogaz@gmail.com.cl')
     cy.get('#search').click()
-    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(3)`).should('have.text', '1234@1234.cl')
+    cy.get(`${FILTER_TABLE_FIRST_ROW} td:nth-child(3)`).should('have.text', 'edmundo.ogaz@gmail.com.cl')
   })
 
   it('search by company', () => {

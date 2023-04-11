@@ -13,7 +13,7 @@ export default function Head({postulant, company, state, updatedAt}) {
             <ul>
               <li>Nombre: {postulant.firstName} {postulant.lastName}</li>
               <li>RUN: {postulant.rut}</li>
-              <li>Edad: {postulant.age}</li>
+              <li>Edad: {DateUtil.birthdayToEge(postulant.birthday)}</li>
               <li>Sexo: {postulant.sexo}</li>
             </ul>
           </div>

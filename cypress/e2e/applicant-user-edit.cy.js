@@ -13,7 +13,6 @@ describe('applicant user edit', () => {
     cy.getCookie('applicantApp').should('not.exist')
     cy.get('#email').type(Cypress.env('username'))
     cy.get('#password').type('1234')
-    cy.get('#company').select('1')
     cy.intercept(`${Cypress.env('api')}/users/login`).as('apiLogin')
     cy.get('#login').click()
     cy.wait('@apiLogin')

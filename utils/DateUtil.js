@@ -38,6 +38,18 @@ return (
   );
 }
 
-const DateUtil = { parse, format }
+function birthdayToEge(str) {
+  console.log(str)
+  if (!str) return ''
+
+  const birthdayDate = new Date(str)
+  if (!birthdayDate instanceof Date || isNaN(birthdayDate)) return ''
+
+  const currentDate = new Date()
+  const different = currentDate - birthdayDate
+  return Math.floor(different / 31557600000)
+}
+
+const DateUtil = { parse, format, birthdayToEge }
 
 export default DateUtil
