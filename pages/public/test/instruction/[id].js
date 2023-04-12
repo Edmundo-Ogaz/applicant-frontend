@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Header from '@/components/header/index'
 
 import IcInstruction from '@/components/test/ic/instruction/index.js'
 import DiscInstruction from '@/components/test/disc/instruction/index.js'
@@ -20,6 +20,7 @@ export default function Instruction({testPostulant}) {
 
   return (
     <>
+      <Header />
       <Instruction />
     </>
   );

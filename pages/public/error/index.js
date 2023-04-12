@@ -1,8 +1,11 @@
+import Header from '@/components/header/index'
+
 export default function Error({message}) {
 	console.log('Error', message)
 
   return (
     <>
+      <Header />
       {message}
     </>
   );

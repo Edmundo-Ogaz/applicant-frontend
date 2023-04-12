@@ -1,3 +1,5 @@
+import Header from '@/components/header/index'
+
 import IcTest from '@/components/test/ic/test/index.js'
 import DiscTest from '@/components/test/disc/test/index.js'
 import CealTest from '@/components/test/ceal/test/index.js'
@@ -19,6 +21,7 @@ export default function Start({testPostulant}) {
 
   return (
     <>
+      <Header />
       <Test />
     </>
   );

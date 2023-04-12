@@ -2,17 +2,11 @@
 
 describe('applicant test ic test', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000')
-    cy.get('#email').type(Cypress.env('username'))
-    cy.get('#password').type('1234')
-    cy.intercept(`${Cypress.env('api')}/users/login`).as('login')
-    cy.get('#login').click()
-    cy.wait('@login')
+    cy.visit(`http://localhost:3000/public/test/start?id=${Cypress.env('test_disc_id')}`)
   })
 
   it('ic test', () => {
-    cy.visit(`http://localhost:3000/public/test/start?id=${Cypress.env('test_disc_id')}`)
-    
+    cy.get('header h1').should('have.text', 'Applicant')
     cy.get('#card_0 div:nth-child(1)').should('have.text', '1/28')
     cy.get('#card_0 div:nth-child(2) th:nth-child(2)').should('have.text', '+')
     cy.get('#card_0 div:nth-child(2) th:nth-child(3)').should('have.text', '-')

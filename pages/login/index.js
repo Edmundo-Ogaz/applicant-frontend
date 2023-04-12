@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import Header from '@/components/header';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -51,26 +53,29 @@ export default function Login() {
 	}
 
   return (
-    <div className={styles.login}>
-      <div className={styles.title}>
-        Login
+    <>
+      <Header />
+      <div className={styles.login}>
+        <div className={styles.title}>
+          Login
+        </div>
+        <fieldset className={styles.user__body}>
+          <label forhtml="email">
+            <span className={styles['user__label-text']}>Email</span>
+            <input id="email" type="text" className={styles.user__input} onChange={ handleUsername } />
+          </label>
+          <label forhtml="email">
+            <span className={styles['user__label-text']}>Password</span>
+            <input id="password" type="password" className={styles.user__input} onChange={ handlePassword } />
+          </label>
+        </fieldset>
+        {error && <><small style={ { color: 'red' } }>{error}</small></>}
+        <button id="login" className={styles['login-button']} onClick={ handleLogin } disabled={ isLoading }>
+          {isLoading ? 'Loading...' : 'Log in'}
+        </button>
+        {isLoading && <LoadingSpinner/>}
+        <ToastContainer />
       </div>
-      <fieldset className={styles.user__body}>
-        <label forhtml="email">
-          <span className={styles['user__label-text']}>Email</span>
-          <input id="email" type="text" className={styles.user__input} onChange={ handleUsername } />
-        </label>
-        <label forhtml="email">
-          <span className={styles['user__label-text']}>Password</span>
-          <input id="password" type="password" className={styles.user__input} onChange={ handlePassword } />
-        </label>
-      </fieldset>
-      {error && <><small style={ { color: 'red' } }>{error}</small></>}
-      <button id="login" className={styles['login-button']} onClick={ handleLogin } disabled={ isLoading }>
-        {isLoading ? 'Loading...' : 'Log in'}
-      </button>
-      {isLoading && <LoadingSpinner/>}
-      <ToastContainer />
-    </div>
-    );
+    </>
+  );
 }

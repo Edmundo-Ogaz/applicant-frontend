@@ -4,8 +4,8 @@ const FILTER_TABLE_FIRST_ROW_SEVETH_COL = 'table tbody tr:nth-child(1) td:nth-ch
 
 describe('applicant user password page', () => {
   beforeEach(() => {
-    cy.intercept('http://localhost:3000/user/password/1').as('password')
-    cy.visit('http://localhost:3000/user/password/1')
+    cy.intercept('http://localhost:3000/public/user/password/1').as('password')
+    cy.visit('http://localhost:3000/public/user/password/1')
     cy.wait('@password')
   })
 

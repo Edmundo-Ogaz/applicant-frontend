@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
+import Avatar from '@/components/avatar';
+
 import { toast } from 'react-toastify';
 
 import { ToastContainer } from 'react-toastify';
@@ -77,15 +79,19 @@ export default function Layout({ children }) {
   }, [])
 
   return (
-      <>
-       <Menu
-          mode="horizontal"
-          openAnimation="slide-up"
-          handleMenu={handleMenu}
-        />
-        <main>{children}</main>
-        {isLoading && <LoadingSpinner/>}
-        <ToastContainer />
-      </>
+    <>
+      <header style={{display: 'flex', justifyContent: 'space-between'}}>
+        <h1 id="logo">Applicant</h1>
+        <Avatar/>
+      </header>
+      <Menu
+        mode="horizontal"
+        openAnimation="slide-up"
+        handleMenu={handleMenu}
+      />
+      <main>{children}</main>
+      {isLoading && <LoadingSpinner/>}
+      <ToastContainer />
+    </>
   )
 }

@@ -1,7 +1,5 @@
 import Head from "next/head";
 
-import Avatar from '@/components/avatar';
-
 import '@/styles/global.css'
 
 const Noop = ({ children }) => <>{children}</>;
@@ -14,11 +12,6 @@ export default function App({ Component, pageProps }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      
-      <header style={{display: 'flex', justifyContent: 'space-between'}}>
-        <h1 id="logo">Applicant</h1>
-        <Avatar/>
-      </header>
       <Component {...pageProps} />
     </Auth>
   );

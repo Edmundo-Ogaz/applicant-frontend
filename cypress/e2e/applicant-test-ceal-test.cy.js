@@ -2,24 +2,12 @@
 
 describe('applicant test ceal test', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000')
-    cy.get('#email').type(Cypress.env('username'))
-    cy.get('#password').type('1234')
-    cy.intercept(`${Cypress.env('api')}/users/login`).as('login')
-    cy.get('#login').click()
-    cy.wait('@login')
+    cy.visit(`http://localhost:3000/public/test/start?id=${Cypress.env('test_ceal_id')}`)
   })
 
   it('ceal test', () => {
-    cy.visit(`http://localhost:3000/public/test/start?id=${Cypress.env('test_ceal_id')}`)
-    //cy.get('#time-alert').should('have.css', 'display', 'none') 
-    // cy.get('#time-alert')
-    //     .invoke('attr', 'style', 'display: block')
-    //     .should('have.attr', 'style', 'display: block') 
-    // cy.get('#time-alert').should('not.be.visible')
-    // cy.get('#time-alert').invoke('show');
-    // cy.get('#time-alert').should('have.text', 'Prepárate, quedan 2 minutos')
-    
+    cy.get('header h1').should('have.text', 'Applicant')
+
     cy.get('.questionary .box:nth-child(1) .question .col').should('have.text', 'Sus subordinados no han estado respondiendo a su conversación amistosa y a su obvio interés por el bienestar de ellos.  El rendimiento del grupo se ha mantenido bajo.')
     cy.get('.questionary .box:nth-child(1) .answer:nth-child(1) .col-11').should('have.text', 'Enfatizo el uso de procedimientos uniformes y la necesidad del cumplimiento de las tareas.')
     cy.get('.questionary .box:nth-child(1) .answer:nth-child(2) .col-11').should('have.text', 'Estoy disponible para la discusión, pero presiono.')

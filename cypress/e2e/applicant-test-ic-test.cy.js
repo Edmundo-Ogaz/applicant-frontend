@@ -2,16 +2,17 @@
 
 describe('applicant test ic test', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000')
-    cy.get('#email').type(Cypress.env('username'))
-    cy.get('#password').type('1234')
-    cy.intercept(`${Cypress.env('api')}/users/login`).as('login')
-    cy.get('#login').click()
-    cy.wait('@login')
+    cy.intercept(`http://localhost:3000/public/test/start?id=${Cypress.env('test_ic_id')}`).as('start')
+    cy.visit(`http://localhost:3000/public/test/start?id=${Cypress.env('test_ic_id')}`)
+    cy.wait('@start')
+  })
+
+  it('ic test header', () => {
+    cy.get('header h1').should('have.text', 'Applicant')
   })
 
   it('ic test', () => {
-    cy.visit(`http://localhost:3000/public/test/start?id=${Cypress.env('test_ic_id')}`)
+    //cy.visit(`http://localhost:3000/public/test/start?id=${Cypress.env('test_ic_id')}`)
     //cy.get('#time-alert').should('have.css', 'display', 'none') 
     // cy.get('#time-alert')
     //     .invoke('attr', 'style', 'display: block')
@@ -29,7 +30,7 @@ describe('applicant test ic test', () => {
   })
 
   it('ic test labels', () => {
-    cy.visit(`http://localhost:3000/public/test/start?id=${Cypress.env('test_ic_id')}`)
+    //cy.visit(`http://localhost:3000/public/test/start?id=${Cypress.env('test_ic_id')}`)
     cy.get('#ic_form table thead tr th:nth-child(1)').should('have.text', 'CANTIDAD ASEGURADA')
     cy.get('#ic_form table thead tr th:nth-child(2)').should('have.text', 'CLASES DE SEGURO')
     cy.get('#ic_form table thead tr th:nth-child(3)').should('have.text', 'FECHA')

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 
+import Header from '@/components/header';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import LoadingSpinner from '../../../components/LoadingSpinner';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 import styles from './password.module.css';
 
@@ -60,6 +62,7 @@ export default function RegisterPassword({user}) {
      
   return (
     <>
+      <Header />
       <div className={styles.user}>
         <h2>
         Registrar Nuevo Password

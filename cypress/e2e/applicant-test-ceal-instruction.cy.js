@@ -2,16 +2,11 @@
 
 describe('applicant test ceal instruction', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000')
-    cy.get('#email').type(Cypress.env('username'))
-    cy.get('#password').type('1234')
-    cy.intercept(`${Cypress.env('api')}/users/login`).as('login')
-    cy.get('#login').click()
-    cy.wait('@login')
+    cy.visit(`http://localhost:3000/public/test/instruction/${Cypress.env('test_ceal_id')}`)
   })
 
   it('ceal test instruction', () => {
-    cy.visit(`http://localhost:3000/public/test/instruction/${Cypress.env('test_ceal_id')}`)
+    cy.get('header h1').should('have.text', 'Applicant')
     cy.get('.display-4').should('have.text', 'TEST CEAL')
     cy.get('.lead').should('have.text', 'Instrucciones')
     cy.get('.jumbotron :nth-child(4)  li:nth-child(1)').should('have.text', ' - Esta prueba consta de 12 situaciones. ')
