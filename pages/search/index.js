@@ -16,6 +16,9 @@ import ModalInstruction from '@/components/model/instruction/index.js'
 import ModalCertificate from '@/components/model/certificate/index.js'
 
 import styles from './search.module.css'
+
+import useTranslation from 'next-translate/useTranslation'
+
 export default function Search({companies, tests, states}) {
 	console.log('Search')
 
@@ -52,6 +55,8 @@ export default function Search({companies, tests, states}) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [ analysts, setAnalysts ] = useState([]);
+
+  const { t, lang } = useTranslation('search')
 
   useEffect(() => {
     const user = Cookie.getUser()
@@ -209,50 +214,50 @@ export default function Search({companies, tests, states}) {
         {/* <h2>Buscar Tests</h2> */}
         <form>
           <fieldset className='search__filter'>
-            <legend className='search__filter-header'>Filtro</legend>
+            <legend className='search__filter-header'>{t('filtro')}</legend>
             <label forhtml="rut">
-              <span>Rut</span>
+              <span>{t('rut')}</span>
               <input type="text" id="rut" className="search__input" onChange={ handleRut } />
             </label>
             <label forhtml="name">
-              <span>Nombre</span>
+              <span>{t('nombre')}</span>
               <input type="text" id="name" size="50" className="search__input" onChange={ handleName } />
             </label>
             <label forhtml="email">
-              <span>Email</span>
+              <span>{t('email')}</span>
               <input type="text" id="email" size="50" className="search__input" onChange={ handleEmail } />
             </label>
             <label forhtml="company">
-              <span>Empresa</span>
+              <span>{t('empresa')}</span>
               <select name="company" id="company" value={company} className="search__input" disabled={true} onChange={ handleCompany}>
-                <option value="">Selecionar...</option>
+                <option value="">{t('selecionar')}</option>
                 {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
               </select>
             </label>
             <label forhtml="analyst">
-              <span>Analista</span>
+              <span>{t('analista')}</span>
               <select name="analyst" id="analyst" className="search__input" onChange={ handleAnalyst}>
-                <option value="">Selecionar...</option>
+                <option value="">{t('selecionar')}</option>
                 {analysts.map((analyst) => <option key={analyst.id} value={analyst.id}>{analyst.firstName} {analyst.lastName}</option>)}
               </select>
             </label>
             <label forhtml="test">
-              <span>Test</span>
+              <span>{t('test')}</span>
               <select name="test" id="test" className="search__input" onChange={ handleTest}>
-                <option value="">Selecionar...</option>
+                <option value="">{t('selecionar')}</option>
                 {tests.map((test) => <option key={test.id} value={test.id}>{test.name}</option>)}
               </select>
             </label>
             <label forhtml="state">
-              <span>Estado</span>
+              <span>{t('estado')}</span>
               <select name="state" id="state" className="search__input" onChange={ handleState}>
-                <option value="">Selecionar...</option>
+                <option value="">{t('selecionar')}</option>
                 {states.map((state) => <option key={state.id} value={state.id}>{state.name}</option>)}
               </select>
             </label>
           </fieldset>
           <button id="search" className={styles.search__button} onClick={ handleSearchButton } disabled={ isSearching }>
-            {isSearching ? 'Searching...' : 'Search'}
+            {isSearching ? t('searching') : t('search')}
           </button>
         </form>
         <Table

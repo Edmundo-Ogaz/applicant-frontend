@@ -1,7 +1,11 @@
+import useTranslation from 'next-translate/useTranslation'
+
 import styles from './table.module.css'
 
 export default function Table({colums, data, currentPage, totalPages, onPageChange}) {
 	console.log('table')
+
+  const { t, lang } = useTranslation('common')
 
   function goToPage(page) {
     onPageChange(page);
@@ -30,7 +34,7 @@ export default function Table({colums, data, currentPage, totalPages, onPageChan
       </table>
       <div>
         <button className={styles.footer__button} disabled={currentPage === 1} onClick={() => goToPage(currentPage - 1)}>{'<'}</button>
-        <span>{` Página ${currentPage} de ${totalPages} `}</span>
+        <span>{` ${t('page')} ${currentPage} ${t('of')} ${totalPages} `}</span>
         <button className={styles.footer__button} disabled={currentPage === totalPages} onClick={() => goToPage(currentPage + 1)}>{'>'}</button>
       </div>
     </>

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
+import { toast } from 'react-toastify'
+
 import WithPrivateRoute from '@/components/WithPrivateRoute.js'
-
 import Layout from '@/components/layout/index.js';
-
 import LoadingSpinner from '@/components/LoadingSpinner/index.js';
 
 import Cookie from '@/utils/Cookie';
@@ -14,15 +14,19 @@ import testPostulantService from '@/services/TestPostulantService';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
+import useTranslation from 'next-translate/useTranslation'
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function Error({message}) {
-	console.log('Error', message)
+export default function Home() {
+	console.log('Home')
 
   const [ company, setCompany ] = useState();
   const [ tests, setTests ] = useState([]);
   const [ totalTests, setTotalTests ] = useState(0);
   const [ isSearching, setIsSearching] = useState(false);
+
+  const { t, lang } = useTranslation('home')
 
   useEffect(() => {
     const user = Cookie.getUser()
@@ -36,15 +40,13 @@ export default function Error({message}) {
       const testsPostulants = await testPostulantService.findByMonth(companyId)
       let aTests = [0, 0, 0]
       for (const testPostulant of testsPostulants) {
-        console.log(testPostulant.test.id - 1);
         aTests[testPostulant.test.id - 1] = aTests[testPostulant.test.id - 1] + 1
       }
       setCompany(company)
       setTests(aTests)
       setTotalTests(testsPostulants.length)
-      console.log(aTests);
     } catch(e) {
-      console.log(e.message);
+      toast.error(e.message);
     } finally {
       setIsSearching(false)
     }
@@ -52,8 +54,8 @@ export default function Error({message}) {
 
   const data = {
     labels: [
-      'Tests',
-      'Total',
+      t('Tests'),
+      t('Total'),
     ],
     datasets: [{
       label: 'Test',
@@ -68,12 +70,12 @@ export default function Error({message}) {
 
   const dataTest = {
     labels: [
-      'IC',
-      'DISC',
-      'Ceal'
+      t('IC'),
+      t('DISC'),
+      t('Ceal')
     ],
     datasets: [{
-      label: 'Test',
+      label: t('test'),
       data: [tests[0], tests[1], tests[2]],
       backgroundColor: [
         'rgb(59 169 147)',
@@ -95,8 +97,8 @@ export default function Error({message}) {
   return (
     <>
       <Layout>
-        <p>Empresa: {company?.name}</p>
-        <p>Cuotas: {company?.subscription}</p>
+        <p>{t('empresa')}: {company?.name}</p>
+        <p>{t('cuotas')}: {company?.subscription}</p>
         <section style={{display: 'flex'}}>
           <div style={{position: 'relative'}}>
             <div className="chart-title" style={{position: 'absolute',
@@ -106,9 +108,9 @@ export default function Error({message}) {
                                               alignItems: 'center',
                                               justifyContent: 'center'}}>
               <div style={{textAlign: 'center'}}>
-                <b>Tests creados</b>
+                <b>{t('tests-creados')}</b>
                 <br />
-                <small>{totalTests} total</small>
+                <small>{totalTests} {t('total')}</small>
               </div>
             </div>
             <Doughnut data={data} options={options} style={{height: '20%', width: '20%'}}/>
@@ -130,4 +132,4 @@ export default function Error({message}) {
   );
 }
 
-Error.Auth = WithPrivateRoute
+Home.Auth = WithPrivateRoute
