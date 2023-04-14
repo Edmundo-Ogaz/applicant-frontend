@@ -23,10 +23,14 @@ return (
   );
 }
 
-function format(str) {
-  if (!str) return ''
+function format(param) {
+  if (!param) return ''
 
-  const date = new Date(str)
+  let date = param
+  if (typeof date === 'string') {
+    date = new Date(param)
+  }
+
   if (!date instanceof Date || isNaN(date)) return ''
 
 return (
@@ -50,6 +54,17 @@ function birthdayToEge(str) {
   return Math.floor(different / 31557600000)
 }
 
-const DateUtil = { parse, format, birthdayToEge }
+function getMonth() {
+  let month = new Date().getMonth() + 1
+  if (month < 10)
+    month = `0${month}`
+  return month
+}
+
+function getYear() {
+  return new Date().getFullYear()
+}
+
+const DateUtil = { getYear, getMonth, parse, format, birthdayToEge }
 
 export default DateUtil
