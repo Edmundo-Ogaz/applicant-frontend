@@ -1,8 +1,4 @@
-import Link from 'next/link'
-
 import styles from "./modal.module.css";
-
-import Certificate from '@/components/test/ic/certificate';
 
 export default function ModalInstruction({ testPostulant, setIsOpen }) {
 	console.log('ModalInstruction')

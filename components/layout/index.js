@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
+import useTranslation from 'next-translate/useTranslation'
+
 import Avatar from '@/components/avatar';
 
 import { toast } from 'react-toastify';
@@ -20,6 +22,8 @@ export default function Layout({ children }) {
   const router = useRouter();
 
   const [ isLoading, setIsLoading ] = useState(false)
+
+  const { t, lang } = useTranslation('common')
 
   async function handleMenu(info) {
     try {
@@ -81,7 +85,7 @@ export default function Layout({ children }) {
   return (
     <>
       <header style={{display: 'flex', justifyContent: 'space-between'}}>
-        <h1 id="logo">Applicant</h1>
+        <h1 id="logo">{t('applicant')}</h1>
         <Avatar/>
       </header>
       <Menu

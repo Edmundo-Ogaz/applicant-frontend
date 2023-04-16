@@ -43,7 +43,6 @@ return (
 }
 
 function birthdayToEge(str) {
-  console.log(str)
   if (!str) return ''
 
   const birthdayDate = new Date(str)

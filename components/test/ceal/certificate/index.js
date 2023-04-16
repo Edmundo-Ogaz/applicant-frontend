@@ -1,3 +1,5 @@
+import useTranslation from 'next-translate/useTranslation'
+
 import Head from '../../certificate/head';
 
 import {
@@ -17,12 +19,14 @@ ChartJS.register(LinearScale, PointElement, Tooltip, Legend);
 export default function Certificate(props) {
   console.log('Certificate')
 
+  const { t, lang } = useTranslation('certificateCeal')
+
   const { test, postulant, company, answer, updatedAt, state } = props
 
   const dataBubble = {
     datasets: [
       {
-        label: ["Separado"],
+        label: [t('separado')],
         pointStyle: 'dirArrow',
         backgroundColor: "rgba(255,221,50,0.2)",
         borderColor: "rgba(255,221,50,1)",
@@ -33,7 +37,7 @@ export default function Certificate(props) {
         }]
       },
       {
-        label: ["Autocrático"],
+        label: [t('autocratico')],
         backgroundColor: "rgba(60,186,159,0.2)",
         borderColor: "rgba(60,186,159,1)",
         data: [{
@@ -43,7 +47,7 @@ export default function Certificate(props) {
         }]
       },
       {
-        label: ["Integrado"],
+        label: [t('integrado')],
         backgroundColor: "rgba(0,0,0,0.2)",
         borderColor: "#000",
         data: [{
@@ -53,7 +57,7 @@ export default function Certificate(props) {
         }]
       },
       {
-        label: ["Relacionado"],
+        label: [t('relacionado')],
         backgroundColor: "rgba(193,46,12,0.2)",
         borderColor: "rgba(193,46,12,1)",
         data: [{
@@ -78,7 +82,7 @@ export default function Certificate(props) {
         min: -5,
         title: {
           display: true,
-          text: "Orientado a las personas"
+          text: t('orientado-personas')
         }
       },
       y: {
@@ -87,7 +91,7 @@ export default function Certificate(props) {
         min: -5,
         title: {
           display: true,
-          text: "Orientado a la Tarea"
+          text: t('orientado-tarea')
         }
       }
     }
@@ -120,7 +124,7 @@ export default function Certificate(props) {
           }
         },
         formatter: function(value, context) {
-          return `Efectividad total: ${value.y}`;
+          return `${t('efectividad-total')}: ${value.y}`;
         }
       },
       tooltip: {
@@ -143,15 +147,15 @@ export default function Certificate(props) {
   }
 
   const dataBar = {
-    labels: ["Autocrático", "Integrado", "Relacionado", "Separado"],
+    labels: [t('autocratico'), t('integrado'), t('relacionado'), t('separado')],
     datasets: [{
-      label: 'Seleccionado',
+      label: t('seleccionado'),
       backgroundColor: 'rgba(255,0,0,0.3)',
               borderColor: 'rgba(255,0,0,1)',
       borderWidth: 1,
       data: answer.countStyle
     }, {
-      label: 'Efectividad',
+      label: t('efectividad'),
       backgroundColor: 'rgba(0, 255,0,0.3)',
               borderColor: 'rgba(0, 255,0,1)',
       borderWidth: 1,
@@ -180,13 +184,13 @@ export default function Certificate(props) {
             <div className="col" style={{height: "max-content"}}>
               <Bubble data={dataBubble} options={optionsBubble} />
               <div className={styles.tick} style={{position: "absolute", bottom: "0", left: "0"}}>
-                  Bajo
+                  {t('bajo')}
               </div>
               <div className={styles.tick} style={{position: "absolute", top: "0", left: "0"}}>
-                  Alto
+                  {t('alto')}
               </div>
               <div className={styles.tick} style={{position: "absolute", bottom: "0", right: "0"}}>
-                  Alto
+                {t('alto')}
               </div>
             </div>
           </div>
@@ -206,34 +210,34 @@ export default function Certificate(props) {
             <table className="table table-bordered">
               <thead>
                 <tr>
-                  <td>Estilos</td>
-                  <td className=" text-center">Predominio</td>
-                  <td className=" text-center">Efectividad</td>
+                  <td>{t('estilos')}</td>
+                  <td className=" text-center">{t('predominio')}</td>
+                  <td className=" text-center">{t('efectividad')}</td>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Autocratico</td>
+                  <td>{t('autocratico')}</td>
                   <td className=" text-center">{answer.countStyle[0]}</td>
                   <td className=" text-center">{answer.countEffectiveness[0]}</td>
                 </tr>
                 <tr>
-                  <td>Integrado</td>
+                  <td>{t('integrado')}</td>
                   <td className=" text-center">{answer.countStyle[1]}</td>
                   <td className=" text-center">{answer.countEffectiveness[1]}</td>
                 </tr>
                 <tr>
-                  <td>Relacionado</td>
+                  <td>{t('relacionado')}</td>
                   <td className=" text-center">{answer.countStyle[2]}</td>
                   <td className=" text-center">{answer.countEffectiveness[2]}</td>
                 </tr>
                 <tr>
-                  <td>Sepearado</td>
+                  <td>{t('separado')}</td>
                   <td className=" text-center">{answer.countStyle[3]}</td>
                   <td className=" text-center">{answer.countEffectiveness[3]} </td>
                 </tr>
                 <tr>
-                  <td colSpan="2">Efectividad General</td>
+                  <td colSpan="2">{t('efectividad-general')}</td>
                   <td className=" text-center">{answer.totalEffectiveness}</td>
                 </tr>
               </tbody>
@@ -247,77 +251,78 @@ export default function Certificate(props) {
             <table className="table table-bordered">
               <thead>
                 <tr>
-                  <td className=" text-center align-middle">Ineficaz</td>
-                  <td className=" text-center align-middle">Estilo básico</td>
-                  <td className=" text-center align-middle">Eficaz</td>
+                  <td className=" text-center align-middle">{t('ineficaz')}</td>
+                  <td className=" text-center align-middle">{t('estilo-basico')}</td>
+                  <td className=" text-center align-middle">{t('eficaz')}</td>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td className={`text-justify ${answer.countEffectiveness[0] < 0 ? styles.destacado : ''}`}>
-                    Autoritario
+                    {t('autoritario')}
                     <br /> 
-                    Visto a menudo como alguien que no confía en los demás, es desagradable y se interesa sólo en la producción a corto plazo.
+                    {t('autoritario-msg')}
                   </td>
-                  <td className=" text-center">1
+                  <td className=" text-center">
+                    1
                     <br /> 
-                    Autocratico
+                    {t('autocratico')}
                   </td>
                   <td className={`text-justify ${answer.countEffectiveness[0] > 0 ? styles.destacado : ''}`}>
-                    Autocrata Benevolo
+                    {t('autocrata-benevolo')}
                     <br />
-                    Visto a menudo como alguien que sabe lo que desea y que impone sus métodos para lograrlo sin provocar resentimiento.
+                    {t('autocrata-benevolo-msg')}
                   </td>
                 </tr>
                 <tr>
                   <td className={`text-justify ${answer.countEffectiveness[1] < 0 ? styles.destacado : ''}`}>
-                    Componedor
+                    {t('componedor')}
                     <br />
-                    Visto a menudo como alguien que trata de agradar a todos y, por lo tanto, vacila de un lado a otro para evitar tensiones en una situación.
+                    {t('componedor-msg')}
                   </td>
                   <td className="text-center">
                     2
                     <br />
-                    Integrado
+                    {t('integrado')}
                   </td>
                   <td className={`text-justify ${answer.countEffectiveness[1] > 0 ? styles.destacado : ''}`}>
-                    Ejecutivo
+                    {t('ejecutivo')}
                     <br />
-                    Visto a menudo como alguien que es un buen motivador, maneja normas elevadas, trata a cada uno de modo diferente prefiere administrar en equipo.
+                    {t('ejecutivo-msg')}
                   </td>
                 </tr>
                 <tr>
                   <td className={`text-justify ${answer.countEffectiveness[2] < 0 ? styles.destacado : ''}`}>
-                    Misionero
+                    {t('misionero')}
                     <br />
-                    Visto a menudo como alguien que está primordialmente interesado en la armonía y en ser considerado “buena gente” reticente a arriesgar la ruptura de una relación con tal de cumplir una tarea.
+                    {t('misionero-msg')}
                   </td>
                   <td className="text-center">
                     3
                     <br />
-                    Relacionado
+                    {t('relacionado')}
                   </td>
                   <td className={`text-justify ${answer.countEffectiveness[2] > 0? styles.destacado : ''}`}>
-                    Promotor
+                    {t('promotor')}
                     <br />
-                    Visto a menudo como alguien que tiene una confianza - implícita en las personas y que se interesa primordialmente en desarrollar sus aptitudes.
+                    {t('promotor-msg')}
                   </td>
                 </tr>
                 <tr>
                   <td className={`text-justify ${answer.countEffectiveness[3] < 0 ? styles.destacado : ''}`}>
-                    Desertor
+                    {t('desertor')}
                     <br />
-                    Visto a menudo como alguien que no se siente comprometido y es pasivo, y se preocupa poco por la tarea o por las personas que participan en ella.
+                    {t('desertor-msg')}
                   </td>
                   <td className="text-center">
                     4
                     <br />
-                    Separado
+                    {t('separado')}
                   </td>
                   <td className={`text-justify ${answer.countEffectiveness[3] > 0 ? styles.destacado : ''}`}>
-                    Burócrata
+                    {t('burocrata')}
                     <br />
-                    Visto a menudo como alguien que permite a sus subordinados decidir convenientemente cómo debe hacerse el trabajo y desempeña un papel menor en su interacción social.
+                    {t('burocrata-msg')}
                   </td>
                 </tr>
               </tbody>

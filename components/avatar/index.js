@@ -6,6 +6,8 @@ import Cookie from '../../utils/Cookie'
 
 import styles from './avatar.module.css'
 
+import useTranslation from 'next-translate/useTranslation'
+
 export default function Avatar() {
 	console.log('Avatar')
 
@@ -15,6 +17,8 @@ export default function Avatar() {
   const [ username, setUsername ] = useState()
 
   const [ showMenu, setShowMenu ] = useState(false)
+
+  const { t, lang } = useTranslation('common')
 
   useEffect(function onFirstMount() {
     const user = Cookie.getUser()
@@ -51,7 +55,7 @@ export default function Avatar() {
       <div ref={ref} className={styles.avatar}>
         <span id="username" className={styles.title} onClick={ handleClick }>{username}</span>
         <ul className={styles.menu} style={{ display: showMenu ? 'block' : 'none'}}>
-          <li className={styles.item} onClick={ handleExit }>Salir</li>
+          <li className={styles.item} onClick={ handleExit }>{t('exit')}</li>
         </ul>
       </div>
     </>

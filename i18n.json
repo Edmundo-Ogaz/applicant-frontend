@@ -2,7 +2,8 @@
   "locales": ["es"],
   "defaultLocale": "es",
   "pages": {
-    "*": ["common"],
+    "*": ["common", "menu", "certificateHead", "certificateCeal"],
+    "/": ["index"],
     "/home": ["home"],
     "/search": ["search"]
   }

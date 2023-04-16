@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Menu, { SubMenu, Item as MenuItem } from 'rc-menu';
 
+import useTranslation from 'next-translate/useTranslation'
+
 import Cookie from '../../utils/Cookie'
 
 import 'rc-menu/assets/index.css';
@@ -11,6 +13,8 @@ export default function App( props ) {
 	console.log('Menu')
 
   const [ showMenuUsers, setShowMenuUsers ] = useState(false)
+
+  const { t, lang } = useTranslation('menu')
 
   useEffect(() => {
     const user = Cookie.getUser()
@@ -31,24 +35,24 @@ export default function App( props ) {
         motion={ props.openAnimation }
         defaultOpenKeys={ props.defaultOpenKeys }
       >
-        <MenuItem key="1">Home</MenuItem>
-        <SubMenu title={ <span className="submenu-title-wrapper">Tests</span> } key="2">
-          <MenuItem key="2-1">Buscar</MenuItem>
-          <MenuItem key="2-2">Asignar test</MenuItem>
+        <MenuItem key="1">{t('home')}</MenuItem>
+        <SubMenu title={ <span className="submenu-title-wrapper">{t('tests')}</span> } key="2">
+          <MenuItem key="2-1">{t('buscar')}</MenuItem>
+          <MenuItem key="2-2">{t('asignar-test')}</MenuItem>
         </SubMenu>
         {showMenuUsers ? 
-        <SubMenu title={ <span className="submenu-title-wrapper">Usuarios</span> } key="3">
-          <MenuItem key="3-1">Listar</MenuItem>
-            <MenuItem key="3-2">Crear</MenuItem>
+        <SubMenu title={ <span className="submenu-title-wrapper">{t('usuarios')}</span> } key="3">
+          <MenuItem key="3-1">{t('listar')}</MenuItem>
+            <MenuItem key="3-2">{t('crear')}</MenuItem>
         </SubMenu>
         :
         ''}
-        <SubMenu title={ <span className="submenu-title-wrapper">Postulantes</span> } key="4">
-          <MenuItem key="4-1">Listar</MenuItem>
-            <MenuItem key="4-2">Crear</MenuItem>
+        <SubMenu title={ <span className="submenu-title-wrapper">{t('postulantes')}</span> } key="4">
+          <MenuItem key="4-1">{t('listar')}</MenuItem>
+            <MenuItem key="4-2">{t('crear')}</MenuItem>
         </SubMenu>
-        <SubMenu title={ <span className="submenu-title-wrapper">Salir</span> } key="6">
-          <MenuItem key="6-1">Salida del Sistema</MenuItem>
+        <SubMenu title={ <span className="submenu-title-wrapper">{t('salir')}</span> } key="6">
+          <MenuItem key="6-1">{t('salida-sistema')}</MenuItem>
         </SubMenu>
       </Menu>
     </>

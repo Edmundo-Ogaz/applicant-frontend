@@ -7,7 +7,7 @@ import CealCertificate from '@/components/test/ceal/certificate';
 import styles from "./modal.module.css";
 
 export default function ModalCertificate({ id, url, setIsOpen, testPostulant }) {
-	console.log('ModalCealCertificate')
+	console.log('ModalCertificate')
 
   const { test, postulant, company, answer, updatedAt, state, profile } = { ...testPostulant }
 

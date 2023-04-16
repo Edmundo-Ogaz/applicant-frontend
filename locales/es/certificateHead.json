@@ -1,0 +1,10 @@
+{
+    "name": "Nombre",
+    "run": "RUN",
+    "age": "Edad",
+    "sex": "Sexo",
+    "made": "Rendido",
+    "company": "Empresa",
+    "state": "Estado",
+    "place-made": "Lugar de rendición"
+}

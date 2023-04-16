@@ -2,7 +2,7 @@
 
 const FILTER_TABLE_FIRST_ROW_SEXTH_COL = 'table tbody tr:nth-child(1) td:nth-child(6)'
 
-describe('applicant edit', () => {
+describe('applicant postulant edit', () => {
   beforeEach(() => {
     cy.intercept('http://localhost:3000/login').as('login')
     cy.visit('http://localhost:3000/login')
@@ -19,8 +19,9 @@ describe('applicant edit', () => {
     cy.intercept(`${Cypress.env('api')}/postulants?company=1&rut=15331265-6&limit=5&offset=0`).as('searchPostulantByRut')
     cy.get('#search').click()
     cy.wait('@searchPostulantByRut')
-    //cy.intercept('http://localhost:3000/postulant/edit/1').as('edit')
+    cy.intercept('http://localhost:3000/postulant/edit/2').as('edit')
     cy.get(`${FILTER_TABLE_FIRST_ROW_SEXTH_COL} a:nth-child(1)`).click()
+    //cy.wait('@edit')
   })
 
   it('edit', () => {
