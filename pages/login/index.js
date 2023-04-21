@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import useTranslation from 'next-translate/useTranslation'
+
 import Header from '@/components/header';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -17,6 +19,8 @@ export default function Login() {
 	const [ username, setUsername ] = useState();
 	const [ password, setPassword ] = useState();
 	const [ error, setError ] = useState();
+
+  const { t, lang } = useTranslation('login')
 
   const handleLogin = async () => {
     try {
@@ -57,21 +61,21 @@ export default function Login() {
       <Header />
       <div className={styles.login}>
         <div className={styles.title}>
-          Login
+          {t('login')}
         </div>
         <fieldset className={styles.user__body}>
           <label forhtml="email">
-            <span className={styles['user__label-text']}>Email</span>
+            <span className={styles['user__label-text']}>{t('email')}</span>
             <input id="email" type="text" className={styles.user__input} onChange={ handleUsername } />
           </label>
           <label forhtml="email">
-            <span className={styles['user__label-text']}>Password</span>
+            <span className={styles['user__label-text']}>{t('password')}</span>
             <input id="password" type="password" className={styles.user__input} onChange={ handlePassword } />
           </label>
         </fieldset>
         {error && <><small style={ { color: 'red' } }>{error}</small></>}
         <button id="login" className={styles['login-button']} onClick={ handleLogin } disabled={ isLoading }>
-          {isLoading ? 'Loading...' : 'Log in'}
+          {isLoading ? t('button_loading') : t('button_login')}
         </button>
         {isLoading && <LoadingSpinner/>}
         <ToastContainer />

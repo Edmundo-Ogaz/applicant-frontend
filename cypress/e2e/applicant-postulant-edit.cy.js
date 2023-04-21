@@ -35,6 +35,6 @@ describe('applicant postulant edit', () => {
     cy.get('#email').type('1234@1234.cl')
     cy.get('#sexo').select('masculino')
     cy.get('#save').click()
-    cy.get('.Toastify__toast-body > :nth-child(2)').should('have.text', 'Saved')
+    cy.get('.Toastify__toast-body > :nth-child(2)').should('have.text', 'Guardado')
   })
 })

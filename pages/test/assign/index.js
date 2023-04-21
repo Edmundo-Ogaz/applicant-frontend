@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import useTranslation from 'next-translate/useTranslation'
+
 import { toast } from 'react-toastify';
 
 import WithPrivateRoute from '../../../components/WithPrivateRoute.js'
@@ -13,6 +15,8 @@ import styles from './assign.module.css';
 
 export default function AssignTest({companies, tests}) {
 	console.log('AssignTest')
+
+  const { t, lang } = useTranslation('testAssign')
 
   const [ isSaving, setIsSaving ] = useState(false);
   const [ isSearching, setIsSearching ] = useState(false);
@@ -93,7 +97,7 @@ export default function AssignTest({companies, tests}) {
         throw new Error(json?.error)
       }
       
-      toast.success('Saved');
+      toast.success(t('saved'));
       setRut('')
       setPostulantId('')
       setFirstName('')
@@ -169,36 +173,36 @@ export default function AssignTest({companies, tests}) {
   return (
     <>
       <Layout>
-        <h2>Asignar Test a Postulante</h2>
+        <h2>{t('title')}</h2>
         <form>
           <fieldset className={styles.user__body}>
             <section id="search-section">
               <label forhtml="rut">
-                <span className={styles['user__label-text']}>Rut</span>
+                <span className={styles['user__label-text']}>{t('rut')}</span>
                 <input type="text" id="rut" value={rut} className={styles.user__input} onChange={ handleRut } />
               </label>
               <button id="search-button" className={styles['user__button']} onClick={ handleSearch } disabled={ isSearching }>
                 {isSearching ? 'Searching...' : 'Search'}
               </button>
-              <p>Nombre: {firstName} {lastName}</p>
-              <p>Email: {email}</p>
+              <p>{t('name')}: {firstName} {lastName}</p>
+              <p>{t('email')}: {email}</p>
             </section>
             <label forhtml="company">
-              <span className={styles['user__label-text']}>Empresa</span>
+              <span className={styles['user__label-text']}>{t('company')}</span>
               <select name="company" id="company" value={company} className={styles.user__input} disabled={true} onChange={ handleCompany}>
-                <option value="">Selecionar...</option>
+                <option value="">{t('select')}</option>
                 {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
               </select>
             </label>
             <label forhtml="analyst">
-              <span className={styles['user__label-text']}>Analista</span>
+              <span className={styles['user__label-text']}>{t('analyst')}</span>
               <select name="analyst" id="analyst" value={analyst} className={styles.user__input} onChange={ handleAnalyst}>
-                <option value="">Selecionar...</option>
+                <option value="">{t('select')}.</option>
                 {analysts.map((analyst) => <option key={analyst.id} value={analyst.id}>{analyst.firstName} {analyst.lastName}</option>)}
               </select>
             </label>
             <div id="test">
-              <span className={styles['user__label-text']}>Test</span>
+              <span className={styles['user__label-text']}>{t('test')}</span>
               <fieldset className={`${styles.assign__test} ${styles.user__input}`}>
                 {tests.map((test, index) => {
                   return <div key={test.id} className={styles['assign__test-item']}>
@@ -210,7 +214,7 @@ export default function AssignTest({companies, tests}) {
             </div>
           </fieldset>
           <button id="save-button" className={styles['user__button']} onClick={ handleSave } disabled={ isSaving }>
-            {isSaving ? 'Saving...' : 'Save'}
+            {isSaving ? t('saving') : t('save')}
           </button>
           </form>
         {(isSearching || isSaving) && <LoadingSpinner/>}

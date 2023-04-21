@@ -116,14 +116,14 @@ export default function CreateUser({companies, profiles}) {
             <label forhtml="company">
               <span className={styles['user__label-text']}>Empresa</span>
               <select name="company" id="company" value={company} className={styles.user__input} disabled={true} onChange={ handleCompany}>
-                <option value="">Selecionar...</option>
+                <option value="">Seleccionar...</option>
                 {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
               </select>
             </label>
             <label forhtml="profile">
               <span className={styles['user__label-text']}>Rol</span>
               <select name="profile" id="profile" value={profile} className={styles.user__input} onChange={ handleProfile}>
-                <option value="">Selecionar...</option>
+                <option value="">Seleccionar...</option>
                 {profiles.map((profile) => <option key={profile.id} value={profile.id}>{profile.name}</option>)}
               </select>
             </label>

@@ -1,0 +1,15 @@
+{
+    "saved": "Guardado",
+    "title": "Actualizar Postulante",
+    "rut": "Rut",
+    "firstname": "Nombres",
+    "lastname": "Apellidos",
+    "birthday": "Fecha Nacimiento",
+    "sex": "Sexo",
+    "select": "Seleccionar...",
+    "female": "Femenino",
+    "male": "Masculino",
+    "email": "Email",
+    "saving": "Guardando...",
+    "save": "Guardar"
+}

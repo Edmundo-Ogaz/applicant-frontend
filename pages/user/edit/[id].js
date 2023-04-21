@@ -103,7 +103,7 @@ export default function EditUser({user, companies, profiles}) {
             <label forhtml="company">
               <span className={styles['user__label-text']}>Empresa</span>
               <select name="company" id="company" value={company} className={styles.user__input} disabled={true} onChange={ handleCompany}>
-                <option value="">Selecionar...</option>
+                <option value="">Seleccionar...</option>
                 {companies.map((param) => 
                   <option key={param.id} value={param.id}>{param.name}</option>)}
               </select>
@@ -111,7 +111,7 @@ export default function EditUser({user, companies, profiles}) {
             <label forhtml="profile">
               <span className={styles['user__label-text']}>Rol</span>
               <select name="profile" id="profile" value={profile} className={styles.user__input} onChange={ handleProfile}>
-                <option value="">Selecionar...</option>
+                <option value="">Seleccionar...</option>
                 {profiles.map((param) => 
                   <option key={param.id} value={param.id}>{param.name}</option>)}
               </select>

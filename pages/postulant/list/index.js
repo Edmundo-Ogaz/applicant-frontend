@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
 
+import useTranslation from 'next-translate/useTranslation'
+
 import { toast } from 'react-toastify';
 
 import WithPrivateRoute from '../../../components/WithPrivateRoute.js'
@@ -19,14 +21,16 @@ import Cookie from '@/utils/Cookie'
 export default function List() {
 	console.log('List')
 
+  const { t, lang } = useTranslation('postulantList')
+  
   const ROWS_PER_PAGE = 5
   const COLUMS = [ 
-    {name: 'RUT'},
-    {name: 'Nombre'},
-    {name: 'Email'},
-    {name: 'Fecha Nacimiento'},
-    {name: 'Sexo'},
-    {name: 'Acciones'},
+    {name: t('rut')},
+    {name: t('firstname')},
+    {name: t('email')},
+    {name: t('birthday')},
+    {name: t('sex')},
+    {name: t('actions')},
   ]
 
   const [ isSearching, setIsSearching ] = useState(false);
@@ -124,22 +128,22 @@ export default function List() {
         <h2>Postulantes</h2>
         <form>
           <fieldset className='search__filter'>
-            <legend className='search__filter-header'>Filtro</legend>
+            <legend className='search__filter-header'>{t('filter')}</legend>
             <label forhtml="rut">
-              <span>Rut</span>
+              <span>{t('rut')}</span>
               <input type="text" id="rut" className="search__input" onChange={ handleRut } />
             </label>
             <label forhtml="name">
-              <span>Nombre</span>
+              <span>{t('firstname')}</span>
               <input type="text" id="name" size="50" className="search__input" onChange={ handleName } />
             </label>
             <label forhtml="email">
-              <span>Email</span>
+              <span>{t('email')}</span>
               <input type="text" id="email" size="50" className="search__input" onChange={ handleEmail } />
             </label>
           </fieldset>
           <button id="search" onClick={ handleSearchButton } disabled={ isSearching }>
-            {isSearching ? 'Searching...' : 'Search'}
+            {isSearching ? t('searching') : t('search')}
           </button>
         </form>
         <Table 

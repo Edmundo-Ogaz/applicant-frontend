@@ -4,10 +4,13 @@
     "nombre": "Nombre",
     "email": "Email",
     "empresa": "Empresa",
-    "selecionar": "Selecionar...",
+    "selecionar": "Seleccionar...",
     "analista": "Analista",
     "test": "Test",
     "estado": "Estado",
     "searching": "Buscando...",
-    "search": "Buscar"
+    "search": "Buscar",
+    "candidate": "Candidato",
+    "createAt": "Fecha Creación",
+    "updateAt": "Fecha Test"
 }

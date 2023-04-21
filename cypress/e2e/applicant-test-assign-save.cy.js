@@ -30,6 +30,6 @@ describe('applicant assign test', () => {
         }
     }).as('apisave')
     cy.get('#save-button').click()
-    cy.get('.Toastify__toast-body > :nth-child(2)').should('have.text', 'Saved')
+    cy.get('.Toastify__toast-body > :nth-child(2)').should('have.text', 'Guardado')
   })
 })

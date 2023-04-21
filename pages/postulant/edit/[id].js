@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import useTranslation from 'next-translate/useTranslation'
+
 import { toast } from 'react-toastify';
 
 import WithPrivateRoute from '../../../components/WithPrivateRoute.js'
@@ -25,6 +27,8 @@ export default function EditPostulant({postulant}) {
   const [ email, setEmail ] = useState(postulant.email);
   const [ birthday, setBirthday ] = useState(DateUtil.format(postulant.birthday));
   const [ sexo, setSexo ] = useState(postulant.sexo);
+
+  const { t, lang } = useTranslation('postulantEdit')
 
   const handleSave = async (e) => {
     try {
@@ -53,7 +57,7 @@ export default function EditPostulant({postulant}) {
       if (response?.ok === false) {
         throw new Error(json?.error)
       }
-      toast.success('Saved');
+      toast.success(t('saved'));
     } catch(e) {
       toast.error(e.message);
     } finally {
@@ -84,40 +88,40 @@ export default function EditPostulant({postulant}) {
   return (
     <>
       <Layout>
-        <h2>Actualizar Postulante</h2>
+        <h2>{t('title')}</h2>
         <form>
           <fieldset className={styles.user__body}>
             <label forhtml="rut">
-              <span className={styles['user__label-text']}>Rut</span>
+              <span className={styles['user__label-text']}>{t('rut')}</span>
               <input type="text" id="rut" value={rut} className={styles.user__input} disabled={true}/>
             </label>
             <label forhtml="firstName">
-              <span className={styles['user__label-text']}>Nombres</span>
+              <span className={styles['user__label-text']}>{t('firstname')}</span>
               <input type="test" id="firstName" value={firstName} size="50" className={styles.user__input} onChange={ handleFirstName } />
             </label>
             <label forhtml="lastName">
-              <span className={styles['user__label-text']}>Apellidos</span>
+              <span className={styles['user__label-text']}>{t('lastname')}</span>
               <input type="text" id="lastName" value={lastName} size="50" className={styles.user__input} onChange={ handleLastName } />
             </label>
             <label forhtml="email">
-              <span className={styles['user__label-text']}>Email</span>
+              <span className={styles['user__label-text']}>{t('email')}</span>
               <input type="text" id="email" value={email} size="30"className={styles.user__input} onChange={ handleEmail } />
             </label>
             <label forhtml="birthday">
-                <span className={styles['user__label-text']}>Fecha Nacimiento</span>
+                <span className={styles['user__label-text']}>{t('birthday')}</span>
                 <input type="date" id="birthday" name="birthday" value={birthday} min="1900-01-01" max="2023-12-31" className={styles.user__input} onChange={ handleBirthday } />
               </label>
             <label forhtml="sexo">
-              <span className={styles['user__label-text']}>Sexo</span>
+              <span className={styles['user__label-text']}>{t('sex')}</span>
               <select name="sexo" id="sexo" value={sexo} className={styles.user__input} onChange={ handleSexo}>
-                <option value="">Selecionar...</option>
-                <option value="femenino">Femenino</option>
-                <option value="masculino">Masculino</option>
+                <option value="">{t('select')}</option>
+                <option value="femenino">{t('female')}</option>
+                <option value="masculino">{t('male')}</option>
               </select>
             </label>
           </fieldset>
           <button id="save" className={styles['user__button']} onClick={ handleSave } disabled={ saving }>
-            {saving ? 'Saving...' : 'Save'}
+            {saving ? t('saving') : t('save')}
           </button>
         </form>
         {saving && <LoadingSpinner/>}

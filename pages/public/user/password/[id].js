@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import useTranslation from 'next-translate/useTranslation'
+
 import Header from '@/components/header';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -11,6 +13,8 @@ import styles from './password.module.css';
 
 export default function RegisterPassword({user}) {
 	console.log('RegisterPassword')
+
+  const { t, lang } = useTranslation('userPassword')
 
   const [ isSaving, setIsSaving ] = useState(false);
   const [ password, setPassword ] = useState();
@@ -36,7 +40,7 @@ export default function RegisterPassword({user}) {
         throw new Error(json?.error)
       }
       
-      toast.success('Saved')
+      toast.success(t('saved'))
       setPassword('');
       setRepeatPassword('')
     } catch(e) {
@@ -65,23 +69,23 @@ export default function RegisterPassword({user}) {
       <Header />
       <div className={styles.user}>
         <h2>
-        Registrar Nuevo Password
+        {t('title')}
         </h2>
-        <p>Nombre: {user.firstName} {user.lastName}</p>
-        <p>Email: {user.email}</p>
-        <p>Compañía: {user.company.name}</p>
+        <p>{t('firstname')}: {user.firstName} {user.lastName}</p>
+        <p>{t('email')}: {user.email}</p>
+        <p>{t('company')}: {user.company.name}</p>
         <form className={styles.user__form} onSubmit={ handleSubmit }>
           <label forhtml="password" className={styles.user__label}>
-            <span className={styles['user__label-text']}>Password</span>
+            <span className={styles['user__label-text']}>{t('password')}</span>
             <input type="password" id="password" value={password} className={styles.user__input} onChange={ handlePassword } />
           </label>
           <label forhtml="repeatPassword" className={styles.user__label}>
-            <span className={styles['user__label-text']}>Repetir Password</span>
+            <span className={styles['user__label-text']}>{t('repit_password')}</span>
             <input type="password" id="repeatPassword" value={repeatPassword} className={styles.user__input} onChange={ handleRepeatPassword } />
           </label>
           {error && <><small style={ { color: 'red' } }>{error}</small></>}
           <button className={`${styles["user__button"]} ${!isPasswordCorrect && styles["user__button--dissabled"]}` } onClick={ handleSave } disabled={ !isPasswordCorrect || isSaving }>
-            {isSaving ? 'Saving...' : 'Save'}
+            {isSaving ? t('saving') : t('save')}
           </button>
         </form>
       </div>

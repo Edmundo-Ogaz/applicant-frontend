@@ -5,6 +5,16 @@
     "*": ["common", "menu", "certificateHead", "certificateCeal"],
     "/": ["index"],
     "/home": ["home"],
-    "/search": ["search"]
+    "/search": ["search"],
+    "/error": ["error"],
+    "/login": ["login"],
+    "/postulant/create": ["postulantCreate"],
+    "/postulant/edit/[id]": ["postulantEdit"],
+    "/postulant/list": ["postulantList"],
+    "/public/test/ceal/success": ["testCealSuccess"],
+    "/public/test/disc/success": ["testDiscSuccess"],
+    "/public/test/ic/success": ["testIcSuccess"],
+    "/public/user/password/[id]": ["userPassword"],
+    "/test/assign": ["testAssign"]
   }
 }

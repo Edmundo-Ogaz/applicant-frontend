@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import useTranslation from 'next-translate/useTranslation'
+
 import { toast } from 'react-toastify';
 
 import WithPrivateRoute from '../../components/WithPrivateRoute.js'
@@ -17,21 +19,21 @@ import ModalCertificate from '@/components/model/certificate/index.js'
 
 import styles from './search.module.css'
 
-import useTranslation from 'next-translate/useTranslation'
-
 export default function Search({companies, tests, states}) {
 	console.log('Search')
 
+  const { t, lang } = useTranslation('search')
+  
   const ROWS_PER_PAGE = 10
   const COLUMS = [ 
-    {name: 'Candidato', style: {width: 'calc(15%)'}},
-    {name: 'Email',  style: {width: 'calc(15%)'}},
-    {name: 'Empresa',  style: {width: 'calc(10%)'}},
-    {name: 'Analista',  style: {width: 'calc(15%)'}},
-    {name: 'Test',  style: {width: 'calc(5%)'}},
-    {name: 'Estado',  style: {width: 'calc(5%)'}},
-    {name: 'Fecha Creación',  style: {width: 'calc(15%)'}},
-    {name: 'Fecha Test', style: {width: 'calc(15%)'}},
+    {name: t('candidate'), style: {width: 'calc(15%)'}},
+    {name: t('email'),  style: {width: 'calc(15%)'}},
+    {name: t('empresa'),  style: {width: 'calc(10%)'}},
+    {name: t('analista'),  style: {width: 'calc(15%)'}},
+    {name: t('test'),  style: {width: 'calc(5%)'}},
+    {name: t('estado'),  style: {width: 'calc(5%)'}},
+    {name: t('createAt'),  style: {width: 'calc(15%)'}},
+    {name: t('updateAt'), style: {width: 'calc(15%)'}},
   ]
 
   const Modals = []
@@ -55,8 +57,6 @@ export default function Search({companies, tests, states}) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [ analysts, setAnalysts ] = useState([]);
-
-  const { t, lang } = useTranslation('search')
 
   useEffect(() => {
     const user = Cookie.getUser()

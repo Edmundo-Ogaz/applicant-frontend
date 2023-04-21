@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('applicant', () => {
+describe('applicant postulant create', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000')
     cy.get('#email').type(Cypress.env('username'))
@@ -30,7 +30,7 @@ describe('applicant', () => {
         }
     }).as('apisave')
     cy.get('#save').click()
-    cy.get('.Toastify__toast-body > :nth-child(2)').should('have.text', 'Saved')
+    cy.get('.Toastify__toast-body > :nth-child(2)').should('have.text', 'Guardado')
   })
   it('rut already exist', () => {
     cy.get('#rut').type('15331265-6')

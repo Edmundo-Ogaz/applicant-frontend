@@ -169,14 +169,14 @@ export default function List({companies, profiles}) {
             <label forhtml="company">
               <span>Empresa</span>
               <select name="company" id="company" value={company} className="search__input" disabled={true} onChange={ handleCompany}>
-                <option value="">Selecionar...</option>
+                <option value="">Seleccionar...</option>
                 {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
               </select>
             </label>
             <label forhtml="profile">
               <span>Rol</span>
               <select name="profile" id="profile" className="search__input" onChange={ handleProfile}>
-                <option value="">Selecionar...</option>
+                <option value="">Seleccionar...</option>
                 {profiles.map((profile) => <option key={profile.id} value={profile.id}>{profile.name}</option>)}
               </select>
             </label>
