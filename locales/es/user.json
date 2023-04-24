@@ -1,0 +1,39 @@
+{
+    "title": {
+        "create": "Crear Usuario",
+        "edit": "Actualizar Usuario",
+        "list": "Usuarios",
+        "filter": "Filtro",
+        "password": "Registrar Nuevo Password"
+    },
+    "label": {
+        "rut": "Rut",
+        "name": "Nombre",
+        "firstname": "Nombres",
+        "lastname": "Apellidos",
+        "email": "Email",
+        "company": "Empresa",
+        "role": "Rol",
+        "select": "Seleccionar...",
+        "password": "Password",
+        "repit_password": "Repetir Password"
+    },
+    "table": {
+        "head": {
+            "rut": "Rut",
+            "name": "Nombre",
+            "email": "Email",
+            "company": "Empresa",
+            "role": "Rol",
+            "date_password_updated": "Fecha Password Actualizado",
+            "actions": "Acciones"
+        }
+    },
+    "button": {
+        "saving": "Guardando...",
+        "save": "Guardar",
+        "searching": "Buscando...",
+        "search": "Buscando"
+    },
+    "saved": "Guardado"
+}

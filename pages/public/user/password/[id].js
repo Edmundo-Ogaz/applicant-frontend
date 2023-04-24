@@ -14,7 +14,7 @@ import styles from './password.module.css';
 export default function RegisterPassword({user}) {
 	console.log('RegisterPassword')
 
-  const { t, lang } = useTranslation('userPassword')
+  const { t, lang } = useTranslation('user')
 
   const [ isSaving, setIsSaving ] = useState(false);
   const [ password, setPassword ] = useState();
@@ -69,23 +69,23 @@ export default function RegisterPassword({user}) {
       <Header />
       <div className={styles.user}>
         <h2>
-        {t('title')}
+        {t('title.password')}
         </h2>
-        <p>{t('firstname')}: {user.firstName} {user.lastName}</p>
-        <p>{t('email')}: {user.email}</p>
-        <p>{t('company')}: {user.company.name}</p>
+        <p>{t('label.name')}: {user.firstName} {user.lastName}</p>
+        <p>{t('label.email')}: {user.email}</p>
+        <p>{t('label.company')}: {user.company.name}</p>
         <form className={styles.user__form} onSubmit={ handleSubmit }>
           <label forhtml="password" className={styles.user__label}>
-            <span className={styles['user__label-text']}>{t('password')}</span>
+            <span className={styles['user__label-text']}>{t('label.password')}</span>
             <input type="password" id="password" value={password} className={styles.user__input} onChange={ handlePassword } />
           </label>
           <label forhtml="repeatPassword" className={styles.user__label}>
-            <span className={styles['user__label-text']}>{t('repit_password')}</span>
+            <span className={styles['user__label-text']}>{t('label.repit_password')}</span>
             <input type="password" id="repeatPassword" value={repeatPassword} className={styles.user__input} onChange={ handleRepeatPassword } />
           </label>
           {error && <><small style={ { color: 'red' } }>{error}</small></>}
           <button className={`${styles["user__button"]} ${!isPasswordCorrect && styles["user__button--dissabled"]}` } onClick={ handleSave } disabled={ !isPasswordCorrect || isSaving }>
-            {isSaving ? t('saving') : t('save')}
+            {isSaving ? t('button.saving') : t('button.save')}
           </button>
         </form>
       </div>

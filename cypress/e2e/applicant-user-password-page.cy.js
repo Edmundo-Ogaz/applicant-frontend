@@ -14,7 +14,7 @@ describe('applicant user password page', () => {
     cy.get('h2').should('have.text', 'Registrar Nuevo Password')
     cy.get('#__next div p:nth-child(2)').should('have.text', 'Nombre: Edmundo Dante del Carmen Ogaz Barahona')
     cy.get('#__next div p:nth-child(3)').should('have.text', 'Email: edmundo.ogaz@gmail.com.cl')
-    cy.get('#__next div p:nth-child(4)').should('have.text', 'Compañía: Applicant')
+    cy.get('#__next div p:nth-child(4)').should('have.text', 'Empresa: Applicant')
     cy.get('#__next form button').should('be.disabled')
     cy.get('#password').type('1234')
     cy.get('#repeatPassword').type('1234')

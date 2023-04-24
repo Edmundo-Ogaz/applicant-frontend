@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import useTranslation from 'next-translate/useTranslation'
+
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -21,15 +23,17 @@ import styles from './list.module.css'
 export default function List({companies, profiles}) {
 	console.log('List')
 
+  const { t, lang } = useTranslation('user')
+
   const ROWS_PER_PAGE = 5
   const COLUMS = [ 
-    {name: 'RUT'},
-    {name: 'Nombre'},
-    {name: 'Email'},
-    {name: 'Empresa'},
-    {name: 'Rol'},
-    {name: 'Password Actualizado'},
-    {name: 'Acciones'},
+    {name: t('table.head.rut')},
+    {name: t('table.head.name')},
+    {name: t('table.head.email')},
+    {name: t('table.head.company')},
+    {name: t('table.head.role')},
+    {name: t('table.head.date_password_updated')},
+    {name: t('table.head.actions')},
   ]
 
   const [ isSearching, setIsSearching ] = useState(false);
@@ -150,39 +154,39 @@ export default function List({companies, profiles}) {
   return (
     <>
       <Layout>
-        <h2>Usuarios</h2>
+        <h2>{t('title.list')}</h2>
         <form>
           <fieldset className='search__filter'>
-            <legend className='search__filter-header'>Filtro</legend>
+            <legend className='search__filter-header'>{t('title.filter')}</legend>
             <label forhtml="rut">
-              <span>Rut</span>
+              <span>{t('label.rut')}</span>
               <input type="text" id="rut" className="search__input" onChange={ handleRut } />
             </label>
             <label forhtml="email">
-              <span>Email</span>
+              <span>{t('label.email')}</span>
               <input type="text" id="email" size="50" className="search__input" onChange={ handleEmail } />
             </label>
             <label forhtml="name">
-              <span>Nombre</span>
+              <span>{t('label.name')}</span>
               <input type="text" id="name" size="60" className="search__input" onChange={ handleName } />
             </label>
             <label forhtml="company">
-              <span>Empresa</span>
+              <span>{t('label.company')}</span>
               <select name="company" id="company" value={company} className="search__input" disabled={true} onChange={ handleCompany}>
-                <option value="">Seleccionar...</option>
+                <option value="">{t('label.select')}</option>
                 {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
               </select>
             </label>
             <label forhtml="profile">
-              <span>Rol</span>
+              <span>{t('label.role')}</span>
               <select name="profile" id="profile" className="search__input" onChange={ handleProfile}>
-                <option value="">Seleccionar...</option>
+                <option value="">{t('label.select')}</option>
                 {profiles.map((profile) => <option key={profile.id} value={profile.id}>{profile.name}</option>)}
               </select>
             </label>
           </fieldset>
           <button id="search" onClick={ handleSearchButton } disabled={ isSearching }>
-            {isSearching ? 'Searching...' : 'Search'}
+            {isSearching ? t('button.searching') : t('button.search')}
           </button>
         </form>
         <Table 

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import useTranslation from 'next-translate/useTranslation'
+
 import { toast } from 'react-toastify'
 
 import WithPrivateRoute from '../../../components/WithPrivateRoute.js'
@@ -13,6 +15,8 @@ import styles from './create.module.css';
 
 export default function CreateUser({companies, profiles}) {
 	console.log('CreateUser')
+
+  const { t, lang } = useTranslation('user')
 
   const [ saving, setSaving ] = useState();
   
@@ -94,42 +98,42 @@ export default function CreateUser({companies, profiles}) {
   return (
     <>
       <Layout>
-        <h2>Crear Usuario</h2>
+        <h2>{t('title.create')}</h2>
         <form>
           <fieldset className={styles.user__body}>
             <label forhtml="rut">
-              <span className={styles['user__label-text']}>Rut</span>
+              <span className={styles['user__label-text']}>{t('label.rut')}</span>
               <input type="text" id="rut" value={rut} className={styles.user__input} onChange={ handleRut } />
             </label>
             <label forhtml="firstName">
-              <span className={styles['user__label-text']}>Nombres</span>
+              <span className={styles['user__label-text']}>{t('label.firstname')}</span>
               <input type="test" id="firstName" value={firstName} size="50" className={styles.user__input} onChange={ handleFirstName } />
             </label>
             <label forhtml="lastName">
-              <span className={styles['user__label-text']}>Apellidos</span>
+              <span className={styles['user__label-text']}>{t('label.lastname')}</span>
               <input type="text" id="lastName" value={lastName} size="50" className={styles.user__input} onChange={ handleLastName } />
             </label>
             <label forhtml="email">
-              <span className={styles['user__label-text']}>Email</span>
+              <span className={styles['user__label-text']}>{t('label.email')}</span>
               <input type="text" id="email" value={email} size="30"className={styles.user__input} onChange={ handleEmail } />
             </label>
             <label forhtml="company">
-              <span className={styles['user__label-text']}>Empresa</span>
+              <span className={styles['user__label-text']}>{t('label.company')}</span>
               <select name="company" id="company" value={company} className={styles.user__input} disabled={true} onChange={ handleCompany}>
-                <option value="">Seleccionar...</option>
+                <option value="">{t('label.select')}</option>
                 {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
               </select>
             </label>
             <label forhtml="profile">
-              <span className={styles['user__label-text']}>Rol</span>
+              <span className={styles['user__label-text']}>{t('label.role')}</span>
               <select name="profile" id="profile" value={profile} className={styles.user__input} onChange={ handleProfile}>
-                <option value="">Seleccionar...</option>
+                <option value="">{t('label.select')}</option>
                 {profiles.map((profile) => <option key={profile.id} value={profile.id}>{profile.name}</option>)}
               </select>
             </label>
           </fieldset>
           <button id="save" className={styles['user__button']} onClick={ handleSave } disabled={ saving }>
-            {saving ? 'Saving...' : 'Save'}
+            {saving ? t('button.saving') : t('button.save')}
           </button>
         </form>
         {saving && <LoadingSpinner/>}
