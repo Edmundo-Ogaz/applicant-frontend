@@ -5,12 +5,12 @@ import useTranslation from 'next-translate/useTranslation'
 export default function Success() {
 	console.log('Success')
 
-  const { t, lang } = useTranslation('testDiscSuccess')
+  const { t, lang } = useTranslation('page')
 
   return (
     <>
       <Header />
-      {t('success')}
+      {t('test.ic.success')}
     </>
   );
 }

@@ -1,5 +1,3 @@
-import Head from './head'
-
 import IcCertificate from '@/components/test/ic/certificate';
 import DiscCertificate from '@/components/test/disc/certificate';
 import CealCertificate from '@/components/test/ceal/certificate';

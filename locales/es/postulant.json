@@ -1,31 +1,28 @@
 {
     "title": {
-        "create": "Crear Usuario",
-        "edit": "Actualizar Usuario",
-        "list": "Usuarios",
-        "filter": "Filtro",
-        "password": "Registrar Nuevo Password"
+        "create": "Crear Postulante",
+        "edit": "Actualizar Postulante",
+        "list": "Postulantes",
+        "filter": "Filtro"
     },
     "label": {
         "rut": "Rut",
-        "name": "Nombre",
         "firstname": "Nombres",
         "lastname": "Apellidos",
-        "email": "Email",
-        "company": "Empresa",
-        "role": "Rol",
+        "birthday": "Fecha Nacimiento",
+        "sex": "Sexo",
         "select": "Seleccionar...",
-        "password": "Password",
-        "repit_password": "Repetir Password"
+        "female": "Femenino",
+        "male": "Masculino",
+        "email": "Email"
     },
     "table": {
         "head": {
             "rut": "Rut",
             "name": "Nombre",
             "email": "Email",
-            "company": "Empresa",
-            "role": "Rol",
-            "date_password_updated": "Fecha Password Actualizado",
+            "birthday": "Fecha Nacimiento",
+            "sex": "Sexo",
             "actions": "Acciones"
         }
     },

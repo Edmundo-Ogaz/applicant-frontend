@@ -26,7 +26,7 @@ export default function Home() {
   const [ totalTests, setTotalTests ] = useState(0);
   const [ isSearching, setIsSearching] = useState(false);
 
-  const { t, lang } = useTranslation('home')
+  const { t, lang } = useTranslation('page')
 
   useEffect(() => {
     const user = Cookie.getUser()
@@ -54,8 +54,8 @@ export default function Home() {
 
   const data = {
     labels: [
-      t('Tests'),
-      t('Total'),
+      t('home.Tests'),
+      t('home.Total'),
     ],
     datasets: [{
       label: 'Test',
@@ -70,12 +70,12 @@ export default function Home() {
 
   const dataTest = {
     labels: [
-      t('IC'),
-      t('DISC'),
-      t('Ceal')
+      t('home.IC'),
+      t('home.DISC'),
+      t('home.Ceal')
     ],
     datasets: [{
-      label: t('test'),
+      label: t('home.test'),
       data: [tests[0], tests[1], tests[2]],
       backgroundColor: [
         'rgb(59 169 147)',
@@ -97,8 +97,8 @@ export default function Home() {
   return (
     <>
       <Layout>
-        <p>{t('empresa')}: {company?.name}</p>
-        <p>{t('cuotas')}: {company?.subscription}</p>
+        <p>{t('home.empresa')}: {company?.name}</p>
+        <p>{t('home.cuotas')}: {company?.subscription}</p>
         <section style={{display: 'flex'}}>
           <div style={{position: 'relative'}}>
             <div className="chart-title" style={{position: 'absolute',
@@ -108,9 +108,9 @@ export default function Home() {
                                               alignItems: 'center',
                                               justifyContent: 'center'}}>
               <div style={{textAlign: 'center'}}>
-                <b>{t('tests-creados')}</b>
+                <b>{t('home.tests-creados')}</b>
                 <br />
-                <small>{totalTests} {t('total')}</small>
+                <small>{totalTests} {t('home.total')}</small>
               </div>
             </div>
             <Doughnut data={data} options={options} style={{height: '20%', width: '20%'}}/>

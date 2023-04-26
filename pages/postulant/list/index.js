@@ -21,16 +21,16 @@ import Cookie from '@/utils/Cookie'
 export default function List() {
 	console.log('List')
 
-  const { t, lang } = useTranslation('postulantList')
+  const { t, lang } = useTranslation('postulant')
   
   const ROWS_PER_PAGE = 5
   const COLUMS = [ 
-    {name: t('rut')},
-    {name: t('firstname')},
-    {name: t('email')},
-    {name: t('birthday')},
-    {name: t('sex')},
-    {name: t('actions')},
+    {name: t('table.head.rut')},
+    {name: t('table.head.name')},
+    {name: t('table.head.email')},
+    {name: t('table.head.birthday')},
+    {name: t('table.head.sex')},
+    {name: t('table.head.actions')},
   ]
 
   const [ isSearching, setIsSearching ] = useState(false);
@@ -125,25 +125,25 @@ export default function List() {
   return (
     <>
       <Layout>
-        <h2>Postulantes</h2>
+        <h2>{t('title.list')}</h2>
         <form>
           <fieldset className='search__filter'>
-            <legend className='search__filter-header'>{t('filter')}</legend>
+            <legend className='search__filter-header'>{t('title.filter')}</legend>
             <label forhtml="rut">
-              <span>{t('rut')}</span>
+              <span>{t('label.rut')}</span>
               <input type="text" id="rut" className="search__input" onChange={ handleRut } />
             </label>
             <label forhtml="name">
-              <span>{t('firstname')}</span>
+              <span>{t('label.firstname')}</span>
               <input type="text" id="name" size="50" className="search__input" onChange={ handleName } />
             </label>
             <label forhtml="email">
-              <span>{t('email')}</span>
+              <span>{t('label.email')}</span>
               <input type="text" id="email" size="50" className="search__input" onChange={ handleEmail } />
             </label>
           </fieldset>
           <button id="search" onClick={ handleSearchButton } disabled={ isSearching }>
-            {isSearching ? t('searching') : t('search')}
+            {isSearching ? t('button.searching') : t('button.search')}
           </button>
         </form>
         <Table 

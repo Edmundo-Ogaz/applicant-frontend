@@ -1,7 +1,11 @@
+import useTranslation from 'next-translate/useTranslation'
+
 import DateUtil from '@/utils/DateUtil'
 import styles from './certificate.module.css'
 
 export default function Head({postulant, company, state, updatedAt}) {
+
+  const { t, lang } = useTranslation('common')
 
   return (
     <div className={styles.header}>
@@ -11,18 +15,18 @@ export default function Head({postulant, company, state, updatedAt}) {
       <div className={styles.personal_info}>
           <div className={styles.info_col}>
             <ul>
-              <li>Nombre: {postulant.firstName} {postulant.lastName}</li>
-              <li>RUN: {postulant.rut}</li>
-              <li>Edad: {DateUtil.birthdayToEge(postulant.birthday)}</li>
-              <li>Sexo: {postulant.sexo}</li>
+              <li>{t('certificate.head.name')}: {postulant.firstName} {postulant.lastName}</li>
+              <li>{t('certificate.head.run')}: {postulant.rut}</li>
+              <li>{t('certificate.head.age')}: {DateUtil.birthdayToEge(postulant.birthday)}</li>
+              <li>{t('certificate.head.sex')}: {postulant.sexo}</li>
             </ul>
           </div>
           <div className={styles.info_col}>
             <ul>
-              <li>Rendido: {DateUtil.parse(updatedAt)}</li>
-              <li>Empresa: {company.name}</li>
-              <li>Estado: {state.name} </li>
-              <li>Lugar de rendición: Online</li>
+              <li>{t('certificate.head.made')}: {DateUtil.parse(updatedAt)}</li>
+              <li>{t('certificate.head.company')}: {company.name}</li>
+              <li>{t('certificate.head.state')}: {state.name} </li>
+              <li>{t('certificate.head.place_made')}: Online</li>
             </ul>
           </div>
       </div>

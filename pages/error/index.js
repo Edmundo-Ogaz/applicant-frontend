@@ -7,7 +7,7 @@ import Layout from '@/components/layout/index.js';
 export default function Error({message}) {
 	console.log('Error', message)
 
-  const { t, lang } = useTranslation('error')
+  const { t, lang } = useTranslation('page')
 
   return (
     <>

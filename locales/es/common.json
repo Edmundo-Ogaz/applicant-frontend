@@ -1,6 +1,36 @@
 {
-    "applicant": "Applicant",
-    "page": "Página",
-    "of": "de",
-    "exit": "Salir"
+    "header": {
+        "title": "Applicant"
+    },
+    "avatar": {
+        "exit": "Salir"
+    },
+    "menu": {
+        "home": "Home",
+        "tests": "Tests",
+        "search": "Buscar",
+        "assign_test": "Asignar test",
+        "users": "Usuarios",
+        "list": "Listar",
+        "create": "Crear",
+        "postulants": "Postulantes",
+        "exit": "Salir",
+        "exit_system": "Salida del Sistema"
+    },
+    "table": {
+        "page": "Página",
+        "of": "de"
+    },
+    "certificate": {
+        "head": {
+            "name": "Nombre",
+            "run": "RUN",
+            "age": "Edad",
+            "sex": "Sexo",
+            "made": "Rendido",
+            "company": "Empresa",
+            "state": "Estado",
+            "place_made": "Lugar de rendición"
+        }
+    }
 }

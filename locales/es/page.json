@@ -1,0 +1,62 @@
+{
+  "error": "error",
+  "login": {
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "button_loading": "Loading...",
+    "button_login": "Log in"
+  },
+  "home": {
+    "empresa": "Empresa",
+    "cuotas": "Cuotas",
+    "tests-creados": "Tests creados",
+    "total": "total",
+    "test": "Test",
+    "IC": "IC",
+    "DISC": "DISC",
+    "Ceal": "Ceal",
+    "Tests": "Tests",
+    "Total": "Total"
+  },
+  "search": {
+    "filtro": "Filtro",
+    "rut": "Rut",
+    "nombre": "Nombre",
+    "email": "Email",
+    "empresa": "Empresa",
+    "selecionar": "Seleccionar...",
+    "analista": "Analista",
+    "test": "Test",
+    "estado": "Estado",
+    "searching": "Buscando...",
+    "search": "Buscar",
+    "candidate": "Candidato",
+    "createAt": "Fecha Creación",
+    "updateAt": "Fecha Test"
+  },
+  "test_assign": {
+    "saved": "Guardado",
+    "title": "Asignar Test a Postulante",
+    "rut": "Rut",
+    "name": "Nombre",
+    "email": "Email",
+    "company": "Empresa",
+    "analyst": "Analista",
+    "select": "Seleccionar...",
+    "test": "Test",
+    "saving": "Guardando...",
+    "save": "Guardar"
+  },
+  "test": {
+    "ic": {
+        "success": "Success"
+    },
+    "disc": {
+        "success": "Success"
+    },
+    "ceal": {
+        "success": "Success"
+    }
+  }
+}

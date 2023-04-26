@@ -55,7 +55,7 @@ export default function Avatar() {
       <div ref={ref} className={styles.avatar}>
         <span id="username" className={styles.title} onClick={ handleClick }>{username}</span>
         <ul className={styles.menu} style={{ display: showMenu ? 'block' : 'none'}}>
-          <li className={styles.item} onClick={ handleExit }>{t('exit')}</li>
+          <li className={styles.item} onClick={ handleExit }>{t('avatar.exit')}</li>
         </ul>
       </div>
     </>

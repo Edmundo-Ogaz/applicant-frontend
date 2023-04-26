@@ -7,7 +7,7 @@ export default function Header() {
 
   return (
     <header style={{display: 'flex', justifyContent: 'space-between'}}>
-      <h1 id="logo">{t('applicant')}</h1>
+      <h1 id="logo">{t('header.title')}</h1>
     </header>
   );
 }

@@ -14,7 +14,7 @@ export default function App( props ) {
 
   const [ showMenuUsers, setShowMenuUsers ] = useState(false)
 
-  const { t, lang } = useTranslation('menu')
+  const { t, lang } = useTranslation('common')
 
   useEffect(() => {
     const user = Cookie.getUser()
@@ -35,24 +35,24 @@ export default function App( props ) {
         motion={ props.openAnimation }
         defaultOpenKeys={ props.defaultOpenKeys }
       >
-        <MenuItem key="1">{t('home')}</MenuItem>
-        <SubMenu title={ <span className="submenu-title-wrapper">{t('tests')}</span> } key="2">
-          <MenuItem key="2-1">{t('buscar')}</MenuItem>
-          <MenuItem key="2-2">{t('asignar-test')}</MenuItem>
+        <MenuItem key="1">{t('menu.home')}</MenuItem>
+        <SubMenu title={ <span className="submenu-title-wrapper">{t('menu.tests')}</span> } key="2">
+          <MenuItem key="2-1">{t('menu.search')}</MenuItem>
+          <MenuItem key="2-2">{t('menu.assign_test')}</MenuItem>
         </SubMenu>
         {showMenuUsers ? 
-        <SubMenu title={ <span className="submenu-title-wrapper">{t('usuarios')}</span> } key="3">
-          <MenuItem key="3-1">{t('listar')}</MenuItem>
-            <MenuItem key="3-2">{t('crear')}</MenuItem>
+        <SubMenu title={ <span className="submenu-title-wrapper">{t('menu.users')}</span> } key="3">
+          <MenuItem key="3-1">{t('menu.list')}</MenuItem>
+            <MenuItem key="3-2">{t('menu.create')}</MenuItem>
         </SubMenu>
         :
         ''}
-        <SubMenu title={ <span className="submenu-title-wrapper">{t('postulantes')}</span> } key="4">
-          <MenuItem key="4-1">{t('listar')}</MenuItem>
-            <MenuItem key="4-2">{t('crear')}</MenuItem>
+        <SubMenu title={ <span className="submenu-title-wrapper">{t('menu.postulants')}</span> } key="4">
+          <MenuItem key="4-1">{t('menu.list')}</MenuItem>
+            <MenuItem key="4-2">{t('menu.create')}</MenuItem>
         </SubMenu>
-        <SubMenu title={ <span className="submenu-title-wrapper">{t('salir')}</span> } key="6">
-          <MenuItem key="6-1">{t('salida-sistema')}</MenuItem>
+        <SubMenu title={ <span className="submenu-title-wrapper">{t('menu.exit')}</span> } key="6">
+          <MenuItem key="6-1">{t('menu.exit_system')}</MenuItem>
         </SubMenu>
       </Menu>
     </>

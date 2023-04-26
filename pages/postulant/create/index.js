@@ -26,7 +26,7 @@ export default function CreatePostulant() {
   const [ sexo, setSexo ] = useState('');
   const [ email, setEmail ] = useState('');
 
-  const { t, lang } = useTranslation('postulantCreate')
+  const { t, lang } = useTranslation('postulant')
 
   useEffect(() => {
     const user = Cookie.getUser()
@@ -103,40 +103,40 @@ export default function CreatePostulant() {
   return (
     <>
       <Layout>
-          <h2>{t('title')}</h2>
+          <h2>{t('title.create')}</h2>
           <form>
             <fieldset className={styles.user__body}>
               <label forhtml="rut">
-                <span className={styles['user__label-text']}>{t('rut')}</span>
+                <span className={styles['user__label-text']}>{t('label.rut')}</span>
                 <input type="text" id="rut" value={rut} className={styles.user__input} onChange={ handleRut } />
               </label>
               <label forhtml="firstName">
-                <span className={styles['user__label-text']}>{t('firstname')}</span>
+                <span className={styles['user__label-text']}>{t('label.firstname')}</span>
                 <input type="test" id="firstName" value={firstName} size="50" className={styles.user__input} onChange={ handleFirstName } />
               </label>
               <label forhtml="lastName">
-                <span className={styles['user__label-text']}>{t('lastname')}</span>
+                <span className={styles['user__label-text']}>{t('label.lastname')}</span>
                 <input type="text" id="lastName" value={lastName} size="50" className={styles.user__input} onChange={ handleLastName } />
               </label>
               <label forhtml="birthday">
-                <span className={styles['user__label-text']}>{t('birthday')}</span>
+                <span className={styles['user__label-text']}>{t('label.birthday')}</span>
                 <input type="date" id="birthday" name="birthday" value={birthday} min="1900-01-01" max="2023-12-31" className={styles.user__input} onChange={ handleBirthday } />
               </label>
               <label forhtml="sexo">
-                <span className={styles['user__label-text']}>{t('sex')}</span>
+                <span className={styles['user__label-text']}>{t('label.sex')}</span>
                 <select name="sexo" id="sexo" value={sexo} className={styles.user__input} onChange={ handleSexo}>
-                  <option value="">{t('select')}</option>
-                  <option value="femenino">{t('female')}</option>
-                  <option value="masculino">{t('male')}</option>
+                  <option value="">{t('label.select')}</option>
+                  <option value="femenino">{t('label.female')}</option>
+                  <option value="masculino">{t('label.male')}</option>
                 </select>
               </label>
               <label forhtml="email">
-                <span className={styles['user__label-text']}>{t('email')}</span>
+                <span className={styles['user__label-text']}>{t('label.email')}</span>
                 <input type="text" id="email" value={email} size="30"className={styles.user__input} onChange={ handleEmail } />
               </label>
             </fieldset>
             <button id="save" className={styles['user__button']} onClick={ handleSave } disabled={ isSaving }>
-              {isSaving ? t('saving') : t('save')}
+              {isSaving ? t('button.saving') : t('button.save')}
             </button>
           </form>
         {(isSaving) && <LoadingSpinner/>}

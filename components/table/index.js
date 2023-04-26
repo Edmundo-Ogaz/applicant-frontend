@@ -34,7 +34,7 @@ export default function Table({colums, data, currentPage, totalPages, onPageChan
       </table>
       <div>
         <button className={styles.footer__button} disabled={currentPage === 1} onClick={() => goToPage(currentPage - 1)}>{'<'}</button>
-        <span>{` ${t('page')} ${currentPage} ${t('of')} ${totalPages} `}</span>
+        <span>{` ${t('table.page')} ${currentPage} ${t('table.of')} ${totalPages} `}</span>
         <button className={styles.footer__button} disabled={currentPage === totalPages} onClick={() => goToPage(currentPage + 1)}>{'>'}</button>
       </div>
     </>

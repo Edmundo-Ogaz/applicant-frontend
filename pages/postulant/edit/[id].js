@@ -16,6 +16,7 @@ import styles from './edit.module.css';
 
 export default function EditPostulant({postulant}) {
 	console.log('EditPostulant')
+
   postulant = postulant ? postulant : {} 
 
   const [ saving, setSaving ] = useState(false);
@@ -28,7 +29,7 @@ export default function EditPostulant({postulant}) {
   const [ birthday, setBirthday ] = useState(DateUtil.format(postulant.birthday));
   const [ sexo, setSexo ] = useState(postulant.sexo);
 
-  const { t, lang } = useTranslation('postulantEdit')
+  const { t, lang } = useTranslation('postulant')
 
   const handleSave = async (e) => {
     try {
@@ -88,40 +89,40 @@ export default function EditPostulant({postulant}) {
   return (
     <>
       <Layout>
-        <h2>{t('title')}</h2>
+        <h2>{t('title.edit')}</h2>
         <form>
           <fieldset className={styles.user__body}>
             <label forhtml="rut">
-              <span className={styles['user__label-text']}>{t('rut')}</span>
+              <span className={styles['user__label-text']}>{t('label.rut')}</span>
               <input type="text" id="rut" value={rut} className={styles.user__input} disabled={true}/>
             </label>
             <label forhtml="firstName">
-              <span className={styles['user__label-text']}>{t('firstname')}</span>
+              <span className={styles['user__label-text']}>{t('label.firstname')}</span>
               <input type="test" id="firstName" value={firstName} size="50" className={styles.user__input} onChange={ handleFirstName } />
             </label>
             <label forhtml="lastName">
-              <span className={styles['user__label-text']}>{t('lastname')}</span>
+              <span className={styles['user__label-text']}>{t('label.lastname')}</span>
               <input type="text" id="lastName" value={lastName} size="50" className={styles.user__input} onChange={ handleLastName } />
             </label>
             <label forhtml="email">
-              <span className={styles['user__label-text']}>{t('email')}</span>
+              <span className={styles['user__label-text']}>{t('label.email')}</span>
               <input type="text" id="email" value={email} size="30"className={styles.user__input} onChange={ handleEmail } />
             </label>
             <label forhtml="birthday">
-                <span className={styles['user__label-text']}>{t('birthday')}</span>
+                <span className={styles['user__label-text']}>{t('label.birthday')}</span>
                 <input type="date" id="birthday" name="birthday" value={birthday} min="1900-01-01" max="2023-12-31" className={styles.user__input} onChange={ handleBirthday } />
               </label>
             <label forhtml="sexo">
-              <span className={styles['user__label-text']}>{t('sex')}</span>
+              <span className={styles['user__label-text']}>{t('label.sex')}</span>
               <select name="sexo" id="sexo" value={sexo} className={styles.user__input} onChange={ handleSexo}>
-                <option value="">{t('select')}</option>
-                <option value="femenino">{t('female')}</option>
-                <option value="masculino">{t('male')}</option>
+                <option value="">{t('label.select')}</option>
+                <option value="femenino">{t('label.female')}</option>
+                <option value="masculino">{t('label.male')}</option>
               </select>
             </label>
           </fieldset>
           <button id="save" className={styles['user__button']} onClick={ handleSave } disabled={ saving }>
-            {saving ? t('saving') : t('save')}
+            {saving ? t('button.saving') : t('button.save')}
           </button>
         </form>
         {saving && <LoadingSpinner/>}

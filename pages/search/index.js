@@ -22,18 +22,18 @@ import styles from './search.module.css'
 export default function Search({companies, tests, states}) {
 	console.log('Search')
 
-  const { t, lang } = useTranslation('search')
+  const { t, lang } = useTranslation('page')
   
   const ROWS_PER_PAGE = 10
   const COLUMS = [ 
-    {name: t('candidate'), style: {width: 'calc(15%)'}},
-    {name: t('email'),  style: {width: 'calc(15%)'}},
-    {name: t('empresa'),  style: {width: 'calc(10%)'}},
-    {name: t('analista'),  style: {width: 'calc(15%)'}},
-    {name: t('test'),  style: {width: 'calc(5%)'}},
-    {name: t('estado'),  style: {width: 'calc(5%)'}},
-    {name: t('createAt'),  style: {width: 'calc(15%)'}},
-    {name: t('updateAt'), style: {width: 'calc(15%)'}},
+    {name: t('search.candidate'), style: {width: 'calc(15%)'}},
+    {name: t('search.email'),  style: {width: 'calc(15%)'}},
+    {name: t('search.empresa'),  style: {width: 'calc(10%)'}},
+    {name: t('search.analista'),  style: {width: 'calc(15%)'}},
+    {name: t('search.test'),  style: {width: 'calc(5%)'}},
+    {name: t('search.estado'),  style: {width: 'calc(5%)'}},
+    {name: t('search.createAt'),  style: {width: 'calc(15%)'}},
+    {name: t('search.updateAt'), style: {width: 'calc(15%)'}},
   ]
 
   const Modals = []
@@ -214,50 +214,50 @@ export default function Search({companies, tests, states}) {
         {/* <h2>Buscar Tests</h2> */}
         <form>
           <fieldset className='search__filter'>
-            <legend className='search__filter-header'>{t('filtro')}</legend>
+            <legend className='search__filter-header'>{t('search.filtro')}</legend>
             <label forhtml="rut">
-              <span>{t('rut')}</span>
+              <span>{t('search.rut')}</span>
               <input type="text" id="rut" className="search__input" onChange={ handleRut } />
             </label>
             <label forhtml="name">
-              <span>{t('nombre')}</span>
+              <span>{t('search.nombre')}</span>
               <input type="text" id="name" size="50" className="search__input" onChange={ handleName } />
             </label>
             <label forhtml="email">
-              <span>{t('email')}</span>
+              <span>{t('search.email')}</span>
               <input type="text" id="email" size="50" className="search__input" onChange={ handleEmail } />
             </label>
             <label forhtml="company">
-              <span>{t('empresa')}</span>
+              <span>{t('search.empresa')}</span>
               <select name="company" id="company" value={company} className="search__input" disabled={true} onChange={ handleCompany}>
-                <option value="">{t('selecionar')}</option>
+                <option value="">{t('search.selecionar')}</option>
                 {companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
               </select>
             </label>
             <label forhtml="analyst">
-              <span>{t('analista')}</span>
+              <span>{t('search.analista')}</span>
               <select name="analyst" id="analyst" className="search__input" onChange={ handleAnalyst}>
-                <option value="">{t('selecionar')}</option>
+                <option value="">{t('search.selecionar')}</option>
                 {analysts.map((analyst) => <option key={analyst.id} value={analyst.id}>{analyst.firstName} {analyst.lastName}</option>)}
               </select>
             </label>
             <label forhtml="test">
-              <span>{t('test')}</span>
+              <span>{t('search.test')}</span>
               <select name="test" id="test" className="search__input" onChange={ handleTest}>
-                <option value="">{t('selecionar')}</option>
+                <option value="">{t('search.selecionar')}</option>
                 {tests.map((test) => <option key={test.id} value={test.id}>{test.name}</option>)}
               </select>
             </label>
             <label forhtml="state">
-              <span>{t('estado')}</span>
+              <span>{t('search.estado')}</span>
               <select name="state" id="state" className="search__input" onChange={ handleState}>
-                <option value="">{t('selecionar')}</option>
+                <option value="">{t('search.selecionar')}</option>
                 {states.map((state) => <option key={state.id} value={state.id}>{state.name}</option>)}
               </select>
             </label>
           </fieldset>
           <button id="search" className={styles.search__button} onClick={ handleSearchButton } disabled={ isSearching }>
-            {isSearching ? t('searching') : t('search')}
+            {isSearching ? t('search.searching') : t('search.search')}
           </button>
         </form>
         <Table
